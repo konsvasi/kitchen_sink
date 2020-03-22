@@ -1,0 +1,103 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Desk.gd" type="Script" id=1]
+[ext_resource path="res://environment/desk.png" type="Texture" id=2]
+[ext_resource path="res://ui/yellow-bg.png" type="Texture" id=3]
+[ext_resource path="res://items/pack_of_mushrooms.png" type="Texture" id=4]
+[ext_resource path="res://DialogBox.tscn" type="PackedScene" id=5]
+[ext_resource path="res://audio/The Adventure Begins 8-bit remix.ogg" type="AudioStream" id=6]
+[ext_resource path="res://GoBackButton.tscn" type="PackedScene" id=7]
+[ext_resource path="res://utils/arm.png" type="Texture" id=8]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 7.51884, 8.4526 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 34.4614, 30.6383 )
+
+[sub_resource type="RectangleShape2D" id=3]
+
+[node name="Desk" type="Node2D"]
+position = Vector2( 325, 235 )
+scale = Vector2( 1.01563, 0.979167 )
+script = ExtResource( 1 )
+
+[node name="Desk" type="Sprite" parent="."]
+position = Vector2( 313.312, 128.007 )
+scale = Vector2( 1.9791, 1.53336 )
+texture = ExtResource( 2 )
+
+[node name="YellowBorder" type="Sprite" parent="."]
+visible = false
+position = Vector2( 270.335, 198.175 )
+rotation = 1.0472
+scale = Vector2( 2.03902, 2.14653 )
+texture = ExtResource( 3 )
+
+[node name="ShroomPack" type="Sprite" parent="."]
+position = Vector2( 270.76, 198.859 )
+rotation = 1.0472
+scale = Vector2( 7.26124, 7.5027 )
+texture = ExtResource( 4 )
+
+[node name="Area2D" type="Area2D" parent="ShroomPack"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShroomPack/Area2D"]
+position = Vector2( 0.0726395, -0.728172 )
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Polygon2D" parent="." instance=ExtResource( 5 )]
+position = Vector2( -221.538, -219.574 )
+dialogText = "Ooh, Tom left me some of his special African jungle mushrooms for the weekend..."
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 6 )
+volume_db = -19.535
+autoplay = true
+attenuation = 0.840897
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+position = Vector2( 102.184, 985.532 )
+scale = Vector2( 2, 2 )
+
+[node name="Arm" type="Sprite" parent="KinematicBody2D"]
+texture = ExtResource( 8 )
+offset = Vector2( -50, 160 )
+
+[node name="Area2D" type="Area2D" parent="KinematicBody2D/Arm"]
+position = Vector2( 34.4614, -153.191 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D/Arm/Area2D"]
+position = Vector2( -43.7074, 163.404 )
+shape = SubResource( 2 )
+
+[node name="Timer" type="Timer" parent="KinematicBody2D/Arm"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+shape = SubResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ArmBackTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="GoBackButton" parent="." instance=ExtResource( 7 )]
+margin_left = 662.234
+margin_top = 416.744
+margin_right = 902.234
+margin_bottom = 464.744
+nextScene = "res://House_inside.tscn"
+[connection signal="area_entered" from="ShroomPack/Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="area_exited" from="ShroomPack/Area2D" to="." method="_on_Area2D_area_exited"]
+[connection signal="input_event" from="ShroomPack/Area2D" to="." method="_on_Area2D_input_event"]
+[connection signal="mouse_entered" from="ShroomPack/Area2D" to="." method="_on_Area2D_mouse_entered"]
+[connection signal="mouse_exited" from="ShroomPack/Area2D" to="." method="_on_Area2D_mouse_exited"]
+[connection signal="timeout" from="ArmBackTimer" to="." method="_on_ArmBackTimer_timeout"]
+[connection signal="pressed" from="GoBackButton" to="." method="_on_GoBackButton_pressed"]

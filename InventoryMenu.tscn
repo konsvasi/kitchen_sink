@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://InventoryMenu.gd" type="Script" id=1]
+[ext_resource path="res://GoBackButton.tscn" type="PackedScene" id=2]
+[ext_resource path="res://fonts/kenney_high.tres" type="DynamicFont" id=3]
+
+[node name="InventoryMenu" type="Panel"]
+pause_mode = 2
+margin_left = -2.0
+margin_right = 1281.0
+margin_bottom = 721.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="."]
+margin_right = 1282.0
+margin_bottom = 721.0
+color = Color( 0.498039, 0.596078, 0.596078, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = 48.0
+margin_top = 48.0
+margin_right = 81.2959
+margin_bottom = 23.8639
+custom_fonts/font = ExtResource( 3 )
+text = "Inventory"
+
+[node name="BackButton" parent="." instance=ExtResource( 2 )]
+margin_left = 44.3212
+margin_top = 648.198
+margin_right = 284.321
+margin_bottom = 696.198
+[connection signal="pressed" from="BackButton" to="." method="_on_BackButton_pressed"]

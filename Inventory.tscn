@@ -1,0 +1,14 @@
+[gd_scene format=2]
+
+[node name="Panel" type="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -890.0
+margin_bottom = -190.0
+
+[node name="GridContainer" type="GridContainer" parent="."]
+margin_left = 20.0
+margin_top = 30.0
+margin_right = 370.0
+margin_bottom = 510.0
+columns = 4
