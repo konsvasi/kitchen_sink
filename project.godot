@@ -16,13 +16,12 @@ _global_script_class_icons={
 [application]
 
 config/name="kitchen_sink"
-run/main_scene="res://House_inside.tscn"
-config/icon="res://icon.png"
+run/main_scene="res://scenes/House_inside.tscn"
 
 [autoload]
 
-global="*res://global.gd"
-PlayerVariables="*res://PlayerVariables.gd"
+global="*res://scripts/global.gd"
+PlayerVariables="*res://scripts/PlayerVariables.gd"
 
 [display]
 

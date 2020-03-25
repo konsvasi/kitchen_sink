@@ -51,7 +51,7 @@ func _unhandled_key_input(event):
 		if self.visible:
 			print('interact', index)
 			if index == 0:
-				get_tree().change_scene("res://InventoryMenu.tscn")
+				get_tree().change_scene("res://scenes/InventoryMenu.tscn")
 
 		
 func toggleMenu():

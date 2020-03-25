@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Fridge.gd" type="Script" id=1]
-[ext_resource path="res://fridge.png" type="Texture" id=2]
+[ext_resource path="res://scripts/Fridge.gd" type="Script" id=1]
+[ext_resource path="res://environment/fridge.png" type="Texture" id=2]
 [ext_resource path="res://items/hot_sauce.png" type="Texture" id=3]
-[ext_resource path="res://GoBackButton.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/GoBackButton.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 20.2205, 53.5082 )
@@ -32,6 +32,6 @@ margin_left = 900.718
 margin_top = 552.746
 margin_right = 1140.72
 margin_bottom = 600.746
-nextScene = "res://House_inside.tscn"
+nextScene = "res://scenes/House_inside.tscn"
 [connection signal="area_entered" from="hotSauce/hotSauceArea" to="." method="_on_Area2D_area_entered"]
 [connection signal="pressed" from="GoBackButton" to="." method="_on_GoBackButton_pressed"]

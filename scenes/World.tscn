@@ -1,12 +1,15 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://World.gd" type="Script" id=1]
+[ext_resource path="res://scripts/World.gd" type="Script" id=1]
 [ext_resource path="res://environment/house.png" type="Texture" id=2]
-[ext_resource path="res://Player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Portal.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Portal.tscn" type="PackedScene" id=4]
 [ext_resource path="res://environment/sky_background-blue.png" type="Texture" id=5]
 [ext_resource path="res://environment/mountains.png" type="Texture" id=6]
 [ext_resource path="res://environment/city-bg-small.png" type="Texture" id=7]
+
+
+
 
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
@@ -23,7 +26,7 @@ position = Vector2( 440, 50 )
 [node name="Portal" parent="." instance=ExtResource( 4 )]
 position = Vector2( 600.25, 50 )
 areaName = "Door to house"
-nextScene = "res://House_inside.tscn"
+nextScene = "res://scenes/House_inside.tscn"
 outArea = "Door_outside"
 pathToScene = "House_inside"
 

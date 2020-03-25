@@ -43,7 +43,6 @@ func addItemToInventory(item):
 func _on_ArmBackTimer_timeout():
 	moveBack = true;
 
-
 func _on_Area2D_mouse_entered():
 	$YellowBorder.visible = true;
 

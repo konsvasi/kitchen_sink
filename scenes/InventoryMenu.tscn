@@ -1,8 +1,9 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://InventoryMenu.gd" type="Script" id=1]
-[ext_resource path="res://GoBackButton.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scripts/InventoryMenu.gd" type="Script" id=1]
+[ext_resource path="res://scenes/GoBackButton.tscn" type="PackedScene" id=2]
 [ext_resource path="res://fonts/kenney_high.tres" type="DynamicFont" id=3]
+
 
 [node name="InventoryMenu" type="Panel"]
 pause_mode = 2

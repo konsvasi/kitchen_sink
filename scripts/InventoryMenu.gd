@@ -29,5 +29,5 @@ func _on_BackButton_pressed():
 	## store position when menu opens for first time
 	print('change scene')
 	global.previous_scene = 'InventoryMenu'
-	get_tree().change_scene("res://House_inside.tscn")
+	get_tree().change_scene("res://scenes/House_inside.tscn")
 
