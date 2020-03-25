@@ -1,8 +1,9 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://DialogBox.gd" type="Script" id=1]
+[ext_resource path="res://scripts/DialogBox.gd" type="Script" id=1]
 [ext_resource path="res://fonts/kenney_block.tres" type="DynamicFont" id=2]
 [ext_resource path="res://fonts/kenney_high.tres" type="DynamicFont" id=3]
+
 
 [node name="Polygon2D" type="Polygon2D"]
 scale = Vector2( 0.835938, 1 )

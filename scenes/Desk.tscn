@@ -1,12 +1,12 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://Desk.gd" type="Script" id=1]
+[ext_resource path="res://scripts/Desk.gd" type="Script" id=1]
 [ext_resource path="res://environment/desk.png" type="Texture" id=2]
 [ext_resource path="res://ui/yellow-bg.png" type="Texture" id=3]
 [ext_resource path="res://items/pack_of_mushrooms.png" type="Texture" id=4]
-[ext_resource path="res://DialogBox.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/DialogBox.tscn" type="PackedScene" id=5]
 [ext_resource path="res://audio/The Adventure Begins 8-bit remix.ogg" type="AudioStream" id=6]
-[ext_resource path="res://GoBackButton.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/GoBackButton.tscn" type="PackedScene" id=7]
 [ext_resource path="res://utils/arm.png" type="Texture" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -93,9 +93,7 @@ margin_left = 662.234
 margin_top = 416.744
 margin_right = 902.234
 margin_bottom = 464.744
-nextScene = "res://House_inside.tscn"
-[connection signal="area_entered" from="ShroomPack/Area2D" to="." method="_on_Area2D_area_entered"]
-[connection signal="area_exited" from="ShroomPack/Area2D" to="." method="_on_Area2D_area_exited"]
+nextScene = "res://scenes/House_inside.tscn"
 [connection signal="input_event" from="ShroomPack/Area2D" to="." method="_on_Area2D_input_event"]
 [connection signal="mouse_entered" from="ShroomPack/Area2D" to="." method="_on_Area2D_mouse_entered"]
 [connection signal="mouse_exited" from="ShroomPack/Area2D" to="." method="_on_Area2D_mouse_exited"]

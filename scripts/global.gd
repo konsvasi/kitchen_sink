@@ -4,8 +4,8 @@ var prev_scene_position = Vector2();
 var current_scene = null;
 var previous_scene = null;
 var next_scene = null;
-var PlayerNode = preload("res://Player.tscn").instance()
-var Player = preload("res://Player.gd").new();
+var PlayerNode = preload("res://scenes/Player.tscn").instance()
+var Player = preload("res://scripts/Player.gd").new();
 var beforeMenuOpenPosition = null
 
 func _ready():

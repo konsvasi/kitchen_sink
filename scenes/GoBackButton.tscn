@@ -2,7 +2,8 @@
 
 [ext_resource path="res://ui/back_button.png" type="Texture" id=1]
 [ext_resource path="res://ui/back_button_hover.png" type="Texture" id=2]
-[ext_resource path="res://GoBackButton.gd" type="Script" id=3]
+[ext_resource path="res://scripts/GoBackButton.gd" type="Script" id=3]
+
 
 [node name="TextureButton" type="TextureButton"]
 margin_right = 40.0
