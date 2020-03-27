@@ -40,10 +40,10 @@ func _unhandled_key_input(event):
 		elif index - 1 < 0:
 			get_node("VBoxContainer/" + elements[elements.size() -1]).set("custom_colors/font_color", WHITE)	
 
-	if event.is_action_pressed('ui_open_menu'):
-		global.beforeMenuOpenPosition = global.Player.get_global_position()
-		print('beforeMenuOpenPos: ', global.beforeMenuOpenPosition)
-		toggleMenu()
+#	if event.is_action_pressed('ui_open_menu'):
+##		global.beforeMenuOpenPosition = global.Player.get_global_position()
+##		print('beforeMenuOpenPos: ', global.beforeMenuOpenPosition)
+#		toggleMenu()
 	
 	if event.is_action_pressed("ui_interact"):
 		# get selected element
