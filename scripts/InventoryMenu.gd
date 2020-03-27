@@ -8,7 +8,6 @@ const itemDictionary = {
 	}
 }
 func _ready():
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	for item in itemDictionary:
 		print('item: ', itemDictionary[item])
 
@@ -28,6 +27,6 @@ func _on_BackButton_pressed():
 	## store active scene when menu opens for the first time
 	## store position when menu opens for first time
 	print('change scene')
-	global.previous_scene = 'InventoryMenu'
-	get_tree().change_scene("res://scenes/House_inside.tscn")
+	self.hide()
+#	get_tree().change_scene("res://scenes/House_inside.tscn")
 
