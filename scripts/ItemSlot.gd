@@ -6,7 +6,7 @@ var itemName
 # can be path or resource
 var iconPath
 var quantity
-var description = "A pack of dried shrooms."
+var description
 
 func _ready():
 	print(has_focus())
@@ -17,6 +17,7 @@ func _ready():
 func setItemSlot(item):
 	$ItemButton.texture_normal = item.iconPath
 	$Quantity.text = str(item.quantity)
+	description = item.description
 
 func _on_ItemSlot_focus_entered():
 	$FocusRect.show()

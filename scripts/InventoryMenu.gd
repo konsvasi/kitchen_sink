@@ -7,27 +7,32 @@ const itemDictionary = {
 	0: {
 		"itemName": "Shrooms",
 		"iconPath": preload("res://items/pack_of_mushrooms.png"),
-		"quantity": 1
+		"quantity": 1,
+		"description": "A pack of dried shrooms."
 	},
 	1: {
 		"itemName": "Shrooms",
 		"iconPath": preload("res://items/pack_of_mushrooms.png"),
-		"quantity": 1
+		"quantity": 1,
+		"description": "5 grams of dried shrooms."
 	},
 	2: {
 		"itemName": "Shrooms",
 		"iconPath": preload("res://items/pack_of_mushrooms.png"),
-		"quantity": 1
+		"quantity": 1,
+		"description": "A pack of dried shrooms."
 	},
 	3: {
 		"itemName": "Shrooms",
 		"iconPath": preload("res://items/pack_of_mushrooms.png"),
-		"quantity": 1
+		"quantity": 1,
+		"description": "A pack of dried shrooms."
 	},
 	4: {
 		"itemName": "Shrooms",
 		"iconPath": preload("res://items/pack_of_mushrooms.png"),
-		"quantity": 1
+		"quantity": 1,
+		"description": "A pack of dried shrooms."
 	},
 }
 func _ready():
@@ -48,7 +53,7 @@ func _input(event):
 		print('focus owner:', get_focus_owner().get_name())
 
 func on_update_description(value):
-	print("update description", value)
+	$ItemDescription.text = value
 	
 func _on_BackButton_pressed():
 	self.hide()
