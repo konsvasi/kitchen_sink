@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scripts/InventoryMenu.gd" type="Script" id=1]
 [ext_resource path="res://fonts/kenney_high.tres" type="DynamicFont" id=2]
 [ext_resource path="res://scenes/GoBackButton.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/MouseCursor.tscn" type="PackedScene" id=4]
 
 [node name="InventoryMenu" type="Panel"]
 pause_mode = 2
@@ -36,6 +35,4 @@ margin_left = 44.3212
 margin_top = 648.198
 margin_right = 284.321
 margin_bottom = 696.198
-
-[node name="Mouse" parent="." instance=ExtResource( 4 )]
 [connection signal="pressed" from="BackButton" to="." method="_on_BackButton_pressed"]
