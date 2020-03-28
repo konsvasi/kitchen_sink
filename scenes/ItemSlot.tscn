@@ -20,6 +20,12 @@ margin_right = 75.0
 margin_bottom = 72.0
 color = Color( 0.0705882, 0.14902, 0.392157, 1 )
 
+[node name="FocusRect" type="ColorRect" parent="."]
+visible = false
+margin_right = 75.0
+margin_bottom = 72.0
+color = Color( 0.878906, 0.31929, 0.31929, 1 )
+
 [node name="ItemButton" type="TextureButton" parent="."]
 margin_left = 5.0
 margin_top = 23.0
@@ -37,3 +43,5 @@ margin_bottom = 72.0304
 custom_fonts/font = SubResource( 1 )
 text = "10"
 align = 2
+[connection signal="focus_entered" from="." to="." method="_on_ItemSlot_focus_entered"]
+[connection signal="focus_exited" from="." to="." method="_on_ItemSlot_focus_exited"]

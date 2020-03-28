@@ -8,35 +8,47 @@ const itemDictionary = {
 		"itemName": "Shrooms",
 		"iconPath": preload("res://items/pack_of_mushrooms.png"),
 		"quantity": 1
-	}
+	},
+	1: {
+		"itemName": "Shrooms",
+		"iconPath": preload("res://items/pack_of_mushrooms.png"),
+		"quantity": 1
+	},
+	2: {
+		"itemName": "Shrooms",
+		"iconPath": preload("res://items/pack_of_mushrooms.png"),
+		"quantity": 1
+	},
+	3: {
+		"itemName": "Shrooms",
+		"iconPath": preload("res://items/pack_of_mushrooms.png"),
+		"quantity": 1
+	},
+	4: {
+		"itemName": "Shrooms",
+		"iconPath": preload("res://items/pack_of_mushrooms.png"),
+		"quantity": 1
+	},
 }
 func _ready():
 	for item in itemDictionary:
-		print('item: ', itemDictionary[item])
+#		print('item: ', itemDictionary[item])
 		# create instances of ItemSlots within ItemContainer
 		var itemSlotInstance = ItemSlot.instance()
-		# pass arguments for item slot
 		itemSlotInstance.setItemSlot(itemDictionary[item])
-		# add to scene
 		$ItemContainer.add_child(itemSlotInstance)
-		
+		itemSlotInstance.connect("update_description", self, "on_update_description")
+	
+	# Focus first element
+	$ItemContainer.get_child(0).grab_focus()
+	print('has focus: ', $ItemContainer.get_child(0).has_focus(), ' focus:', get_focus_owner())
 
+func _input(event):
+	if Input.is_action_just_pressed("ui_interact"):
+		print('focus owner:', get_focus_owner().get_name())
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-
+func on_update_description(value):
+	print("update description", value)
+	
 func _on_BackButton_pressed():
-	## hint
-	## go to previous scene where player is visible
-	## and menu is open
-	## example if you where in the house scene and entered inventory mode
-	## when going back you should change to this scene
-	## at the same position
-	## store active scene when menu opens for the first time
-	## store position when menu opens for first time
-	print('change scene')
 	self.hide()
-#	get_tree().change_scene("res://scenes/House_inside.tscn")
-
