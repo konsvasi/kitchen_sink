@@ -1,17 +1,18 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scenes/Interactable_object.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/Portal.tscn" type="PackedScene" id=3]
-[ext_resource path="res://utils/white_noise_1.png" type="Texture" id=4]
+[ext_resource path="res://scripts/House_inside.gd" type="Script" id=1]
+[ext_resource path="res://environment/house_iniside.png" type="Texture" id=2]
+[ext_resource path="res://utils/white_noise_1.png" type="Texture" id=3]
+[ext_resource path="res://utils/white_noise_2.png" type="Texture" id=4]
 [ext_resource path="res://utils/white_noise_3.png" type="Texture" id=5]
-[ext_resource path="res://utils/white_noise_2.png" type="Texture" id=6]
-[ext_resource path="res://environment/house_iniside.png" type="Texture" id=7]
-[ext_resource path="res://scripts/House_inside.gd" type="Script" id=8]
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/Portal.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/Interactable_object.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/HUD.tscn" type="PackedScene" id=9]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 4 ), ExtResource( 6 ), ExtResource( 5 ) ],
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
 "loop": true,
 "name": "white_noise",
 "speed": 10.0
@@ -21,21 +22,21 @@ animations = [ {
 extents = Vector2( 10, 100 )
 
 [node name="House_inside" type="Node2D"]
-script = ExtResource( 8 )
+script = ExtResource( 1 )
 
 [node name="background" type="Sprite" parent="."]
-position = Vector2( 320, 0 )
-texture = ExtResource( 7 )
+position = Vector2( 319.751, 0 )
+texture = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 223.921, 233.996 )
 scale = Vector2( 1.59434, 0.875 )
 frames = SubResource( 1 )
 animation = "white_noise"
-frame = 2
+frame = 1
 playing = true
 
-[node name="Player" parent="." instance=ExtResource( 1 )]
+[node name="Player" parent="." instance=ExtResource( 6 )]
 position = Vector2( 180, 240 )
 
 [node name="wall" type="StaticBody2D" parent="."]
@@ -53,20 +54,20 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Portal" parent="." instance=ExtResource( 3 )]
+[node name="Portal" parent="." instance=ExtResource( 7 )]
 position = Vector2( 180, 250 )
 areaName = "Door_outside"
 nextScene = "res://scenes/World.tscn"
 outArea = "Door to house"
 pathToScene = "World"
 
-[node name="fridge_door" parent="." instance=ExtResource( 2 )]
+[node name="fridge_door" parent="." instance=ExtResource( 8 )]
 position = Vector2( 49.1099, 242.565 )
 areaName = "fridge_door"
 transitionOnInteract = true
 nextScene = "res://scenes/Fridge.tscn"
 
-[node name="mushroom_on_desk" parent="." instance=ExtResource( 2 )]
+[node name="mushroom_on_desk" parent="." instance=ExtResource( 8 )]
 visible = false
 position = Vector2( 425.007, 234.266 )
 areaName = "mushroom_on_desk"
@@ -75,3 +76,5 @@ nextScene = "res://scenes/Desk.tscn"
 
 [node name="respawn_from_desk_point" type="Node2D" parent="."]
 position = Vector2( 421.636, 241.542 )
+
+[node name="HUD" parent="." instance=ExtResource( 9 )]
