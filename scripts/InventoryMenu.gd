@@ -1,15 +1,25 @@
 extends Panel
 
+var ItemSlot = load("res://scenes/ItemSlot.tscn")
+
 ## Replace with global player items
 const itemDictionary = {
 	0: {
 		"itemName": "Shrooms",
-		"itemIcon": preload("res://items/pack_of_mushrooms.png")
+		"iconPath": preload("res://items/pack_of_mushrooms.png"),
+		"quantity": 1
 	}
 }
 func _ready():
 	for item in itemDictionary:
 		print('item: ', itemDictionary[item])
+		# create instances of ItemSlots within ItemContainer
+		var itemSlotInstance = ItemSlot.instance()
+		# pass arguments for item slot
+		itemSlotInstance.setItemSlot(itemDictionary[item])
+		# add to scene
+		$ItemContainer.add_child(itemSlotInstance)
+		
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

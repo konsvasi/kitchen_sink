@@ -1,8 +1,15 @@
-extends Panel
+extends Control
 
-var itemIcon = ""
-var itemName = ""
+var itemName
+# can be path or resource
+var iconPath
+var quantity
 
 func _ready():
-	print('Item slot created')
+	pass # Replace with function body.
 
+# Dictionary object with key for
+# name, icon path and quantity
+func setItemSlot(item):
+	$ItemButton.texture_normal = item.iconPath
+	$Quantity.text = str(item.quantity)
