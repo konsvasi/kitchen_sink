@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 const SPEED = 60;
-const GRAVITY = 10;
+const GRAVITY = 5;
 const FLOOR = Vector2(0, -1);
 export var health = 50;
 var items = {};
@@ -14,8 +14,10 @@ var activeArea;
 var activeOutArea = "";
 var isMenuOpen = false;
 
-
+func _ready():
+	velocity.y = GRAVITY
 func _physics_process(delta):
+	velocity.y += GRAVITY
 	if Input.is_action_pressed("ui_right"):
 		velocity.x = SPEED;
 		$AnimatedSprite.play("walk_right");

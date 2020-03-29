@@ -33,7 +33,7 @@ position = Vector2( 223.921, 233.996 )
 scale = Vector2( 1.59434, 0.875 )
 frames = SubResource( 1 )
 animation = "white_noise"
-frame = 2
+frame = 1
 playing = true
 
 [node name="Player" parent="." instance=ExtResource( 6 )]

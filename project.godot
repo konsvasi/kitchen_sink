@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="kitchen_sink"
-run/main_scene="res://scenes/House_inside.tscn"
+run/main_scene="res://scenes/Basement.tscn"
 
 [autoload]
 
