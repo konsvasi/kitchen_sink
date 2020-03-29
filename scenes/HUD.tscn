@@ -4,7 +4,6 @@
 [ext_resource path="res://scenes/Menu.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/InventoryMenu.tscn" type="PackedScene" id=3]
 
-
 [node name="HUD" type="CanvasLayer"]
 pause_mode = 2
 script = ExtResource( 1 )
@@ -18,3 +17,4 @@ margin_bottom = 388.0
 
 [node name="InventoryMenu" parent="." instance=ExtResource( 3 )]
 visible = false
+[connection signal="hide" from="InventoryMenu" to="." method="_on_InventoryMenu_hide"]

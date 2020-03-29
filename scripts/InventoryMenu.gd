@@ -48,18 +48,21 @@ func _ready():
 	# Focus first element
 	$ItemContainer.get_child(0).grab_focus()
 
-func _input(event):
-	if Input.is_action_just_pressed("ui_interact"):
-#		if ($ItemContainer.get_child_count() - 1 == 0):
-#			print('doing nothing')
-#			pass
-			
-		if get_focus_owner().id == "item_slot":
-			$UseItemAudio.play()
-			get_focus_owner().useItem()
-			
-		if get_focus_owner().id == "back_button":
-			hide()	
+func _unhandled_key_input(event):
+	if self.visible:
+		if Input.is_action_just_pressed("ui_interact"):
+	#		if ($ItemContainer.get_child_count() - 1 == 0):
+	#			print('doing nothing')
+	#			pass
+			print('interact', get_focus_owner().id)
+			if get_focus_owner():
+				if get_focus_owner().id == "item_slot":
+					$UseItemAudio.play()
+					get_focus_owner().useItem()
+					
+				if get_focus_owner().id == "back_button":
+					print('hide')
+					self.hide()	
 
 func on_update_description(value):
 	$ItemDescription.text = value
