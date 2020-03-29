@@ -36,6 +36,7 @@ const itemDictionary = {
 	},
 }
 func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	for item in itemDictionary:
 #		print('item: ', itemDictionary[item])
 		# create instances of ItemSlots within ItemContainer
