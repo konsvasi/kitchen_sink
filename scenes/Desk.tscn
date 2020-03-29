@@ -6,8 +6,8 @@
 [ext_resource path="res://items/pack_of_mushrooms.png" type="Texture" id=4]
 [ext_resource path="res://scenes/DialogBox.tscn" type="PackedScene" id=5]
 [ext_resource path="res://audio/The Adventure Begins 8-bit remix.ogg" type="AudioStream" id=6]
-[ext_resource path="res://scenes/GoBackButton.tscn" type="PackedScene" id=7]
-[ext_resource path="res://utils/arm.png" type="Texture" id=8]
+[ext_resource path="res://utils/arm.png" type="Texture" id=7]
+[ext_resource path="res://scenes/GoBackButton.tscn" type="PackedScene" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7.51884, 8.4526 )
@@ -67,7 +67,7 @@ position = Vector2( 102.184, 985.532 )
 scale = Vector2( 2, 2 )
 
 [node name="Arm" type="Sprite" parent="KinematicBody2D"]
-texture = ExtResource( 8 )
+texture = ExtResource( 7 )
 offset = Vector2( -50, 160 )
 
 [node name="Area2D" type="Area2D" parent="KinematicBody2D/Arm"]
@@ -88,7 +88,7 @@ __meta__ = {
 [node name="ArmBackTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="GoBackButton" parent="." instance=ExtResource( 7 )]
+[node name="GoBackButton" parent="." instance=ExtResource( 8 )]
 margin_left = 662.234
 margin_top = 416.744
 margin_right = 902.234

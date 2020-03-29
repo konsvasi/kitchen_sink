@@ -1,8 +1,21 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scripts/InventoryMenu.gd" type="Script" id=1]
 [ext_resource path="res://fonts/kenney_high.tres" type="DynamicFont" id=2]
 [ext_resource path="res://scenes/GoBackButton.tscn" type="PackedScene" id=3]
+[ext_resource path="res://fonts/Kenney Pixel.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://audio/beads.wav" type="AudioStream" id=5]
+[ext_resource path="res://fonts/Kenney Mini.ttf" type="DynamicFontData" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 36
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+outline_size = 3
+outline_color = Color( 0.0862745, 0.0392157, 0.0313726, 1 )
+font_data = ExtResource( 6 )
 
 [node name="InventoryMenu" type="Panel"]
 pause_mode = 2
@@ -14,15 +27,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="MainBackground" type="ColorRect" parent="."]
+margin_top = -1.07141
 margin_right = 1282.0
-margin_bottom = 721.0
+margin_bottom = 719.929
 color = Color( 0.498039, 0.596078, 0.596078, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="."]
+[node name="Title" type="Label" parent="."]
 margin_left = 48.0
 margin_top = 48.0
 margin_right = 81.2959
@@ -31,8 +45,54 @@ custom_fonts/font = ExtResource( 2 )
 text = "Inventory"
 
 [node name="BackButton" parent="." instance=ExtResource( 3 )]
-margin_left = 44.3212
+margin_left = 48.0
 margin_top = 648.198
-margin_right = 284.321
+margin_right = 288.0
 margin_bottom = 696.198
+
+[node name="ItemContainerBackground" type="ColorRect" parent="."]
+margin_left = 48.0
+margin_top = 118.0
+margin_right = 768.0
+margin_bottom = 478.0
+color = Color( 1, 0.74902, 0.431373, 1 )
+
+[node name="ItemContainer" type="GridContainer" parent="."]
+margin_left = 63.8133
+margin_top = 135.084
+margin_right = 103.813
+margin_bottom = 175.084
+columns = 3
+
+[node name="ItemDescription" type="Label" parent="."]
+margin_left = 55.0
+margin_top = 535.0
+margin_right = 776.0
+margin_bottom = 597.0
+custom_fonts/font = SubResource( 1 )
+text = "A pack of dried mushrooms"
+
+[node name="ColorRect" type="ColorRect" parent="ItemDescription"]
+show_behind_parent = true
+light_mask = 0
+margin_left = -7.0
+margin_top = -0.939148
+margin_right = 715.0
+margin_bottom = 39.0609
+color = Color( 0.286275, 0.27451, 0.27451, 1 )
+
+[node name="UseItemAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+
+[node name="EmptyInventoryMessage" type="Label" parent="."]
+visible = false
+margin_left = 72.0
+margin_top = 140.0
+margin_right = 752.0
+margin_bottom = 440.0
+custom_fonts/font = SubResource( 2 )
+text = "It seems like you don't have any items"
+align = 1
+valign = 1
 [connection signal="pressed" from="BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="sort_children" from="ItemContainer" to="." method="_on_ItemContainer_sort_children"]

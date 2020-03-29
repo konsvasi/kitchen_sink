@@ -1,32 +1,79 @@
 extends Panel
 
+var ItemSlot = load("res://scenes/ItemSlot.tscn")
+
 ## Replace with global player items
 const itemDictionary = {
 	0: {
 		"itemName": "Shrooms",
-		"itemIcon": preload("res://items/pack_of_mushrooms.png")
-	}
+		"iconPath": preload("res://items/pack_of_mushrooms.png"),
+		"quantity": 1,
+		"description": "A pack of dried shrooms."
+	},
+	1: {
+		"itemName": "Shrooms",
+		"iconPath": preload("res://items/pack_of_mushrooms.png"),
+		"quantity": 1,
+		"description": "5 grams of dried shrooms."
+	},
+	2: {
+		"itemName": "Shrooms",
+		"iconPath": preload("res://items/pack_of_mushrooms.png"),
+		"quantity": 1,
+		"description": "A pack of dried shrooms."
+	},
+	3: {
+		"itemName": "Shrooms",
+		"iconPath": preload("res://items/pack_of_mushrooms.png"),
+		"quantity": 1,
+		"description": "A pack of dried shrooms."
+	},
+	4: {
+		"itemName": "Shrooms",
+		"iconPath": preload("res://items/pack_of_mushrooms.png"),
+		"quantity": 1,
+		"description": "A pack of dried shrooms."
+	},
 }
 func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	for item in itemDictionary:
-		print('item: ', itemDictionary[item])
+#		print('item: ', itemDictionary[item])
+		# create instances of ItemSlots within ItemContainer
+		var itemSlotInstance = ItemSlot.instance()
+		itemSlotInstance.setItemSlot(itemDictionary[item])
+		$ItemContainer.add_child(itemSlotInstance)
+		itemSlotInstance.connect("update_description", self, "on_update_description")
+	
+	# Focus first element
+	$ItemContainer.get_child(0).grab_focus()
 
+func _unhandled_key_input(event):
+	if self.visible:
+		if Input.is_action_just_pressed("ui_interact"):
+	#		if ($ItemContainer.get_child_count() - 1 == 0):
+	#			print('doing nothing')
+	#			pass
+			print('interact', get_focus_owner().id)
+			if get_focus_owner():
+				if get_focus_owner().id == "item_slot":
+					$UseItemAudio.play()
+					get_focus_owner().useItem()
+					
+				if get_focus_owner().id == "back_button":
+					print('hide')
+					self.hide()	
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-
+func on_update_description(value):
+	$ItemDescription.text = value
+	
 func _on_BackButton_pressed():
-	## hint
-	## go to previous scene where player is visible
-	## and menu is open
-	## example if you where in the house scene and entered inventory mode
-	## when going back you should change to this scene
-	## at the same position
-	## store active scene when menu opens for the first time
-	## store position when menu opens for first time
-	print('change scene')
 	self.hide()
-#	get_tree().change_scene("res://scenes/House_inside.tscn")
 
+func _on_ItemContainer_sort_children():
+	if $ItemContainer.get_child_count() != 0:
+		$ItemContainer.get_child(0).grab_focus()
+	else:
+		$EmptyInventoryMessage.show()
+		# give focus to back button
+		$BackButton.grab_focus()
