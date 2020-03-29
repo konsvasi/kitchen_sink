@@ -1,13 +1,21 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scripts/InventoryMenu.gd" type="Script" id=1]
 [ext_resource path="res://fonts/kenney_high.tres" type="DynamicFont" id=2]
 [ext_resource path="res://scenes/GoBackButton.tscn" type="PackedScene" id=3]
 [ext_resource path="res://fonts/Kenney Pixel.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://audio/beads.wav" type="AudioStream" id=5]
+[ext_resource path="res://fonts/Kenney Mini.ttf" type="DynamicFontData" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 size = 36
 font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+outline_size = 3
+outline_color = Color( 0.0862745, 0.0392157, 0.0313726, 1 )
+font_data = ExtResource( 6 )
 
 [node name="InventoryMenu" type="Panel"]
 pause_mode = 2
@@ -72,4 +80,19 @@ margin_top = -0.939148
 margin_right = 715.0
 margin_bottom = 39.0609
 color = Color( 0.286275, 0.27451, 0.27451, 1 )
+
+[node name="UseItemAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+
+[node name="EmptyInventoryMessage" type="Label" parent="."]
+visible = false
+margin_left = 72.0
+margin_top = 140.0
+margin_right = 752.0
+margin_bottom = 440.0
+custom_fonts/font = SubResource( 2 )
+text = "It seems like you don't have any items"
+align = 1
+valign = 1
 [connection signal="pressed" from="BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="sort_children" from="ItemContainer" to="." method="_on_ItemContainer_sort_children"]

@@ -46,14 +46,30 @@ func _ready():
 	
 	# Focus first element
 	$ItemContainer.get_child(0).grab_focus()
-	print('has focus: ', $ItemContainer.get_child(0).has_focus(), ' focus:', get_focus_owner())
 
 func _input(event):
 	if Input.is_action_just_pressed("ui_interact"):
-		print('focus owner:', get_focus_owner().get_name())
+#		if ($ItemContainer.get_child_count() - 1 == 0):
+#			print('doing nothing')
+#			pass
+			
+		if get_focus_owner().id == "item_slot":
+			$UseItemAudio.play()
+			get_focus_owner().useItem()
+			
+		if get_focus_owner().id == "back_button":
+			hide()	
 
 func on_update_description(value):
 	$ItemDescription.text = value
 	
 func _on_BackButton_pressed():
 	self.hide()
+
+func _on_ItemContainer_sort_children():
+	if $ItemContainer.get_child_count() != 0:
+		$ItemContainer.get_child(0).grab_focus()
+	else:
+		$EmptyInventoryMessage.show()
+		# give focus to back button
+		$BackButton.grab_focus()
