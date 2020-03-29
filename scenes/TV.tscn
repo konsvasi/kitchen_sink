@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://environment/TV.png" type="Texture" id=1]
+
+[node name="TV" type="Node"]
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="Node2D"]
+position = Vector2( 642.036, 362.376 )
+texture = ExtResource( 1 )

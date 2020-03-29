@@ -32,6 +32,7 @@ func _physics_process(delta):
 	
 func _input(event):
 	if Input.is_action_pressed("ui_interact"):
+		print('interact')
 		if activeArea is Area2D:
 			if (activeArea.type == "Interactable_Object"):
 				if activeArea.transitionOnInteract:
@@ -52,6 +53,7 @@ func dialog_open(dialogContent):
 	print(dialogContent)
 	
 func _on_Area2D_area_entered(area):
+	print('entered', area)
 	# First check if Area2d is a Portal or an Interactable Object
 	activeArea = area;
 	if area.type == "Portal":
