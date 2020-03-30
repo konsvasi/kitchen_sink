@@ -74,3 +74,4 @@ shape = SubResource( 2 )
 [node name="Interactable_object" parent="BasementMain" instance=ExtResource( 3 )]
 position = Vector2( 195.177, 325.243 )
 transitionOnInteract = true
+nextScene = "res://scenes/TV.tscn"
