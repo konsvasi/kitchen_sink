@@ -10,6 +10,9 @@ const hidePosition = Vector2(330, 1210);
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	DialogContent.get_content("desk")
+	## init dialog
+	$Dialogbox.setDialog(DialogContent.get_content("desk"))
 	
 func _process(delta):
 	if moveArm:

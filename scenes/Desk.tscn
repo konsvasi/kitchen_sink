@@ -96,7 +96,6 @@ margin_left = -195.123
 margin_top = -209.376
 margin_right = 847.877
 margin_bottom = 51.6236
-dialog = [ "Finally my parents are gone...", "Time to triiiiiiip!!!!!" ]
 [connection signal="input_event" from="ShroomPack/Area2D" to="." method="_on_Area2D_input_event"]
 [connection signal="mouse_entered" from="ShroomPack/Area2D" to="." method="_on_Area2D_mouse_entered"]
 [connection signal="mouse_exited" from="ShroomPack/Area2D" to="." method="_on_Area2D_mouse_exited"]

@@ -1,11 +1,6 @@
 extends Control
 
-export var dialog = [
-	'Hello there',
-	'This is a dialog',
-	'Have fun'
-]
-
+var dialog = ['default']
 var index = 0
 
 func _ready():
