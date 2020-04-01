@@ -4,10 +4,10 @@
 [ext_resource path="res://environment/desk.png" type="Texture" id=2]
 [ext_resource path="res://ui/yellow-bg.png" type="Texture" id=3]
 [ext_resource path="res://items/pack_of_mushrooms.png" type="Texture" id=4]
-[ext_resource path="res://scenes/DialogBox.tscn" type="PackedScene" id=5]
-[ext_resource path="res://audio/The Adventure Begins 8-bit remix.ogg" type="AudioStream" id=6]
-[ext_resource path="res://utils/arm.png" type="Texture" id=7]
-[ext_resource path="res://scenes/GoBackButton.tscn" type="PackedScene" id=8]
+[ext_resource path="res://audio/The Adventure Begins 8-bit remix.ogg" type="AudioStream" id=5]
+[ext_resource path="res://utils/arm.png" type="Texture" id=6]
+[ext_resource path="res://scenes/GoBackButton.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/DialogBox.tscn" type="PackedScene" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7.51884, 8.4526 )
@@ -52,12 +52,8 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Polygon2D" parent="." instance=ExtResource( 5 )]
-position = Vector2( -221.538, -219.574 )
-dialogText = "Ooh, Tom left me some of his special African jungle mushrooms for the weekend..."
-
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 6 )
+stream = ExtResource( 5 )
 volume_db = -19.535
 autoplay = true
 attenuation = 0.840897
@@ -67,7 +63,7 @@ position = Vector2( 102.184, 985.532 )
 scale = Vector2( 2, 2 )
 
 [node name="Arm" type="Sprite" parent="KinematicBody2D"]
-texture = ExtResource( 7 )
+texture = ExtResource( 6 )
 offset = Vector2( -50, 160 )
 
 [node name="Area2D" type="Area2D" parent="KinematicBody2D/Arm"]
@@ -88,12 +84,19 @@ __meta__ = {
 [node name="ArmBackTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="GoBackButton" parent="." instance=ExtResource( 8 )]
+[node name="GoBackButton" parent="." instance=ExtResource( 7 )]
 margin_left = 662.234
 margin_top = 416.744
 margin_right = 902.234
 margin_bottom = 464.744
 nextScene = "res://scenes/House_inside.tscn"
+
+[node name="Dialogbox" parent="." instance=ExtResource( 8 )]
+margin_left = -195.123
+margin_top = -209.376
+margin_right = 847.877
+margin_bottom = 51.6236
+dialog = [ "Finally my parents are gone...", "Time to triiiiiiip!!!!!" ]
 [connection signal="input_event" from="ShroomPack/Area2D" to="." method="_on_Area2D_input_event"]
 [connection signal="mouse_entered" from="ShroomPack/Area2D" to="." method="_on_Area2D_mouse_entered"]
 [connection signal="mouse_exited" from="ShroomPack/Area2D" to="." method="_on_Area2D_mouse_exited"]

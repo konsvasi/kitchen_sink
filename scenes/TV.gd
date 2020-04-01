@@ -10,6 +10,10 @@ func _ready():
 func _process(delta):
 	pass
 
+func _input(event):
+	if Input.is_action_just_pressed("ui_interact"):
+		$Dialogbox.loadDialog()
+
 func flicker_light():
 	$TVMain/Light2D.texture_scale = smoothstep(1, 2, 0.15)
 

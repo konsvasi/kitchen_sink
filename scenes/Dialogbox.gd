@@ -1,6 +1,6 @@
 extends Control
 
-var dialog = [
+export var dialog = [
 	'Hello there',
 	'This is a dialog',
 	'Have fun'
@@ -13,8 +13,13 @@ func _ready():
 
 #func _process(delta):
 #	pass
-
+func setDialog(dialogArray):
+	dialog = dialogArray
+	
 func loadDialog():
+	if index == dialog.size():
+		queue_free()
+
 	if index < dialog.size():
 		$RichTextLabel.bbcode_text = dialog[index]
 		$Tween.interpolate_property($RichTextLabel,
@@ -24,4 +29,8 @@ func loadDialog():
 			Tween.EASE_IN_OUT
 		)
 		$Tween.start()
+		
 	index += 1
+	
+	if index == dialog.size():
+		$Arrow.hide()

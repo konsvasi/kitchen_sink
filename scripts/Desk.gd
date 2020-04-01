@@ -26,7 +26,10 @@ func _process(delta):
 		$YellowBorder.visible = false;
 		takeItemAndMove();
 	
-
+func _input(event):
+	if Input.is_action_just_pressed("ui_interact"):
+		$Dialogbox.loadDialog()
+		
 func takeItemAndMove():
 	velocity = (hidePosition - $KinematicBody2D.get_global_position()).normalized() * 200;
 	if (hidePosition - $KinematicBody2D.get_global_position()).length() > 5:
