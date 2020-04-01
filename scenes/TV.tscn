@@ -71,7 +71,6 @@ material = SubResource( 2 )
 position = Vector2( 642.937, 355.553 )
 scale = Vector2( 11.8421, 7.64045 )
 frames = SubResource( 3 )
-frame = 2
 playing = true
 
 [node name="Light2D" type="Light2D" parent="TVMain"]
