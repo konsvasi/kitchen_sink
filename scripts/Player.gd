@@ -65,11 +65,17 @@ func _on_Area2D_area_entered(area):
 	if area.type == "Portal":
 		global.next_scene = area.get("nextScene");
 	elif area.type == "Interactable_Object":
-		exclamationBox.show();
+		if area.dialogId:
+			# set animation for dialog though bubble
+			$ThoughtBubble.animation = 'dialog_interaction'
+		else:
+			# set animation for normal interaction
+			$ThoughtBubble.animation = 'interaction'
+		$ThoughtBubble.show();
 
 func _on_Area2D_area_exited(area):
 	activeArea = "";
 	activeOutArea = "";
 	global.next_scene = "";
 	
-	exclamationBox.hide();
+	$ThoughtBubble.hide();

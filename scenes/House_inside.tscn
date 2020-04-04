@@ -40,15 +40,13 @@ playing = true
 position = Vector2( 180, 240 )
 
 [node name="wall" type="StaticBody2D" parent="."]
-editor/display_folded = true
 position = Vector2( -10, 190 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="wall"]
 shape = SubResource( 2 )
 
 [node name="floor" type="StaticBody2D" parent="."]
-editor/display_folded = true
-position = Vector2( 369.671, 264.43 )
+position = Vector2( 370.271, 265.631 )
 rotation = 1.5708
 __meta__ = {
 "_edit_group_": true
@@ -59,7 +57,6 @@ position = Vector2( 0.395905, 0 )
 shape = SubResource( 2 )
 
 [node name="wall2" type="StaticBody2D" parent="."]
-editor/display_folded = true
 position = Vector2( 640, 190 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="wall2"]
@@ -69,6 +66,7 @@ __meta__ = {
 }
 
 [node name="Portal" parent="." instance=ExtResource( 7 )]
+visible = false
 position = Vector2( 180, 250 )
 areaName = "Door_outside"
 nextScene = "res://scenes/World.tscn"
