@@ -32,12 +32,18 @@ func _physics_process(delta):
 	
 func _input(event):
 	if Input.is_action_pressed("ui_interact"):
-		print('interact')
-		if activeArea is Area2D:
+		if (activeArea is Area2D):
 			if (activeArea.type == "Interactable_Object"):
+				print(activeArea)
 				if activeArea.transitionOnInteract:
 					global.go_to_scene(activeArea.nextScene)
-		
+				# Open dialog		
+				if activeArea.dialogId && !global.isDialogOpen:
+					get_parent().get_node("HUD").showDialog(get_parent().name.to_lower(), activeArea.dialogId)
+				else:
+					# Progress dialog
+					get_parent().get_node("HUD").loadDialog()
+			
 	if Input.is_action_pressed("ui_up"):		
 		if global.next_scene != "" && global.next_scene != null:
 			global.previous_scene = get_tree().get_current_scene().name;

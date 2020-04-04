@@ -19,7 +19,7 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 10, 100 )
+extents = Vector2( 10, 390.221 )
 
 [node name="House_inside" type="Node2D"]
 script = ExtResource( 1 )
@@ -33,19 +33,33 @@ position = Vector2( 223.525, 233.996 )
 scale = Vector2( 1.59434, 0.875 )
 frames = SubResource( 1 )
 animation = "white_noise"
-frame = 1
+frame = 2
 playing = true
 
 [node name="Player" parent="." instance=ExtResource( 6 )]
 position = Vector2( 180, 240 )
 
 [node name="wall" type="StaticBody2D" parent="."]
+editor/display_folded = true
 position = Vector2( -10, 190 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="wall"]
 shape = SubResource( 2 )
 
+[node name="floor" type="StaticBody2D" parent="."]
+editor/display_folded = true
+position = Vector2( 369.671, 264.43 )
+rotation = 1.5708
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="floor"]
+position = Vector2( 0.395905, 0 )
+shape = SubResource( 2 )
+
 [node name="wall2" type="StaticBody2D" parent="."]
+editor/display_folded = true
 position = Vector2( 640, 190 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="wall2"]
@@ -76,5 +90,9 @@ nextScene = "res://scenes/Desk.tscn"
 
 [node name="respawn_from_desk_point" type="Node2D" parent="."]
 position = Vector2( 421.636, 241.542 )
+
+[node name="Interactable_object" parent="." instance=ExtResource( 8 )]
+position = Vector2( 530.794, 247.111 )
+dialogId = "painting"
 
 [node name="HUD" parent="." instance=ExtResource( 9 )]

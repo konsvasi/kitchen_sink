@@ -8,12 +8,16 @@ func _ready():
 
 #func _process(delta):
 #	pass
+
 func setDialog(dialogArray):
 	dialog = dialogArray
+	index = 0
+	loadDialog()
 	
 func loadDialog():
 	if index == dialog.size():
-		queue_free()
+		hide()
+		global.isDialogOpen = false
 
 	if index < dialog.size():
 		$RichTextLabel.bbcode_text = dialog[index]

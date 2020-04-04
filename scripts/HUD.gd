@@ -2,6 +2,8 @@ extends CanvasLayer
 
 var index = 0
 var menuOptions = ['Inventory', 'Options']
+var dialog = []
+
 func _ready():
 	pass # Replace with function body.
 
@@ -35,3 +37,13 @@ func _unhandled_key_input(event):
 
 func _on_InventoryMenu_hide():
 	self.set_process_unhandled_key_input(true)
+
+	
+func showDialog(currentScene, dialogId):
+	var dialog = DialogContent.get_content(currentScene, dialogId)
+	$Dialogbox.setDialog(dialog)
+	$Dialogbox.show()
+	global.isDialogOpen = true
+
+func loadDialog():
+	$Dialogbox.loadDialog()

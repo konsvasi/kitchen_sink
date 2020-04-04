@@ -2,7 +2,6 @@
 
 [ext_resource path="res://scripts/Interactable_Object.gd" type="Script" id=1]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 
 [node name="Interactable_object" type="Area2D"]

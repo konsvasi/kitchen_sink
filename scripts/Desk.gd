@@ -6,13 +6,13 @@ var moveBack = false;
 var positionToMove;
 var velocity = Vector2();
 const hidePosition = Vector2(330, 1210);
-
+onready var dialog = $Dialogbox
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	DialogContent.get_content("desk")
 	## init dialog
-	$Dialogbox.setDialog(DialogContent.get_content("desk"))
+	$Dialogbox.setDialog(DialogContent.get_content("desk", "main"))
+
 	
 func _process(delta):
 	if moveArm:
@@ -63,3 +63,7 @@ func _on_Area2D_input_event(viewport, event, shape_idx):
 func _on_GoBackButton_pressed():
 	global.previous_scene = "desk"
 	global.go_to_scene($GoBackButton.nextScene);
+
+
+func _on_Dialogbox_tree_entered():
+	$Dialogbox.setDialog(DialogContent.get_content("desk", "main"))

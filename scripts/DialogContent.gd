@@ -1,17 +1,16 @@
 extends Node
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
 
-func get_content(dialogId):
-	print(content[dialogId][0])
-	return content[dialogId][0]
+func get_content(currentScene, dialogId):
+	return content[currentScene][dialogId]
 
 var content = {
-	"desk": ['Finally my parents are gone...', 'Time to triiiiiiip!!!!!']
+	"desk": {
+		"main": ['Ooh the mushrooms that B. left for me...', 'Time to triiiiiiip!!!!!']
+	},
+	"house_inside": {
+		"painting": ['What a nice painting', 'Took me three years to make...']
+	}
 }

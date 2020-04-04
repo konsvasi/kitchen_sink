@@ -6,7 +6,8 @@ var previous_scene = null;
 var next_scene = null;
 var PlayerNode = preload("res://scenes/Player.tscn").instance()
 var Player = preload("res://scripts/Player.gd").new();
-var beforeMenuOpenPosition = null
+# Used to handle interaction when dialog is open
+var isDialogOpen = false
 
 func _ready():
 	var root = get_tree().get_root();

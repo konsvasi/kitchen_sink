@@ -101,3 +101,4 @@ margin_bottom = 51.6236
 [connection signal="mouse_exited" from="ShroomPack/Area2D" to="." method="_on_Area2D_mouse_exited"]
 [connection signal="timeout" from="ArmBackTimer" to="." method="_on_ArmBackTimer_timeout"]
 [connection signal="pressed" from="GoBackButton" to="." method="_on_GoBackButton_pressed"]
+[connection signal="tree_entered" from="Dialogbox" to="." method="_on_Dialogbox_tree_entered"]
