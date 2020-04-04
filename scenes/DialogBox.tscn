@@ -1,27 +1,62 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://scripts/DialogBox.gd" type="Script" id=1]
-[ext_resource path="res://fonts/kenney_block.tres" type="DynamicFont" id=2]
-[ext_resource path="res://fonts/kenney_high.tres" type="DynamicFont" id=3]
+[ext_resource path="res://scenes/Dialogbox.gd" type="Script" id=1]
+[ext_resource path="res://ui/dialog_box.png" type="Texture" id=2]
+[ext_resource path="res://fonts/Kenney Mini.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://ui/arrow_down.png" type="Texture" id=4]
 
+[sub_resource type="DynamicFont" id=1]
+size = 28
+font_data = ExtResource( 3 )
 
-[node name="Polygon2D" type="Polygon2D"]
-scale = Vector2( 0.835938, 1 )
-color = Color( 0, 0, 0, 1 )
-polygon = PoolVector2Array( 0, 0, 1280, 0, 1280, 180, 0, 180 )
+[node name="Dialogbox" type="Control"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -504.355
+margin_top = 409.333
+margin_right = 538.645
+margin_bottom = 670.333
 script = ExtResource( 1 )
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-margin_left = 11.9626
-margin_top = 10.0
-margin_right = 1271.96
-margin_bottom = 160.0
-custom_fonts/mono_font = ExtResource( 2 )
-custom_fonts/normal_font = ExtResource( 3 )
-tab_size = 6
-text = "Ooh, Tom left me some of his special African jungle mushrooms for the weekend..."
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 2 )
+expand = true
 
-[node name="Timer" type="Timer" parent="."]
-one_shot = true
-autostart = true
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 30.0
+margin_top = 30.0
+margin_right = -30.0
+margin_bottom = -30.0
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+bbcode_text = "Hello there bla bla this is text"
+text = "Hello there bla bla this is text"
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Control" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -639.0
+margin_top = -360.0
+margin_right = 639.0
+margin_bottom = 360.0
+
+[node name="Arrow" type="TextureRect" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -68.0
+margin_top = -61.0
+margin_right = -28.0
+margin_bottom = -21.0
+rect_scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 4 )
+expand = true

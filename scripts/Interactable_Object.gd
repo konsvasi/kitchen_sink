@@ -3,9 +3,7 @@ extends Area2D
 const type = "Interactable_Object";
 export var areaName = ""
 export var interactable = true;
-export(Dictionary) var object_dictionary = {
-	"opensDialog": false,
-}
+export var dialogId = ""
 export var transitionOnInteract = false;
 export(String, FILE, "*.tscn") var nextScene
 

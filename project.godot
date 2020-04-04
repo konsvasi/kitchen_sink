@@ -22,6 +22,7 @@ run/main_scene="res://scenes/House_inside.tscn"
 
 global="*res://scripts/global.gd"
 PlayerVariables="*res://scripts/PlayerVariables.gd"
+DialogContent="*res://scripts/DialogContent.gd"
 
 [display]
 

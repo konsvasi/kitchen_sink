@@ -36,8 +36,10 @@ animations = [ {
 } ]
 
 [sub_resource type="CapsuleShape2D" id=2]
+height = 12.1873
 
 [sub_resource type="CapsuleShape2D" id=3]
+height = 15.6038
 
 [sub_resource type="SpriteFrames" id=4]
 animations = [ {

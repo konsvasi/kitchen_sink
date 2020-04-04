@@ -6,10 +6,13 @@ var moveBack = false;
 var positionToMove;
 var velocity = Vector2();
 const hidePosition = Vector2(330, 1210);
-
+onready var dialog = $Dialogbox
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	## init dialog
+	$Dialogbox.setDialog(DialogContent.get_content("desk", "main"))
+
 	
 func _process(delta):
 	if moveArm:
@@ -26,7 +29,10 @@ func _process(delta):
 		$YellowBorder.visible = false;
 		takeItemAndMove();
 	
-
+func _input(event):
+	if Input.is_action_just_pressed("ui_interact"):
+		$Dialogbox.loadDialog()
+		
 func takeItemAndMove():
 	velocity = (hidePosition - $KinematicBody2D.get_global_position()).normalized() * 200;
 	if (hidePosition - $KinematicBody2D.get_global_position()).length() > 5:
@@ -57,3 +63,7 @@ func _on_Area2D_input_event(viewport, event, shape_idx):
 func _on_GoBackButton_pressed():
 	global.previous_scene = "desk"
 	global.go_to_scene($GoBackButton.nextScene);
+
+
+func _on_Dialogbox_tree_entered():
+	$Dialogbox.setDialog(DialogContent.get_content("desk", "main"))
