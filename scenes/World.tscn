@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scripts/World.gd" type="Script" id=1]
 [ext_resource path="res://environment/house.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://environment/sky_background-blue.png" type="Texture" id=5]
 [ext_resource path="res://environment/mountains.png" type="Texture" id=6]
 [ext_resource path="res://environment/city-bg-small.png" type="Texture" id=7]
+[ext_resource path="res://scenes/HUD.tscn" type="PackedScene" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 747.979, 10 )
@@ -80,3 +81,5 @@ shape = SubResource( 2 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="wall_right"]
 position = Vector2( 1389.43, -0.157928 )
 shape = SubResource( 2 )
+
+[node name="HUD" parent="." instance=ExtResource( 8 )]

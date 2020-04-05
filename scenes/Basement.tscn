@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://environment/Basement.png" type="Texture" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/Interactable_object.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/HUD.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 421.333, 10 )
@@ -75,3 +76,5 @@ shape = SubResource( 2 )
 position = Vector2( 195.177, 325.243 )
 transitionOnInteract = true
 nextScene = "res://scenes/TV.tscn"
+
+[node name="HUD" parent="." instance=ExtResource( 4 )]
