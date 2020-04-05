@@ -47,7 +47,7 @@ func _on_BackButton_pressed():
 	self.hide()
 
 func _on_ItemContainer_sort_children():
-	print("SORTED", $ItemContainer.get_child_count())
+#	print("SORTED", $ItemContainer.get_child_count())
 	if $ItemContainer.get_child_count() != 0:
 		$ItemContainer.get_child(0).grab_focus()
 	else:

@@ -1,20 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scripts/Fridge.gd" type="Script" id=1]
 [ext_resource path="res://environment/fridge.png" type="Texture" id=2]
 [ext_resource path="res://items/hot_sauce.png" type="Texture" id=3]
 [ext_resource path="res://scenes/GoBackButton.tscn" type="PackedScene" id=4]
 [ext_resource path="res://items/sandwich_v2.png" type="Texture" id=5]
-[ext_resource path="res://shaders/outline.shader" type="Shader" id=6]
 [ext_resource path="res://scenes/EnvironmentItem.tscn" type="PackedScene" id=7]
-
-[sub_resource type="ShaderMaterial" id=4]
-shader = ExtResource( 6 )
-shader_param/width = 3.0
-shader_param/outline_color = Color( 0.486275, 0.890196, 0.262745, 1 )
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 20.2205, 53.5082 )
 
 [node name="Fridge" type="Node2D"]
 script = ExtResource( 1 )
@@ -24,37 +15,24 @@ position = Vector2( 638.943, 360 )
 scale = Vector2( 2, 1.5 )
 texture = ExtResource( 2 )
 
-[node name="hotSauce" type="Sprite" parent="."]
-visible = false
-material = SubResource( 4 )
-position = Vector2( 378.457, 333.705 )
-scale = Vector2( 2.34187, 1.90625 )
-texture = ExtResource( 3 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="hotSauceArea" type="Area2D" parent="hotSauce"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="hotSauce/hotSauceArea"]
-position = Vector2( 0, 9.44263 )
-shape = SubResource( 1 )
-
 [node name="GoBackButton" parent="." instance=ExtResource( 4 )]
-margin_left = 900.718
-margin_top = 552.746
-margin_right = 1140.72
-margin_bottom = 600.746
+margin_left = 942.212
+margin_top = 578.104
+margin_right = 1182.21
+margin_bottom = 626.104
 nextScene = "res://scenes/House_inside.tscn"
 
 [node name="Sandwich" parent="." instance=ExtResource( 7 )]
-position = Vector2( 821.337, 410.041 )
+position = Vector2( 821.337, 411.074 )
 scale = Vector2( 6, 6 )
 texture = ExtResource( 5 )
+id = "blt_sandwich"
 
-[node name="EnvironmentItem" parent="." instance=ExtResource( 7 )]
+[node name="HotSauce" parent="." instance=ExtResource( 7 )]
 position = Vector2( 378.501, 334.926 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 3 )
-[connection signal="area_entered" from="hotSauce/hotSauceArea" to="." method="_on_Area2D_area_entered"]
+id = "hot_sauce"
 [connection signal="pressed" from="GoBackButton" to="." method="_on_GoBackButton_pressed"]
+[connection signal="grabItemById" from="Sandwich" to="." method="_on_Sandwich_grabItemById"]
+[connection signal="grabItemById" from="HotSauce" to="." method="_on_HotSauce_grabItemById"]
