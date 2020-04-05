@@ -22,5 +22,12 @@ var content = {
 		"image_path": "res://items/sandwich_v2.png",
 		"description": "Just a sandwich",
 		"quantity": 1
+	},
+	"hot_sauce": {
+		"id": "hot_sauce",
+		"name": "Hot sauce",
+		"image_path": "res://items/hot_sauce.png",
+		"description": "Fiery sriracha",
+		"quantity": 1
 	}
 }

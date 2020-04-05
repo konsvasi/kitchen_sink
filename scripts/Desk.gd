@@ -10,8 +10,12 @@ onready var dialog = $Dialogbox
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	## init dialog
-	$Dialogbox.setDialog(DialogContent.get_content("desk", "main"))
+	
+	if PlayerVariables.items.has('special_mushrooms'):
+		$ShroomPack.queue_free()
+		$Dialogbox.setDialog(DialogContent.get_content("desk", "empty"))
+	else:
+		$Dialogbox.setDialog(DialogContent.get_content("desk", "main"))
 
 	
 func _process(delta):
