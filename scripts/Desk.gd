@@ -41,10 +41,12 @@ func takeItemAndMove():
 	else:
 		moveBack = false;
 		$ShroomPack.queue_free();
-		addItemToInventory($ShroomPack.name);
+		var itemId = "special_mushrooms"
+		addItemToInventory(itemId);
 
-func addItemToInventory(item):
-	PlayerVariables.items.append(item);
+func addItemToInventory(itemId):
+	PlayerVariables.setItem(itemId)
+	
 	
 func _on_ArmBackTimer_timeout():
 	moveBack = true;

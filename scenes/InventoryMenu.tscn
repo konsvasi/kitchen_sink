@@ -71,6 +71,9 @@ margin_right = 776.0
 margin_bottom = 597.0
 custom_fonts/font = SubResource( 1 )
 text = "A pack of dried mushrooms"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ColorRect" type="ColorRect" parent="ItemDescription"]
 show_behind_parent = true

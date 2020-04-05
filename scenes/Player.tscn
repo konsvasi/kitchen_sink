@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://character_sprites/idle.png" type="Texture" id=2]
@@ -12,10 +12,6 @@
 [ext_resource path="res://character_sprites/walk_left_3.png" type="Texture" id=10]
 [ext_resource path="res://character_sprites/walk_left_4.png" type="Texture" id=11]
 [ext_resource path="res://character_sprites/walk_left_5.png" type="Texture" id=12]
-[ext_resource path="res://ui/exclamation_mark_1.png" type="Texture" id=13]
-[ext_resource path="res://ui/exclamation_mark_2.png" type="Texture" id=14]
-[ext_resource path="res://ui/exclamation_mark_3.png" type="Texture" id=15]
-[ext_resource path="res://ui/exclamation_mark_4.png" type="Texture" id=16]
 [ext_resource path="res://scenes/ThoughtBubble.tscn" type="PackedScene" id=17]
 
 [sub_resource type="SpriteFrames" id=1]
@@ -42,14 +38,6 @@ height = 12.1873
 [sub_resource type="CapsuleShape2D" id=3]
 height = 15.6038
 
-[sub_resource type="SpriteFrames" id=4]
-animations = [ {
-"frames": [ ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
-"loop": true,
-"name": "trigger",
-"speed": 5.0
-} ]
-
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
 
@@ -69,13 +57,6 @@ shape = SubResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 3 )
-
-[node name="exclamation_box" type="AnimatedSprite" parent="."]
-visible = false
-position = Vector2( 0, -22 )
-frames = SubResource( 4 )
-animation = "trigger"
-frame = 3
 
 [node name="ThoughtBubble" parent="." instance=ExtResource( 17 )]
 visible = false

@@ -6,9 +6,6 @@ var index = 0
 func _ready():
 	loadDialog()
 
-#func _process(delta):
-#	pass
-
 func setDialog(dialogArray):
 	dialog = dialogArray
 	index = 0

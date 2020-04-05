@@ -3,6 +3,7 @@ extends Control
 signal update_description
 
 var id = "item_slot"
+var itemId
 var itemName
 # can be path or resource
 var iconPath
@@ -16,7 +17,9 @@ func _ready():
 # Dictionary object with key for
 # name, icon path and quantity
 func setItemSlot(item):
-	$ItemButton.texture_normal = item.iconPath
+	itemId = item.id
+	itemName = item.name
+	$ItemButton.texture_normal = load(item.image_path)
 	updateQuantityText(item.quantity)
 	quantity = item.quantity
 	description = item.description
@@ -31,6 +34,8 @@ func useItem ():
 	if quantity != 0:
 		updateQuantityText(quantity)
 	else:
+		#Remove item from PlayerVariables items
+		PlayerVariables.items.erase(itemId)
 		queue_free()		
 
 func updateQuantityText(quantity):

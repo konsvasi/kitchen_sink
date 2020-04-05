@@ -12,10 +12,8 @@ var isDialogOpen = false
 func _ready():
 	var root = get_tree().get_root();
 	current_scene = root.get_child( root.get_child_count() -1 )
-	print(current_scene);
 
 func go_to_scene(nextScene):
-	print("Next scene: ", nextScene);
 	call_deferred("_deferred_goto_scene", nextScene);
 	
 func _deferred_goto_scene(path):

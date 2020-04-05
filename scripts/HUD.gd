@@ -18,7 +18,7 @@ func _unhandled_key_input(event):
 			if $Menu.visible:
 				if index == 0:
 					self.set_process_unhandled_key_input(false)
-					$InventoryMenu.show()	
+					$InventoryMenu.updateItems()
 		
 		if event.is_action_pressed('ui_down'):
 			index += 1
@@ -36,9 +36,9 @@ func _unhandled_key_input(event):
 
 
 func _on_InventoryMenu_hide():
+	$InventoryMenu.clearItems()
 	self.set_process_unhandled_key_input(true)
 
-	
 func showDialog(currentScene, dialogId):
 	var dialog = DialogContent.get_content(currentScene, dialogId)
 	$Dialogbox.setDialog(dialog)
