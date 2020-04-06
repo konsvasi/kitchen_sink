@@ -5,6 +5,7 @@ signal update_description
 var id = "item_slot"
 var itemId
 var itemName
+var isKeyItem = false
 # can be path or resource
 var iconPath
 var quantity
@@ -36,8 +37,14 @@ func useItem ():
 	else:
 		#Remove item from PlayerVariables items
 		PlayerVariables.items.erase(itemId)
+		
+		if isKeyItem(itemId):
+			PlayerVariables.setUsedKeyItem(itemId)
+		
 		queue_free()		
 
+func isKeyItem(itemId):
+	return ItemStore.getItem(itemId).isKeyItem
 func updateQuantityText(quantity):
 	$Quantity.text = str(quantity)
 	

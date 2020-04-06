@@ -1,10 +1,12 @@
 extends Area2D
 
-const type = "Interactable_Object";
+const type = "Interactable_Object"
 export var areaName = ""
-export var interactable = true;
+export var interactable = true
 export var dialogId = ""
-export var transitionOnInteract = false;
+export var transitionOnInteract = false
+export var actionNeeded = false
+export var actionId = ""
 export(String, FILE, "*.tscn") var nextScene
 
 # Called when the node enters the scene tree for the first time.

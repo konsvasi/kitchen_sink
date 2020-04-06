@@ -33,9 +33,14 @@ func _input(event):
 		print('items:', PlayerVariables.items)
 		if (activeArea is Area2D):
 			if (activeArea.type == "Interactable_Object"):
-				print(activeArea)
-				if activeArea.transitionOnInteract:
+				print(activeArea.actionNeeded, activeArea.name)
+				if activeArea.transitionOnInteract && !activeArea.actionNeeded:
 					global.go_to_scene(activeArea.nextScene)
+				elif activeArea.transitionOnInteract && activeArea.actionNeeded:
+						if !global.isDialogOpen:
+							get_parent().get_node("HUD").showDialog(get_parent().name.to_lower(), activeArea.actionId)
+						else:
+							get_parent().get_node("HUD").loadDialog()
 				# Open dialog		
 				elif activeArea.dialogId && !global.isDialogOpen:
 					get_parent().get_node("HUD").showDialog(get_parent().name.to_lower(), activeArea.dialogId)

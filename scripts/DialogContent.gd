@@ -13,5 +13,8 @@ var content = {
 	},
 	"house_inside": {
 		"painting": ['What a nice painting', 'Took me three years to make...']
+	},
+	"basement": {
+		"action_mushrooms_taken": ['I think I should eat the mushrooms before watching TV...']
 	}
 }

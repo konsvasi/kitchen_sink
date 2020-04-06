@@ -25,6 +25,7 @@ PlayerVariables="*res://scripts/PlayerVariables.gd"
 DialogContent="*res://scripts/DialogContent.gd"
 ItemStore="*res://scripts/ItemStore.gd"
 KeySceneItems="*res://scripts/KeySceneItems.gd"
+Actions="*res://scripts/actions.gd"
 
 [display]
 

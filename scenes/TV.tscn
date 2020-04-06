@@ -63,6 +63,7 @@ polygon = PoolVector2Array( 325.767, 631.023, 921.16, 631.023, 922.535, 665.399,
 script = ExtResource( 1 )
 
 [node name="TVMain" type="Node2D" parent="."]
+z_index = 1
 
 [node name="Background" type="Sprite" parent="TVMain"]
 position = Vector2( 642.036, 362.376 )
@@ -73,7 +74,6 @@ material = SubResource( 2 )
 position = Vector2( 642.937, 355.553 )
 scale = Vector2( 11.8421, 7.64045 )
 frames = SubResource( 3 )
-frame = 1
 playing = true
 
 [node name="Light2D" type="Light2D" parent="TVMain"]

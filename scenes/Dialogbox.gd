@@ -25,8 +25,6 @@ func loadDialog():
 			Tween.EASE_IN_OUT
 		)
 		$Tween.start()
-		
-	index += 1
 	
-	if index == dialog.size():
-		$Arrow.hide()
+	index += 1
+		

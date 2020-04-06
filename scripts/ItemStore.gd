@@ -14,6 +14,7 @@ var content = {
 		"name": "Special mushrooms",
 		"image_path": "res://items/pack_of_mushrooms.png",
 		"description": "A pack of dried shrooms.",
+		"isKeyItem": true,
 		"quantity": 1
 	},
 	"blt_sandwich": {
