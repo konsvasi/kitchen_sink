@@ -6,11 +6,10 @@ const SHADER = preload("res://shaders/outline.shader")
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
-	# check if Player already has items from that scene
-	for item in PlayerVariables.items:
-		if item == 'blt_sandwich':
+	for item in KeySceneItems.keySceneItems["fridge"]:
+		if item == "blt_sandwich" && KeySceneItems.keySceneItems["fridge"][item].taken == true:
 			$Sandwich.queue_free()
-		if item == 'hot_sauce':
+		if item == "hot_sauce" && KeySceneItems.keySceneItems["fridge"][item].taken == true:
 			$HotSauce.queue_free()
 			
 	
@@ -22,8 +21,10 @@ func takeItemById(id):
 	print('add item to inventory: ', id)
 	PlayerVariables.setItem(id)
 	if id == "blt_sandwich":
+		KeySceneItems.setTaken("fridge", "blt_sandwich")
 		$Sandwich.queue_free()
 	elif id == 'hot_sauce':
+		KeySceneItems.setTaken("fridge", "hot_sauce")
 		$HotSauce.queue_free()	
 
 # Signals

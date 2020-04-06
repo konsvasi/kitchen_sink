@@ -10,8 +10,8 @@ onready var dialog = $Dialogbox
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	
-	if PlayerVariables.items.has('special_mushrooms'):
+		
+	if KeySceneItems.keySceneItems["desk"]["special_mushrooms"].taken:
 		$ShroomPack.queue_free()
 		$Dialogbox.setDialog(DialogContent.get_content("desk", "empty"))
 	else:
@@ -38,6 +38,7 @@ func _input(event):
 		$Dialogbox.loadDialog()
 		
 func takeItemAndMove():
+	addItemToInventory("special_mushrooms");
 	velocity = (hidePosition - $KinematicBody2D.get_global_position()).normalized() * 200;
 	if (hidePosition - $KinematicBody2D.get_global_position()).length() > 5:
 		velocity = $KinematicBody2D.move_and_slide(velocity)
@@ -45,12 +46,10 @@ func takeItemAndMove():
 	else:
 		moveBack = false;
 		$ShroomPack.queue_free();
-		var itemId = "special_mushrooms"
-		addItemToInventory(itemId);
 
 func addItemToInventory(itemId):
 	PlayerVariables.setItem(itemId)
-	
+	KeySceneItems.setTaken("desk", itemId)
 	
 func _on_ArmBackTimer_timeout():
 	moveBack = true;
