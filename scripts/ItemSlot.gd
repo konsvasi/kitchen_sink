@@ -39,6 +39,9 @@ func useItem ():
 		PlayerVariables.items.erase(itemId)
 		
 		if isKeyItem(itemId):
+			print('current_scene name', get_tree().get_current_scene().get_name(), ' current scene ', get_tree().get_current_scene())
+			if ItemStore.getItem(itemId).interactScene == get_tree().get_current_scene().get_name().to_lower():
+					get_tree().get_current_scene().updateInteractPoints(itemId)
 			PlayerVariables.setUsedKeyItem(itemId)
 		
 		queue_free()		

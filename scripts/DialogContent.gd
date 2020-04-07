@@ -15,6 +15,6 @@ var content = {
 		"painting": ['What a nice painting', 'Took me three years to make...']
 	},
 	"basement": {
-		"action_mushrooms_taken": ['I think I should eat the mushrooms before watching TV...']
+		"special_mushrooms": ['I think I should eat the mushrooms before watching TV...']
 	}
 }

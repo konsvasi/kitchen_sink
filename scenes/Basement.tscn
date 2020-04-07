@@ -77,7 +77,7 @@ position = Vector2( 195.177, 325.243 )
 areaName = "tv"
 transitionOnInteract = true
 actionNeeded = true
-actionId = "action_mushrooms_taken"
+actionId = "special_mushrooms"
 nextScene = "res://scenes/TV.tscn"
 
 [node name="HUD" parent="." instance=ExtResource( 4 )]

@@ -1,7 +1,7 @@
 extends Node
 
 var actions = {
-	"action_mushrooms_taken": PlayerVariables.hasUsed("special_mushrooms")
+	"special_mushrooms": PlayerVariables.hasUsed("special_mushrooms")
 }
 
 
