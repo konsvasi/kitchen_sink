@@ -26,3 +26,4 @@ margin_top = 563.098
 margin_right = 464.649
 margin_bottom = 714.098
 [connection signal="hide" from="InventoryMenu" to="." method="_on_InventoryMenu_hide"]
+[connection signal="dialogFinished" from="Dialogbox" to="." method="_on_Dialogbox_dialogFinished"]

@@ -1,12 +1,35 @@
-extends Polygon2D
+extends Control
 
-var opacity : int = 0;
-export var dialogText : String = "";
-# Called when the node enters the scene tree for the first time.
+signal dialogFinished
+var dialog = ['default']
+var index = 0
+var dialogId
+
 func _ready():
-	# Add some kind of nice transition
-	# for first time opening the dialogbox
-	$RichTextLabel.bbcode_text = dialogText;
+	loadDialog()
 
-func _on_Timer_timeout():
-	self.visible = true;
+func setDialog(dialogArray):
+	dialog = dialogArray
+	index = 0
+	loadDialog()
+	
+func setId(id):
+	dialogId = id
+
+func loadDialog():
+	if index == dialog.size():
+		hide()
+		global.isDialogOpen = false
+		emit_signal("dialogFinished", dialogId)
+
+	if index < dialog.size():
+		$RichTextLabel.bbcode_text = dialog[index]
+		$Tween.interpolate_property($RichTextLabel,
+			'percent_visible',
+			0,1,1,
+			Tween.TRANS_LINEAR,
+			Tween.EASE_IN_OUT
+		)
+		$Tween.start()
+	
+	index += 1

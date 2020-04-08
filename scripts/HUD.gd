@@ -1,5 +1,6 @@
 extends CanvasLayer
 
+signal dialogFinished
 var index = 0
 var menuOptions = ['Inventory', 'Options']
 var dialog = []
@@ -42,8 +43,12 @@ func _on_InventoryMenu_hide():
 func showDialog(currentScene, dialogId):
 	var dialog = DialogContent.get_content(currentScene, dialogId)
 	$Dialogbox.setDialog(dialog)
+	$Dialogbox.setId(dialogId)
 	$Dialogbox.show()
 	global.isDialogOpen = true
 
 func loadDialog():
 	$Dialogbox.loadDialog()
+
+func _on_Dialogbox_dialogFinished(finishedDialogId):
+	emit_signal("dialogFinished", finishedDialogId)
