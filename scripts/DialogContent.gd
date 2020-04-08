@@ -21,7 +21,8 @@ var content = {
 		"special_mushrooms": ['I think I should eat the mushrooms before watching TV...']
 	},
 	"tv": {
-		"main": ['Let\'s put some music videos...', 'wait first I have to turn on the TV...']
+		"main": ['Let\'s put some music videos...', 'wait first I have to turn on the TV...'],
+		"enoying_the_music": ['Finally I can relax', 'These mushrooms should kick in in about a hour or so']
 	}
 }
 

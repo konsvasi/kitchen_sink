@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://scenes/TV.gd" type="Script" id=1]
 [ext_resource path="res://environment/TV.png" type="Texture" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://environment/terry.png" type="Texture" id=10]
 [ext_resource path="res://utils/infrared_active.png" type="Texture" id=11]
 [ext_resource path="res://utils/infrared.png" type="Texture" id=12]
+[ext_resource path="res://audio/A cup of tea.ogg" type="AudioStream" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -100,6 +101,7 @@ material = SubResource( 3 )
 position = Vector2( 642.937, 355.553 )
 scale = Vector2( 11.8421, 7.64045 )
 frames = SubResource( 4 )
+frame = 2
 playing = true
 
 [node name="Light2D" type="Light2D" parent="TVMain"]
@@ -151,11 +153,26 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TVMain/TVRemote/Area2D"]
 shape = SubResource( 8 )
 
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="TVMain/TVRemote"]
+position = Vector2( 374.4, 433.371 )
+scale = Vector2( 5.25143, 11.6971 )
+
+[node name="Lofi" type="AudioStreamPlayer" parent="TVMain"]
+stream = ExtResource( 13 )
+volume_db = -11.471
+
+[node name="pitchTween" type="Tween" parent="TVMain/Lofi"]
+
+[node name="TripTimer" type="Timer" parent="TVMain"]
+wait_time = 3.0
+
 [node name="HUD" parent="." instance=ExtResource( 9 )]
 [connection signal="area_entered" from="TVMain/InfraredPoint" to="." method="_on_InfraredPoint_area_entered"]
 [connection signal="area_exited" from="TVMain/InfraredPoint" to="." method="_on_InfraredPoint_area_exited"]
 [connection signal="tween_completed" from="TVMain/Tween" to="." method="_on_Tween_tween_completed"]
 [connection signal="tween_completed" from="TVMain/Terry/Tween" to="." method="_on_Tween_tween_completed"]
 [connection signal="timeout" from="TVMain/TerryTimer" to="." method="_on_TerryTimer_timeout"]
+[connection signal="screen_exited" from="TVMain/TVRemote/VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="timeout" from="TVMain/TripTimer" to="." method="_on_TripTimer_timeout"]
 [connection signal="dialogFinished" from="HUD" to="." method="_on_HUD_dialogFinished"]
 [connection signal="notificationClosed" from="HUD" to="." method="_on_HUD_notificationClosed"]

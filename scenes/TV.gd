@@ -8,6 +8,7 @@ var VELOCITY = Vector2()
 const FLOOR = Vector2(0, -1);
 var hasSignal = false
 var canMoveRemote = false
+var lowerRemoteControl = false
 var mainDialogFinished = false
 
 func _ready():
@@ -17,6 +18,7 @@ func _ready():
 	$HUD.showDialog("tv", "main")
 	# Disable menu in scene
 	$HUD.disableMenu()
+	$TVMain/Lofi.playing = false
 
 #func _process(delta):
 #	pass
@@ -30,25 +32,21 @@ func _physics_process(delta):
 			VELOCITY.x = -SPEED;
 		elif Input.is_action_pressed("ui_up"):
 			VELOCITY.y = -GRAVITY * 2;
-					
-		VELOCITY = $TVMain/TVRemote.move_and_slide(VELOCITY, FLOOR)
+	elif lowerRemoteControl:
+		VELOCITY.y = GRAVITY			
 	
-#func _input(event):
-#	print("move", event)
-#	if canMoveRemote:	
-#		if Input.is_action_pressed("ui_left"):
-#			move("left")
-#		elif Input.is_action_pressed("ui_right"):
-#			move("right")
-#		elif Input.is_action_pressed("ui_down"):
-#			move("down")
-#		elif Input.is_action_pressed("ui_up"):
-#			move("up")
-
+	VELOCITY = $TVMain/TVRemote.move_and_slide(VELOCITY, FLOOR)
+	
 func _unhandled_key_input(event):
 	if Input.is_action_just_pressed("ui_interact"):
 		if hasSignal:
 			$TVMain/WhiteNoise.visible = !$TVMain/WhiteNoise.visible
+			$TVMain/Lofi.playing = !$TVMain/Lofi.playing
+			canMoveRemote = false
+			VELOCITY.x = 0
+			yield(get_tree().create_timer(1.0), "timeout")
+			lowerRemoteControl = true
+#			$TVMain/TripTimer.start()
 		
 		if !mainDialogFinished:
 			$HUD/Dialogbox.loadDialog()
@@ -115,3 +113,12 @@ func _on_InfraredPoint_area_exited(area):
 
 func _on_HUD_notificationClosed():
 	canMoveRemote = true
+
+
+func _on_TripTimer_timeout():
+	$TVMain/Lofi/pitchTween.interpolate_property($TVMain/Lofi, "pitch_scale", 1.0, 0.2, 10, Tween.TRANS_BOUNCE, Tween.EASE_IN_OUT)
+	$TVMain/Lofi/pitchTween.start()
+
+
+func _on_VisibilityNotifier2D_screen_exited():
+	$HUD.showDialog("tv", "enoying_the_music")
