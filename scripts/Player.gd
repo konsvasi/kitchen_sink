@@ -14,6 +14,7 @@ var isMenuOpen = false;
 
 func _ready():
 	velocity.y = GRAVITY
+	
 func _physics_process(delta):
 	velocity.y += GRAVITY
 	if Input.is_action_pressed("ui_right"):

@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scripts/HUD.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Menu.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/InventoryMenu.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/DialogBox.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/Notification.tscn" type="PackedScene" id=5]
 
 [node name="HUD" type="CanvasLayer"]
 pause_mode = 2
@@ -25,5 +26,8 @@ margin_left = -491.351
 margin_top = 563.098
 margin_right = 464.649
 margin_bottom = 714.098
+
+[node name="Notification" parent="." instance=ExtResource( 5 )]
+visible = false
 [connection signal="hide" from="InventoryMenu" to="." method="_on_InventoryMenu_hide"]
 [connection signal="dialogFinished" from="Dialogbox" to="." method="_on_Dialogbox_dialogFinished"]

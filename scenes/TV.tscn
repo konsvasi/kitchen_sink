@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://scenes/TV.gd" type="Script" id=1]
 [ext_resource path="res://environment/TV.png" type="Texture" id=2]
@@ -7,10 +7,15 @@
 [ext_resource path="res://utils/white_noise_3.png" type="Texture" id=5]
 [ext_resource path="res://utils/light.png" type="Texture" id=6]
 [ext_resource path="res://items/hot_sauce.png" type="Texture" id=7]
+[ext_resource path="res://utils/tv_remote.png" type="Texture" id=8]
 [ext_resource path="res://scenes/HUD.tscn" type="PackedScene" id=9]
 [ext_resource path="res://environment/terry.png" type="Texture" id=10]
+[ext_resource path="res://utils/infrared_active.png" type="Texture" id=11]
+[ext_resource path="res://utils/infrared.png" type="Texture" id=12]
 
-[sub_resource type="Shader" id=1]
+[sub_resource type="RectangleShape2D" id=1]
+
+[sub_resource type="Shader" id=2]
 code = "shader_type canvas_item;
 render_mode unshaded;
 uniform float scanLineCount : hint_range(0, 1080) = 50.0;
@@ -38,11 +43,11 @@ void fragment() {
 	COLOR = vec4(r,g,b, 1.0) * scanLine;
 }"
 
-[sub_resource type="ShaderMaterial" id=2]
-shader = SubResource( 1 )
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 2 )
 shader_param/scanLineCount = 200.0
 
-[sub_resource type="SpriteFrames" id=3]
+[sub_resource type="SpriteFrames" id=4]
 animations = [ {
 "frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
 "loop": true,
@@ -50,14 +55,16 @@ animations = [ {
 "speed": 6.0
 } ]
 
-[sub_resource type="OccluderPolygon2D" id=4]
+[sub_resource type="OccluderPolygon2D" id=5]
 polygon = PoolVector2Array( 646.618, 610.241, 702.211, 610.241, 702.211, 615.056, 646.181, 615.056 )
 
-[sub_resource type="OccluderPolygon2D" id=5]
+[sub_resource type="OccluderPolygon2D" id=6]
 polygon = PoolVector2Array( 21.9713, -7.66553, 24.1599, 64.1229, -23.9909, 63.2474, -24.4286, -5.03912 )
 
-[sub_resource type="OccluderPolygon2D" id=6]
+[sub_resource type="OccluderPolygon2D" id=7]
 polygon = PoolVector2Array( 325.767, 631.023, 921.16, 631.023, 922.535, 665.399, 908.785, 668.149, 906.035, 688.774, 859.283, 692.9, 862.034, 661.274, 389.019, 670.899, 389.019, 688.774, 343.642, 688.774, 342.267, 666.774, 327.142, 665.399 )
+
+[sub_resource type="RectangleShape2D" id=8]
 
 [node name="TV" type="Node"]
 script = ExtResource( 1 )
@@ -69,12 +76,30 @@ z_index = 1
 position = Vector2( 642.036, 362.376 )
 texture = ExtResource( 2 )
 
-[node name="Sprite" type="AnimatedSprite" parent="TVMain"]
-material = SubResource( 2 )
+[node name="InfraredPoint" type="Area2D" parent="TVMain"]
+position = Vector2( 646.635, 424.128 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TVMain/InfraredPoint"]
+shape = SubResource( 1 )
+
+[node name="default" type="Sprite" parent="TVMain/InfraredPoint"]
+scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 12 )
+
+[node name="active" type="Sprite" parent="TVMain/InfraredPoint"]
+visible = false
+scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 11 )
+
+[node name="WhiteNoise" type="AnimatedSprite" parent="TVMain"]
+visible = false
+material = SubResource( 3 )
 position = Vector2( 642.937, 355.553 )
 scale = Vector2( 11.8421, 7.64045 )
-frames = SubResource( 3 )
-frame = 1
+frames = SubResource( 4 )
 playing = true
 
 [node name="Light2D" type="Light2D" parent="TVMain"]
@@ -85,21 +110,22 @@ shadow_enabled = true
 shadow_color = Color( 0, 0, 0, 1 )
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="TVMain"]
-occluder = SubResource( 4 )
+occluder = SubResource( 5 )
 
 [node name="Sprite2" type="Sprite" parent="TVMain"]
 position = Vector2( 521.342, 541.04 )
 texture = ExtResource( 7 )
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="TVMain/Sprite2"]
-occluder = SubResource( 5 )
+occluder = SubResource( 6 )
 
 [node name="LightOccluder2D2" type="LightOccluder2D" parent="TVMain"]
-occluder = SubResource( 6 )
+occluder = SubResource( 7 )
 
 [node name="Tween" type="Tween" parent="TVMain"]
 
 [node name="Terry" type="Sprite" parent="TVMain"]
+visible = false
 position = Vector2( 638.469, 250.558 )
 texture = ExtResource( 10 )
 
@@ -108,8 +134,28 @@ texture = ExtResource( 10 )
 [node name="TerryTimer" type="Timer" parent="TVMain"]
 one_shot = true
 
+[node name="TVRemote" type="KinematicBody2D" parent="TVMain"]
+z_index = 1
+
+[node name="Sprite" type="Sprite" parent="TVMain/TVRemote"]
+position = Vector2( 303.962, 448.706 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 8 )
+
+[node name="Area2D" type="Area2D" parent="TVMain/TVRemote"]
+position = Vector2( 364.954, 219.879 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TVMain/TVRemote/Area2D"]
+shape = SubResource( 8 )
+
 [node name="HUD" parent="." instance=ExtResource( 9 )]
+[connection signal="area_entered" from="TVMain/InfraredPoint" to="." method="_on_InfraredPoint_area_entered"]
+[connection signal="area_exited" from="TVMain/InfraredPoint" to="." method="_on_InfraredPoint_area_exited"]
 [connection signal="tween_completed" from="TVMain/Tween" to="." method="_on_Tween_tween_completed"]
 [connection signal="tween_completed" from="TVMain/Terry/Tween" to="." method="_on_Tween_tween_completed"]
 [connection signal="timeout" from="TVMain/TerryTimer" to="." method="_on_TerryTimer_timeout"]
 [connection signal="dialogFinished" from="HUD" to="." method="_on_HUD_dialogFinished"]
+[connection signal="notificationClosed" from="HUD" to="." method="_on_HUD_notificationClosed"]
