@@ -40,7 +40,8 @@ func _physics_process(delta):
 func _unhandled_key_input(event):
 	if Input.is_action_just_pressed("ui_interact"):
 		if hasSignal:
-			$TVMain/WhiteNoise.visible = !$TVMain/WhiteNoise.visible
+			$TVMain/TvContent.play("lofi-channel")
+			$TVMain/TvContent.visible = !$TVMain/TvContent.visible
 			$TVMain/Lofi.playing = !$TVMain/Lofi.playing
 			canMoveRemote = false
 			VELOCITY.x = 0
