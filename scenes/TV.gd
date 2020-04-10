@@ -18,7 +18,6 @@ func _ready():
 	$HUD.showDialog("tv", "main")
 	# Disable menu in scene
 	$HUD.disableMenu()
-	$TVMain/Lofi.playing = false
 
 #func _process(delta):
 #	pass
@@ -40,9 +39,9 @@ func _physics_process(_delta):
 func _unhandled_key_input(_event):
 	if Input.is_action_just_pressed("ui_interact"):
 		if hasSignal:
+			MusicController.play("res://audio/cup_of_tea.ogg")
 			$TVMain/TvContent.play("lofi-channel")
 			$TVMain/TvContent.visible = !$TVMain/TvContent.visible
-			$TVMain/Lofi.playing = !$TVMain/Lofi.playing
 			canMoveRemote = false
 			VELOCITY.x = 0
 			yield(get_tree().create_timer(1.0), "timeout")
@@ -104,8 +103,8 @@ func _on_HUD_notificationClosed():
 
 
 func _on_TripTimer_timeout():
-	$TVMain/Lofi/pitchTween.interpolate_property($TVMain/Lofi, "pitch_scale", 1.0, 0.1, 5, Tween.TRANS_BOUNCE, Tween.EASE_IN_OUT)
-	$TVMain/Lofi/pitchTween.start()
+	Tween.interpolate_property(MusicController.audioPlayer, "pitch_scale", 1.0, 0.1, 5, Tween.TRANS_BOUNCE, Tween.EASE_IN_OUT)
+	Tween.start()
 	$HUD.showDialog("tv", "something_weird");
 
 

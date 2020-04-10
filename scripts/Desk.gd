@@ -10,7 +10,7 @@ onready var dialog = $Dialogbox
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		
+#	MusicController.play("res://audio/adventure_begins.ogg", -17.0)
 	if KeySceneItems.keySceneItems["desk"]["special_mushrooms"].taken:
 		$ShroomPack.queue_free()
 		$Dialogbox.setDialog(DialogContent.get_content("desk", "empty"))
@@ -33,7 +33,7 @@ func _process(delta):
 		$YellowBorder.visible = false;
 		takeItemAndMove();
 	
-func _input(event):
+func _input(_event):
 	if Input.is_action_just_pressed("ui_interact"):
 		$Dialogbox.loadDialog()
 		
@@ -72,3 +72,7 @@ func _on_GoBackButton_pressed():
 
 func _on_Dialogbox_tree_entered():
 	$Dialogbox.setDialog(DialogContent.get_content("desk", "main"))
+
+
+func _on_Desk_tree_exited():
+	MusicController.stop()

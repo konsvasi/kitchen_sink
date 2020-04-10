@@ -9,6 +9,7 @@ var firstTime = false
 func _ready():
 	$Terry.modulate.a = 0
 	$HUD.disableMenu()
+	MusicController.audioPlayer.pitch_scale = 0.7
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
