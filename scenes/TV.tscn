@@ -1,7 +1,7 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://scenes/TV.gd" type="Script" id=1]
-[ext_resource path="res://environment/TV.png" type="Texture" id=2]
+[ext_resource path="res://environment/tv-background.png" type="Texture" id=2]
 [ext_resource path="res://utils/white_noise_1.png" type="Texture" id=3]
 [ext_resource path="res://utils/white_noise_2.png" type="Texture" id=4]
 [ext_resource path="res://utils/white_noise_3.png" type="Texture" id=5]
@@ -9,43 +9,29 @@
 [ext_resource path="res://items/hot_sauce.png" type="Texture" id=7]
 [ext_resource path="res://utils/tv_remote.png" type="Texture" id=8]
 [ext_resource path="res://scenes/HUD.tscn" type="PackedScene" id=9]
-[ext_resource path="res://environment/terry.png" type="Texture" id=10]
 [ext_resource path="res://utils/infrared_active.png" type="Texture" id=11]
 [ext_resource path="res://utils/infrared.png" type="Texture" id=12]
 [ext_resource path="res://audio/A cup of tea.ogg" type="AudioStream" id=13]
+[ext_resource path="res://environment/table.png" type="Texture" id=14]
+[ext_resource path="res://environment/book.png" type="Texture" id=15]
+[ext_resource path="res://environment/tray.png" type="Texture" id=16]
+[ext_resource path="res://environment/tv_and_desk.png" type="Texture" id=17]
+[ext_resource path="res://environment/TV-content2.png" type="Texture" id=18]
+[ext_resource path="res://environment/TV-content1.png" type="Texture" id=19]
+[ext_resource path="res://environment/TV-content4.png" type="Texture" id=20]
+[ext_resource path="res://environment/TV-content3.png" type="Texture" id=21]
+[ext_resource path="res://environment/TV-content5.png" type="Texture" id=22]
+[ext_resource path="res://shaders/TV.shader" type="Shader" id=23]
+[ext_resource path="res://shaders/TripScene.shader" type="Shader" id=24]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 24 )
+shader_param/color = null
 
-[sub_resource type="Shader" id=2]
-code = "shader_type canvas_item;
-render_mode unshaded;
-uniform float scanLineCount : hint_range(0, 1080) = 50.0;
-
-vec2 uv_curve(vec2 uv) {
-	uv = (uv - 0.5) * 2.0;
-	uv.x *= uv.y;
-	uv = (uv / 2.0) + 0.5;
-	return uv;
-}
-
-
-void fragment() {
-	float PI = 3.14159;
-	vec4 color = texture(TEXTURE, uv_curve(UV));
-	
-	float r = texture(TEXTURE, uv_curve(UV) + vec2(SCREEN_PIXEL_SIZE.x * 1.0), 0.0).r;
-	float g = texture(TEXTURE, uv_curve(UV) + vec2(SCREEN_PIXEL_SIZE.x * 3.0), 0.0).g;
-	float b = texture(TEXTURE, uv_curve(UV) + vec2(SCREEN_PIXEL_SIZE.x * 2.0), 0.0).b;
-	
-	float s = sin(uv_curve(UV).y * scanLineCount * PI * 2.0);
-	s = (s * 0.5 + 0.5) * 0.9 + 0.1;
-	
-	vec4 scanLine = vec4(vec3(pow(s, 0.25)), 1.0);
-	COLOR = vec4(r,g,b, 1.0) * scanLine;
-}"
+[sub_resource type="RectangleShape2D" id=2]
 
 [sub_resource type="ShaderMaterial" id=3]
-shader = SubResource( 2 )
+shader = ExtResource( 23 )
 shader_param/scanLineCount = 200.0
 
 [sub_resource type="SpriteFrames" id=4]
@@ -57,15 +43,30 @@ animations = [ {
 } ]
 
 [sub_resource type="OccluderPolygon2D" id=5]
-polygon = PoolVector2Array( 646.618, 610.241, 702.211, 610.241, 702.211, 615.056, 646.181, 615.056 )
+polygon = PoolVector2Array( 325.776, 624.737, 926.639, 623.73, 927.026, 662.044, 908.837, 663.205, 906.035, 688.774, 860.461, 688.747, 862.034, 661.274, 390.793, 663.437, 389.019, 688.774, 343.642, 688.774, 342.03, 663.824, 327.142, 665.399 )
 
 [sub_resource type="OccluderPolygon2D" id=6]
 polygon = PoolVector2Array( 21.9713, -7.66553, 24.1599, 64.1229, -23.9909, 63.2474, -24.4286, -5.03912 )
 
-[sub_resource type="OccluderPolygon2D" id=7]
-polygon = PoolVector2Array( 325.767, 631.023, 921.16, 631.023, 922.535, 665.399, 908.785, 668.149, 906.035, 688.774, 859.283, 692.9, 862.034, 661.274, 389.019, 670.899, 389.019, 688.774, 343.642, 688.774, 342.267, 666.774, 327.142, 665.399 )
+[sub_resource type="RectangleShape2D" id=7]
 
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="OccluderPolygon2D" id=8]
+polygon = PoolVector2Array( -28.0623, -2.46191, 27.3394, -2.6123, 27.3394, 8.06616, -28.0623, 7.76532 )
+
+[sub_resource type="OccluderPolygon2D" id=9]
+polygon = PoolVector2Array( -14.2387, 2.45209, 0.426208, 10.0563, 15.6986, -3.85135, 16.0457, -1.24994, 1.9014, 12.5576, -3.04477, 12.0574, -14.3255, 5.45377 )
+
+[sub_resource type="ShaderMaterial" id=10]
+shader = ExtResource( 23 )
+shader_param/scanLineCount = 50.0
+
+[sub_resource type="SpriteFrames" id=11]
+animations = [ {
+"frames": [ ExtResource( 19 ), ExtResource( 18 ), ExtResource( 21 ), ExtResource( 20 ), ExtResource( 22 ) ],
+"loop": true,
+"name": "lofi-channel",
+"speed": 2.0
+} ]
 
 [node name="TV" type="Node"]
 script = ExtResource( 1 )
@@ -74,8 +75,13 @@ script = ExtResource( 1 )
 z_index = 1
 
 [node name="Background" type="Sprite" parent="TVMain"]
+material = SubResource( 1 )
 position = Vector2( 642.036, 362.376 )
 texture = ExtResource( 2 )
+
+[node name="TVandDesk" type="Sprite" parent="TVMain"]
+position = Vector2( 648.159, 397.421 )
+texture = ExtResource( 17 )
 
 [node name="InfraredPoint" type="Area2D" parent="TVMain"]
 position = Vector2( 646.635, 424.128 )
@@ -84,7 +90,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TVMain/InfraredPoint"]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="default" type="Sprite" parent="TVMain/InfraredPoint"]
 scale = Vector2( 0.15, 0.15 )
@@ -101,7 +107,7 @@ material = SubResource( 3 )
 position = Vector2( 642.937, 355.553 )
 scale = Vector2( 11.8421, 7.64045 )
 frames = SubResource( 4 )
-frame = 2
+frame = 1
 playing = true
 
 [node name="Light2D" type="Light2D" parent="TVMain"]
@@ -111,32 +117,25 @@ texture = ExtResource( 6 )
 shadow_enabled = true
 shadow_color = Color( 0, 0, 0, 1 )
 
-[node name="LightOccluder2D" type="LightOccluder2D" parent="TVMain"]
+[node name="Table" type="Sprite" parent="TVMain"]
+position = Vector2( 626.358, 629.696 )
+texture = ExtResource( 14 )
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="TVMain/Table"]
+position = Vector2( -626.358, -629.696 )
 occluder = SubResource( 5 )
 
-[node name="Sprite2" type="Sprite" parent="TVMain"]
+[node name="HotSauce" type="Sprite" parent="TVMain"]
 position = Vector2( 521.342, 541.04 )
 texture = ExtResource( 7 )
 
-[node name="LightOccluder2D" type="LightOccluder2D" parent="TVMain/Sprite2"]
+[node name="LightOccluder2D" type="LightOccluder2D" parent="TVMain/HotSauce"]
 occluder = SubResource( 6 )
-
-[node name="LightOccluder2D2" type="LightOccluder2D" parent="TVMain"]
-occluder = SubResource( 7 )
 
 [node name="Tween" type="Tween" parent="TVMain"]
 
-[node name="Terry" type="Sprite" parent="TVMain"]
-visible = false
-position = Vector2( 638.469, 250.558 )
-texture = ExtResource( 10 )
-
-[node name="Tween" type="Tween" parent="TVMain/Terry"]
-
-[node name="TerryTimer" type="Timer" parent="TVMain"]
-one_shot = true
-
 [node name="TVRemote" type="KinematicBody2D" parent="TVMain"]
+visible = false
 z_index = 1
 
 [node name="Sprite" type="Sprite" parent="TVMain/TVRemote"]
@@ -151,7 +150,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TVMain/TVRemote/Area2D"]
-shape = SubResource( 8 )
+shape = SubResource( 7 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="TVMain/TVRemote"]
 position = Vector2( 374.4, 433.371 )
@@ -162,16 +161,40 @@ stream = ExtResource( 13 )
 volume_db = -11.471
 
 [node name="pitchTween" type="Tween" parent="TVMain/Lofi"]
+repeat = true
+playback/repeat = true
 
 [node name="TripTimer" type="Timer" parent="TVMain"]
-wait_time = 3.0
+wait_time = 5.0
+one_shot = true
+
+[node name="Ashtray" type="Sprite" parent="TVMain"]
+position = Vector2( 663.246, 597.195 )
+scale = Vector2( 1.20139, 1.44152 )
+texture = ExtResource( 16 )
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="TVMain/Ashtray"]
+occluder = SubResource( 8 )
+
+[node name="Book" type="Sprite" parent="TVMain"]
+position = Vector2( 818.042, 593.84 )
+scale = Vector2( 2.49848, 2.16687 )
+texture = ExtResource( 15 )
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="TVMain/Book"]
+occluder = SubResource( 9 )
+
+[node name="TvContent" type="AnimatedSprite" parent="TVMain"]
+visible = false
+material = SubResource( 10 )
+position = Vector2( 643.795, 359.087 )
+frames = SubResource( 11 )
+animation = "lofi-channel"
 
 [node name="HUD" parent="." instance=ExtResource( 9 )]
 [connection signal="area_entered" from="TVMain/InfraredPoint" to="." method="_on_InfraredPoint_area_entered"]
 [connection signal="area_exited" from="TVMain/InfraredPoint" to="." method="_on_InfraredPoint_area_exited"]
 [connection signal="tween_completed" from="TVMain/Tween" to="." method="_on_Tween_tween_completed"]
-[connection signal="tween_completed" from="TVMain/Terry/Tween" to="." method="_on_Tween_tween_completed"]
-[connection signal="timeout" from="TVMain/TerryTimer" to="." method="_on_TerryTimer_timeout"]
 [connection signal="screen_exited" from="TVMain/TVRemote/VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
 [connection signal="timeout" from="TVMain/TripTimer" to="." method="_on_TripTimer_timeout"]
 [connection signal="dialogFinished" from="HUD" to="." method="_on_HUD_dialogFinished"]

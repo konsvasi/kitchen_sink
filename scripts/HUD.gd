@@ -18,10 +18,12 @@ func _unhandled_key_input(event):
 		if Input.is_action_just_pressed("ui_interact"):
 			# get selected element
 			# transition to element menu scene
-			print('notificaton visible?', $Notification.visible)
 			if $Notification.visible:
 				emit_signal("notificationClosed")
 				$Notification.hide()
+			
+			if $Dialogbox.visible:
+				loadDialog()	
 			if $Menu.visible:
 				if index == 0:
 					self.set_process_unhandled_key_input(false)
@@ -54,7 +56,7 @@ func _on_InventoryMenu_hide():
 	self.set_process_unhandled_key_input(true)
 
 func showDialog(currentScene, dialogId):
-	var dialog = DialogContent.get_content(currentScene, dialogId)
+	dialog = DialogContent.get_content(currentScene, dialogId)
 	$Dialogbox.setDialog(dialog)
 	$Dialogbox.setId(dialogId)
 	$Dialogbox.show()

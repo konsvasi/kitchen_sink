@@ -23,6 +23,7 @@ var content = {
 		"name": "BLT sandwich",
 		"image_path": "res://items/sandwich_v2.png",
 		"description": "Just a sandwich",
+		"isKeyItem": false,
 		"quantity": 1
 	},
 	"hot_sauce": {
@@ -30,6 +31,7 @@ var content = {
 		"name": "Hot sauce",
 		"image_path": "res://items/hot_sauce.png",
 		"description": "Fiery sriracha",
+		"isKeyItem": false,
 		"quantity": 1
 	}
 }

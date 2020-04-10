@@ -22,7 +22,8 @@ var content = {
 	},
 	"tv": {
 		"main": ['Let\'s put some music videos...', 'wait first I have to turn on the TV...'],
-		"enoying_the_music": ['Finally I can relax', 'These mushrooms should kick in in about a hour or so']
+		"enjoying_the_music": ['Finally I can relax', 'These mushrooms should kick in in about a hour or so'],
+		"something_weird": ['I feel weird...', 'Is it already happening??', 'WTF, what is the dosage of these mushrooms?'],
 	}
 }
 
