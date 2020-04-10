@@ -8,14 +8,10 @@ func _ready():
 	updateInteractPoints('test_id')
 	# set action needed items
 	if PlayerVariables.usedKeyItems.has("special_mushrooms"):
-		print("He has mushrooms in his system")
 		$Couch.actionNeeded = false
-	else:
-		print("He's clear")
 
 func updateInteractPoints(itemId):
 	for point in interact_points:
 		if itemId == point.actionId:
 			point.actionNeeded = false
-		print('actionId:', point.actionId)
 	

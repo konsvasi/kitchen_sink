@@ -15,7 +15,7 @@ var isMenuOpen = false;
 func _ready():
 	velocity.y = GRAVITY
 	
-func _physics_process(delta):
+func _physics_process(_delta):
 	velocity.y += GRAVITY
 	if Input.is_action_pressed("ui_right"):
 		velocity.x = SPEED;
@@ -29,7 +29,7 @@ func _physics_process(delta):
 				
 	velocity = move_and_slide(velocity, FLOOR)
 	
-func _input(event):
+func _input(_event):
 	if Input.is_action_pressed("ui_interact"):
 		print('items:', PlayerVariables.items)
 		if (activeArea is Area2D):
@@ -77,7 +77,7 @@ func _on_Area2D_area_entered(area):
 			$ThoughtBubble.animation = 'interaction'
 		$ThoughtBubble.show();
 
-func _on_Area2D_area_exited(area):
+func _on_Area2D_area_exited(_area):
 	activeArea = "";
 	activeOutArea = "";
 	global.next_scene = "";

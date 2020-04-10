@@ -48,8 +48,9 @@ func useItem ():
 
 func isKeyItem(itemId):
 	return ItemStore.getItem(itemId).isKeyItem
-func updateQuantityText(quantity):
-	$Quantity.text = str(quantity)
+	
+func updateQuantityText(itemQuantity):
+	$Quantity.text = str(itemQuantity)
 	
 func _on_ItemSlot_focus_exited():
 	$FocusRect.hide()

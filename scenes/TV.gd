@@ -10,11 +10,11 @@ var hasSignal = false
 var canMoveRemote = false
 var lowerRemoteControl = false
 var mainDialogFinished = false
+var tripScene = preload("res://Scenes/TripScene.tscn");
 
 func _ready():
 	Tween.interpolate_property($TVMain/Light2D, "texture_scale", 1, 2, 2, Tween.TRANS_SINE, Tween.EASE_IN)
 	Tween.start()
-	$TVMain/Terry.modulate.a = 0
 	$HUD.showDialog("tv", "main")
 	# Disable menu in scene
 	$HUD.disableMenu()
@@ -23,7 +23,7 @@ func _ready():
 #func _process(delta):
 #	pass
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if canMoveRemote:
 		VELOCITY.y = randi() & GRAVITY
 		if Input.is_action_pressed("ui_right"):
@@ -37,7 +37,7 @@ func _physics_process(delta):
 	
 	VELOCITY = $TVMain/TVRemote.move_and_slide(VELOCITY, FLOOR)
 	
-func _unhandled_key_input(event):
+func _unhandled_key_input(_event):
 	if Input.is_action_just_pressed("ui_interact"):
 		if hasSignal:
 			$TVMain/TvContent.play("lofi-channel")
@@ -65,21 +65,15 @@ func move(direction):
 		$TVMain/TVRemote.move_and_slide(Vector2(0,-VELOCITY),Vector2(10,0))	
 
 
-func _on_Tween_tween_all_completed():
-	if tweenPlayback == 'straight':
-		Tween.interpolate_property($TVMain/Light2D, "texture_scale", 2, 1, 2, Tween.TRANS_SINE, Tween.EASE_IN)
-		Tween.start()
-		tweenPlayback = 'reverse'
-	else:
-		Tween.interpolate_property($TVMain/Light2D, "texture_scale", 1, 2, 2, Tween.TRANS_SINE, Tween.EASE_IN)	
-		Tween.start()
-		tweenPlayback = 'straight'
-
-
-func _on_TerryTimer_timeout():
-	$TVMain/Terry/Tween.interpolate_property($TVMain/Terry, "modulate", Color(1, 1, 1, 0), Color(1, 1, 1, 1), 5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$TVMain/Terry/Tween.start()
-	
+#func _on_Tween_tween_all_completed():
+#	if tweenPlayback == 'straight':
+#		Tween.interpolate_property($TVMain/Light2D, "texture_scale", 2, 1, 2, Tween.TRANS_SINE, Tween.EASE_IN)
+#		Tween.start()
+#		tweenPlayback = 'reverse'
+#	else:
+#		Tween.interpolate_property($TVMain/Light2D, "texture_scale", 1, 2, 2, Tween.TRANS_SINE, Tween.EASE_IN)	
+#		Tween.start()
+#		tweenPlayback = 'straight'
 
 func _on_Tween_tween_completed(object, key):
 	if object is Light2D:
@@ -91,8 +85,6 @@ func _on_Tween_tween_completed(object, key):
 			Tween.interpolate_property($TVMain/Light2D, "texture_scale", 1, 2, 2, Tween.TRANS_SINE, Tween.EASE_IN)	
 			Tween.start()
 			tweenPlayback = 'straight'
-	else:
-		$TVMain/Terry/Tween.stop(object, key)
 
 
 func _on_HUD_dialogFinished(dialogId):
@@ -101,13 +93,18 @@ func _on_HUD_dialogFinished(dialogId):
 		$HUD.showNotification("remote_minigame")
 		$TVMain/TVRemote.show()
 		mainDialogFinished = true
+	if dialogId == "enjoying_the_music":
+		$TVMain/TripTimer.start()
+	if dialogId == "something_weird":
+		global.go_to_scene("res://Scenes/TripScene.tscn");
 		
-func _on_InfraredPoint_area_entered(area):
+		
+func _on_InfraredPoint_area_entered(_area):
 	hasSignal = true
 	$TVMain/InfraredPoint/active.show()
 
 
-func _on_InfraredPoint_area_exited(area):
+func _on_InfraredPoint_area_exited(_area):
 	hasSignal = false
 	$TVMain/InfraredPoint/active.hide()
 
@@ -117,9 +114,10 @@ func _on_HUD_notificationClosed():
 
 
 func _on_TripTimer_timeout():
-	$TVMain/Lofi/pitchTween.interpolate_property($TVMain/Lofi, "pitch_scale", 1.0, 0.2, 10, Tween.TRANS_BOUNCE, Tween.EASE_IN_OUT)
+	$TVMain/Lofi/pitchTween.interpolate_property($TVMain/Lofi, "pitch_scale", 1.0, 0.1, 5, Tween.TRANS_BOUNCE, Tween.EASE_IN_OUT)
 	$TVMain/Lofi/pitchTween.start()
+	$HUD.showDialog("tv", "something_weird");
 
 
 func _on_VisibilityNotifier2D_screen_exited():
-	$HUD.showDialog("tv", "enoying_the_music")
+	$HUD.showDialog("tv", "enjoying_the_music")
