@@ -3,11 +3,12 @@ extends TextureRect
 var hue_timer = 0
 var speed = 160 #degrees per second
 var colorEyes = false
+var firstTime = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass;
-
+	$Terry.modulate.a = 0
+	$HUD.disableMenu()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -34,3 +35,22 @@ func _on_EyeTimer_timeout():
 	print('time out')
 	colorEyes = true
 	stretchEyes()
+	$HUD.showDialog("trip", "main")
+	
+
+func _on_HUD_dialogFinished(dialogId):
+	if dialogId == "main":
+		$Terry/TerryTween.interpolate_property($Terry, 'modulate', Color(1, 1, 1, 0), Color(1, 1, 1, 1), 3.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		$Terry/TerryTween.start()
+		firstTime = true
+	
+	if dialogId == "take_it_easy":
+		yield(get_tree().create_timer(1.0), "timeout")
+		firstTime = false
+		$Terry/TerryTween.interpolate_property($Terry, 'modulate', Color(1, 1, 1, 1), Color(1, 1, 1, 0), 3.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		$Terry/TerryTween.start()
+
+
+func _on_TerryTween_tween_completed(object, key):
+	if firstTime:
+		$HUD.showDialog("trip", "take_it_easy")

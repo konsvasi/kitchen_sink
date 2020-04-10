@@ -65,16 +65,6 @@ func move(direction):
 		$TVMain/TVRemote.move_and_slide(Vector2(0,-VELOCITY),Vector2(10,0))	
 
 
-#func _on_Tween_tween_all_completed():
-#	if tweenPlayback == 'straight':
-#		Tween.interpolate_property($TVMain/Light2D, "texture_scale", 2, 1, 2, Tween.TRANS_SINE, Tween.EASE_IN)
-#		Tween.start()
-#		tweenPlayback = 'reverse'
-#	else:
-#		Tween.interpolate_property($TVMain/Light2D, "texture_scale", 1, 2, 2, Tween.TRANS_SINE, Tween.EASE_IN)	
-#		Tween.start()
-#		tweenPlayback = 'straight'
-
 func _on_Tween_tween_completed(object, key):
 	if object is Light2D:
 		if tweenPlayback == 'straight':
