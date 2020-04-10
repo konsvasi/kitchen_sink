@@ -78,7 +78,7 @@ autostart = true
 [node name="HUD" parent="." instance=ExtResource( 4 )]
 
 [node name="Terry" type="Sprite" parent="."]
-position = Vector2( 1025.86, 287.442 )
+position = Vector2( 1036.31, 156.232 )
 scale = Vector2( 0.9, 0.9 )
 texture = ExtResource( 5 )
 

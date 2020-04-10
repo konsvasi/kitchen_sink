@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://scenes/TV.gd" type="Script" id=1]
 [ext_resource path="res://environment/tv-background.png" type="Texture" id=2]
@@ -11,7 +11,6 @@
 [ext_resource path="res://scenes/HUD.tscn" type="PackedScene" id=9]
 [ext_resource path="res://utils/infrared_active.png" type="Texture" id=11]
 [ext_resource path="res://utils/infrared.png" type="Texture" id=12]
-[ext_resource path="res://audio/A cup of tea.ogg" type="AudioStream" id=13]
 [ext_resource path="res://environment/table.png" type="Texture" id=14]
 [ext_resource path="res://environment/book.png" type="Texture" id=15]
 [ext_resource path="res://environment/tray.png" type="Texture" id=16]
@@ -155,14 +154,6 @@ shape = SubResource( 7 )
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="TVMain/TVRemote"]
 position = Vector2( 374.4, 433.371 )
 scale = Vector2( 5.25143, 11.6971 )
-
-[node name="Lofi" type="AudioStreamPlayer" parent="TVMain"]
-stream = ExtResource( 13 )
-volume_db = -11.471
-
-[node name="pitchTween" type="Tween" parent="TVMain/Lofi"]
-repeat = true
-playback/repeat = true
 
 [node name="TripTimer" type="Timer" parent="TVMain"]
 wait_time = 5.0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/cup_of_tea.ogg-32d128bb09bc603a6712cbf852610ffb.oggstr"
+
+[deps]
+
+source_file="res://audio/cup_of_tea.ogg"
+dest_files=[ "res://.import/cup_of_tea.ogg-32d128bb09bc603a6712cbf852610ffb.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

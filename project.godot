@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="kitchen_sink"
-run/main_scene="res://scenes/TripScene.tscn"
+run/main_scene="res://scenes/Desk.tscn"
 
 [autoload]
 
@@ -26,6 +26,7 @@ DialogContent="*res://scripts/DialogContent.gd"
 ItemStore="*res://scripts/ItemStore.gd"
 KeySceneItems="*res://scripts/KeySceneItems.gd"
 Actions="*res://scripts/actions.gd"
+MusicController="*res://scenes/MusicController.tscn"
 
 [display]
 
