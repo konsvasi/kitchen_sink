@@ -26,8 +26,12 @@ var content = {
 		"something_weird": ['I feel weird...', 'Is it already happening??', 'WTF, what is the dosage of these mushrooms?'],
 	},
 	"trip": {
-		"main": ['Whaaaaaaaaaat'],
-		"take_it_easy": ['Take it easy dude...', "But take it!!!", "Goodbye, you are alone now."]
+		"main": ['Oh boy, I\'ve never hade a comeup like this.', 'What is wrong with me?'],
+		"take_it_easy": ['Take it easy dude...', "But take it!!!", "Goodbye, you are alone now."],
+		"elf": ['Hello traveller, this is the hyperdimension. We didn\'t have any visitors for years.', 'How did you even get here?'],
+		"elf_next": ['Don\'t ask questions, just let yourself go and everything will be fine.', 'Don\'t fight it.'],
+		"human": ['What is happening???!!!??', 'Will this end...?'],
+		"end": ['Better turn the TV off and go upstairs...']	
 	}
 }
 

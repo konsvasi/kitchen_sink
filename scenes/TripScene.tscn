@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://utils/head.png" type="Texture" id=1]
 [ext_resource path="res://scripts/TripScene.gd" type="Script" id=2]
 [ext_resource path="res://utils/trippy.png" type="Texture" id=3]
 [ext_resource path="res://scenes/HUD.tscn" type="PackedScene" id=4]
 [ext_resource path="res://environment/terry.png" type="Texture" id=5]
+[ext_resource path="res://environment/elf.png" type="Texture" id=6]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -71,7 +72,6 @@ __meta__ = {
 [node name="EyeTimer" type="Timer" parent="."]
 wait_time = 2.155
 one_shot = true
-autostart = true
 
 [node name="EyeTween" type="Tween" parent="."]
 
@@ -83,6 +83,14 @@ scale = Vector2( 0.9, 0.9 )
 texture = ExtResource( 5 )
 
 [node name="TerryTween" type="Tween" parent="Terry"]
+
+[node name="Elf" type="Sprite" parent="."]
+position = Vector2( 239.778, 207.266 )
+scale = Vector2( 1.2, 1.2 )
+texture = ExtResource( 6 )
+
+[node name="ElfTween" type="Tween" parent="Elf"]
 [connection signal="timeout" from="EyeTimer" to="." method="_on_EyeTimer_timeout"]
 [connection signal="dialogFinished" from="HUD" to="." method="_on_HUD_dialogFinished"]
 [connection signal="tween_completed" from="Terry/TerryTween" to="." method="_on_TerryTween_tween_completed"]
+[connection signal="tween_completed" from="Elf/ElfTween" to="." method="_on_ElfTween_tween_completed"]

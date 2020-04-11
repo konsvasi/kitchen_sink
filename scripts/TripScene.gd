@@ -3,13 +3,19 @@ extends TextureRect
 var hue_timer = 0
 var speed = 160 #degrees per second
 var colorEyes = false
-var firstTime = false
+var firstTime = true
+var firstTimeElf = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Terry.modulate.a = 0
+	$Elf.modulate.a = 0
+	$EyeLeft.modulate.a = 0
+	$EyeRight.modulate.a = 0
 	$HUD.disableMenu()
 	MusicController.audioPlayer.pitch_scale = 0.7
+	yield(get_tree().create_timer(2.0), "timeout")
+	$HUD.showDialog("trip", "main")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -32,26 +38,55 @@ func stretchEyes():
 	$EyeTween.interpolate_property($EyeRight, "rect_size", Vector2(64,35), Vector2(63, 280), 6, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$EyeTween.start()
 
+func whitenEyes():
+	$EyeTween.interpolate_property($EyeLeft, 'modulate', Color(1, 1, 1, 0), Color(1, 1, 1, 1), 3.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$EyeTween.interpolate_property($EyeRight, 'modulate', Color(1, 1, 1, 0), Color(1, 1, 1, 1), 3.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$EyeTween.start()
+	
 func _on_EyeTimer_timeout():
-	print('time out')
 	colorEyes = true
 	stretchEyes()
-	$HUD.showDialog("trip", "main")
+	yield(get_tree().create_timer(2.0), "timeout")
+	$HUD.showDialog("trip", "end")
 	
 
 func _on_HUD_dialogFinished(dialogId):
 	if dialogId == "main":
+		$Elf/ElfTween.interpolate_property($Elf, 'modulate', Color(1, 1, 1, 0), Color(1, 1, 1, 1), 3.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		$Elf/ElfTween.start()
+	
+	if dialogId == "elf":
+		$HUD.showDialog("trip", "human")
+	
+	if dialogId == "human":
+		$HUD.showDialog("trip", "elf_next")
+	
+	if dialogId == "elf_next":
+		$Elf/ElfTween.interpolate_property($Elf, 'modulate', Color(1, 1, 1, 1), Color(1, 1, 1, 0), 3.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		$Elf/ElfTween.start()
+		yield(get_tree().create_timer(1.0), "timeout")
 		$Terry/TerryTween.interpolate_property($Terry, 'modulate', Color(1, 1, 1, 0), Color(1, 1, 1, 1), 3.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		$Terry/TerryTween.start()
-		firstTime = true
-	
+		
 	if dialogId == "take_it_easy":
 		yield(get_tree().create_timer(1.0), "timeout")
-		firstTime = false
 		$Terry/TerryTween.interpolate_property($Terry, 'modulate', Color(1, 1, 1, 1), Color(1, 1, 1, 0), 3.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		$Terry/TerryTween.start()
+		whitenEyes()
+		$EyeTimer.start()
+	
+	
+	if dialogId == "end":
+		print('go to tv scene')
 
 
 func _on_TerryTween_tween_completed(object, key):
 	if firstTime:
 		$HUD.showDialog("trip", "take_it_easy")
+		firstTime = false
+
+
+func _on_ElfTween_tween_completed(object, key):
+	if firstTimeElf:
+		$HUD.showDialog("trip", "elf")
+		firstTimeElf = false
