@@ -13,6 +13,11 @@ var mainDialogFinished = false
 var tripScene = preload("res://Scenes/TripScene.tscn");
 
 func _ready():
+	if global.previous_scene == 'tripscene':
+		print('coming from trip')
+		# have tv turned on with content
+		# music playing
+		
 	Tween.interpolate_property($TVMain/Light2D, "texture_scale", 1, 2, 2, Tween.TRANS_SINE, Tween.EASE_IN)
 	Tween.start()
 	$HUD.showDialog("tv", "main")
