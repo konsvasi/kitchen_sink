@@ -20,7 +20,8 @@ func _on_Area2D_mouse_exited():
 
 
 func _on_Area2D_input_event(viewport, event, shape_idx):
-	if (event is InputEventMouseButton):
+	if (event is InputEventMouseButton && event.pressed):
+		print(event)
 		if grabById:
 			emit_signal('grabItemById', id)
 		else:

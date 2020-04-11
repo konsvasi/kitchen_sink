@@ -11,6 +11,7 @@ onready var dialog = $Dialogbox
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 #	MusicController.play("res://audio/adventure_begins.ogg", -17.0)
+	$Dialogbox.mouse_filter = Control.MOUSE_FILTER_PASS
 	if KeySceneItems.keySceneItems["desk"]["special_mushrooms"].taken:
 		$ShroomPack.queue_free()
 		$Dialogbox.setDialog(DialogContent.get_content("desk", "empty"))
@@ -33,10 +34,13 @@ func _process(delta):
 		$YellowBorder.visible = false;
 		takeItemAndMove();
 	
-func _input(_event):
+func _input(event):
+	if event is InputEventMouseMotion:
+		get_viewport().unhandled_input(event)
 	if Input.is_action_just_pressed("ui_interact"):
 		$Dialogbox.loadDialog()
 		
+	
 func takeItemAndMove():
 	addItemToInventory("special_mushrooms");
 	velocity = (hidePosition - $KinematicBody2D.get_global_position()).normalized() * 200;
@@ -55,9 +59,12 @@ func _on_ArmBackTimer_timeout():
 	moveBack = true;
 
 func _on_Area2D_mouse_entered():
-	$YellowBorder.visible = true;
-
+	print("visible", $YellowBorder.visible)
+	if !$YellowBorder.visible:
+		$YellowBorder.visible = true;
+	
 func _on_Area2D_mouse_exited():
+	print('exited')
 	$YellowBorder.visible = false;
 
 func _on_Area2D_input_event(viewport, event, shape_idx):

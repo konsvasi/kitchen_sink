@@ -12,7 +12,10 @@ func _ready():
 		if item == "hot_sauce" && KeySceneItems.keySceneItems["fridge"][item].taken == true:
 			$HotSauce.queue_free()
 			
-	
+
+func _input(event):
+	get_viewport().unhandled_input(event)
+
 func _on_Area2D_area_entered(area):
 	print('Entered: ', area)
 	activeArea = area;
@@ -37,3 +40,7 @@ func _on_Sandwich_grabItemById(id):
 
 func _on_HotSauce_grabItemById(id):
 	takeItemById(id)
+
+
+func _on_Area2D_mouse_entered():
+	print("mouse in")

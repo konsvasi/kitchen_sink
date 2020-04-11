@@ -8,8 +8,7 @@
 [ext_resource path="res://scenes/GoBackButton.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/DialogBox.tscn" type="PackedScene" id=8]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 7.51884, 8.4526 )
+[sub_resource type="CircleShape2D" id=1]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 34.4614, 30.6383 )
@@ -54,6 +53,7 @@ __meta__ = {
 [node name="KinematicBody2D" type="KinematicBody2D" parent="."]
 position = Vector2( 102.184, 985.532 )
 scale = Vector2( 2, 2 )
+input_pickable = true
 
 [node name="Arm" type="Sprite" parent="KinematicBody2D"]
 texture = ExtResource( 6 )
