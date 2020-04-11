@@ -41,6 +41,3 @@ func _on_Sandwich_grabItemById(id):
 func _on_HotSauce_grabItemById(id):
 	takeItemById(id)
 
-
-func _on_Area2D_mouse_entered():
-	print("mouse in")

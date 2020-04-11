@@ -35,7 +35,7 @@ func _process(delta):
 		takeItemAndMove();
 	
 func _input(event):
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion || event is InputEventMouseButton:
 		get_viewport().unhandled_input(event)
 	if Input.is_action_just_pressed("ui_interact"):
 		$Dialogbox.loadDialog()
@@ -59,15 +59,14 @@ func _on_ArmBackTimer_timeout():
 	moveBack = true;
 
 func _on_Area2D_mouse_entered():
-	print("visible", $YellowBorder.visible)
-	if !$YellowBorder.visible:
-		$YellowBorder.visible = true;
+	$YellowBorder.visible = true;
 	
 func _on_Area2D_mouse_exited():
 	print('exited')
 	$YellowBorder.visible = false;
 
 func _on_Area2D_input_event(viewport, event, shape_idx):
+	print('event', event)
 	if (event is InputEventMouseButton):
 		positionToMove = event.get_global_position();
 		moveArm = true;
