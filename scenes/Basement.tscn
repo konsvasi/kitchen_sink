@@ -81,3 +81,8 @@ actionId = "special_mushrooms"
 nextScene = "res://scenes/TV.tscn"
 
 [node name="HUD" parent="." instance=ExtResource( 4 )]
+
+[node name="DoorToHouse" parent="." instance=ExtResource( 3 )]
+position = Vector2( 10.253, 278.493 )
+transitionOnInteract = true
+nextScene = "res://scenes/House_inside.tscn"

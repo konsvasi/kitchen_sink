@@ -1,7 +1,8 @@
 extends Node
 
 var actions = {
-	"special_mushrooms": PlayerVariables.hasUsed("special_mushrooms")
+	"special_mushrooms": PlayerVariables.hasUsed("special_mushrooms"),
+	"doorknob_game_active": false
 }
 
 
@@ -10,6 +11,5 @@ func _ready():
 	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func getAction(actionId):
+	return actions[actionId]

@@ -33,7 +33,7 @@ position = Vector2( 223.525, 233.996 )
 scale = Vector2( 1.59434, 0.875 )
 frames = SubResource( 1 )
 animation = "white_noise"
-frame = 1
+frame = 2
 playing = true
 
 [node name="Player" parent="." instance=ExtResource( 6 )]
@@ -66,7 +66,6 @@ __meta__ = {
 }
 
 [node name="Portal" parent="." instance=ExtResource( 7 )]
-visible = false
 position = Vector2( 180, 250 )
 areaName = "Door_outside"
 nextScene = "res://scenes/World.tscn"

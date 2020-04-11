@@ -9,6 +9,10 @@ func _ready():
 	# set action needed items
 	if PlayerVariables.usedKeyItems.has("special_mushrooms"):
 		$Couch.actionNeeded = false
+	
+	if Actions.getAction("doorknob_game_active"):
+		# Change to minigame scene
+		$DoorToHouse.nextScene = "res://scenes/TripScene.tscn"
 
 func updateInteractPoints(itemId):
 	for point in interact_points:

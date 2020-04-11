@@ -12,6 +12,5 @@ func _ready():
 			$Player.set_position($respawn_from_desk_point.position)
 		elif global.previous_scene == 'fridge':
 			$Player.set_position($fridge_door.position)
-		#if global.previous_scene == 'inventoryMenu':
-			# put player in position before menu was opened
-			# open menu
+		elif global.previous_scene == 'basement':
+				$Player.set_position($DoorToBasement.position)

@@ -14,6 +14,8 @@ func _ready():
 	current_scene = root.get_child( root.get_child_count() -1 )
 
 func go_to_scene(nextScene):
+	print("currentScene", get_tree().get_current_scene().get_name(), ' next scene', nextScene)
+	global.previous_scene  = get_tree().get_current_scene().get_name().to_lower()
 	call_deferred("_deferred_goto_scene", nextScene);
 	
 func _deferred_goto_scene(path):
