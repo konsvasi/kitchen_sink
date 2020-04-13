@@ -2,43 +2,21 @@
 
 [ext_resource path="res://utils/head.png" type="Texture" id=1]
 [ext_resource path="res://scripts/TripScene.gd" type="Script" id=2]
-[ext_resource path="res://utils/trippy.png" type="Texture" id=3]
+[ext_resource path="res://environment/trippy_bg.png" type="Texture" id=3]
 [ext_resource path="res://scenes/HUD.tscn" type="PackedScene" id=4]
 [ext_resource path="res://environment/terry.png" type="Texture" id=5]
 [ext_resource path="res://environment/elf.png" type="Texture" id=6]
-
-[sub_resource type="Shader" id=1]
-code = "shader_type canvas_item;
-
-const float PI = 3.1415926535897932384626433832795;
-const float amp = 0.1;
-const float freq = 0.05;
-const float scale = 2.0;
-
-void fragment() {
-	vec2 image_size = vec2(textureSize(TEXTURE, 0));
-	float x = UV.x * image_size.x;
-	float y = UV.y * image_size.y;
-	
-	// Get the offset
-	float distx = amp * sin(freq * y + scale * TIME) * PI;
-	float disty = amp * 1.5 * tan(freq * x + scale * TIME) * PI;
-	// Set the coordinate for where the color of a given pixel should come from.
-	vec2 new_uv = UV + vec2(distx, 0.6);
-	new_uv = mod(new_uv, disty);
-	
-	// Set the correct color for each fragment
-	COLOR = texture(TEXTURE, fract(new_uv));
-}"
+[ext_resource path="res://shaders/background.shader" type="Shader" id=7]
 
 [sub_resource type="ShaderMaterial" id=2]
-shader = SubResource( 1 )
+shader = ExtResource( 7 )
 
 [node name="TripScene" type="TextureRect"]
 material = SubResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 3 )
+expand = true
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false

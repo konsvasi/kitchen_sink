@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/head.png-ab7e55abfdebf6c879db53b9b49caae6.stex"
+path="res://.import/knob.png-826cef06c71e2bdea225a52efa2ecb79.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://shaders/head.png"
-dest_files=[ "res://.import/head.png-ab7e55abfdebf6c879db53b9b49caae6.stex" ]
+source_file="res://assets/knob.png"
+dest_files=[ "res://.import/knob.png-826cef06c71e2bdea225a52efa2ecb79.stex" ]
 
 [params]
 

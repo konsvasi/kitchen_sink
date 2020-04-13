@@ -1,6 +1,7 @@
 extends Node
 
 onready var Tween = get_node("TVMain/Tween")
+onready var TripShader = preload("res://shaders/trip.shader")
 var tweenPlayback = 'straight'
 var SPEED = 100
 var GRAVITY = 40
@@ -10,22 +11,25 @@ var hasSignal = false
 var canMoveRemote = false
 var lowerRemoteControl = false
 var mainDialogFinished = false
-var tripScene = preload("res://Scenes/TripScene.tscn");
+var tripScene = preload("res://Scenes/TripScene.tscn")
+var isFromTripScene = false
 
 func _ready():
-	if global.previous_scene == 'tripscene':
-		print('coming from trip')
+	# debug purposes
+	if global.get_previous_scene() == 'tripscene':
+		isFromTripScene = true
 		# have tv turned on with content
-		# music playing
-		
-	Tween.interpolate_property($TVMain/Light2D, "texture_scale", 1, 2, 2, Tween.TRANS_SINE, Tween.EASE_IN)
-	Tween.start()
-	$HUD.showDialog("tv", "main")
+		turnOnTV()
+		# music playing, will come from global player anyway
+		# return dialog
+		$HUD.showDialog("tv", "return")
+	else:	
+#		Tween.interpolate_property($TVMain/Light2D, "texture_scale", 1, 2, 2, Tween.TRANS_SINE, Tween.EASE_IN)
+#		Tween.start()
+		$HUD.showDialog("tv", "main")
 	# Disable menu in scene
 	$HUD.disableMenu()
 
-#func _process(delta):
-#	pass
 
 func _physics_process(_delta):
 	if canMoveRemote:
@@ -44,20 +48,23 @@ func _physics_process(_delta):
 func _unhandled_key_input(_event):
 	if Input.is_action_just_pressed("ui_interact"):
 		if hasSignal:
-			MusicController.play("res://audio/cup_of_tea.ogg")
-			$TVMain/TvContent.play("lofi-channel")
-			$TVMain/TvContent.visible = !$TVMain/TvContent.visible
-			canMoveRemote = false
-			VELOCITY.x = 0
-			yield(get_tree().create_timer(1.0), "timeout")
-			lowerRemoteControl = true
-#			$TVMain/TripTimer.start()
+			if !isFromTripScene:
+				MusicController.play("res://audio/cup_of_tea.ogg")
+				toggleTV()
+				canMoveRemote = false
+				VELOCITY.x = 0
+				global.wait(1.0)
+				lowerRemoteControl = true
+			else:
+				toggleTV()
+				canMoveRemote = false
+				VELOCITY.x = 0
+				global.wait(1.0)
+				lowerRemoteControl = true
+				$HUD.showDialog("tv", "music_playing")
 		
-		if !mainDialogFinished:
-			$HUD/Dialogbox.loadDialog()
-			
-func flicker_light():
-	$TVMain/Light2D.texture_scale = smoothstep(1, 2, 0.15)
+#		if !mainDialogFinished:
+#			$HUD/Dialogbox.loadDialog()
 
 # TV Remote move code
 func move(direction):
@@ -68,7 +75,23 @@ func move(direction):
 	elif direction == "up":
 		$TVMain/TVRemote.move_and_slide(Vector2(0,-VELOCITY),Vector2(10,0))	
 
+func turnOnTV() -> void:
+	$TVMain/TvContent.play("lofi-channel")
+	$TVMain/TvContent.show()
+	$TVMain/Light2D.enabled = true
+	Tween.interpolate_property($TVMain/Light2D, "texture_scale", 1, 2, 2, Tween.TRANS_SINE, Tween.EASE_IN)
+	Tween.start()
 
+func toggleTV() -> void:
+	$TVMain/TvContent.visible = !$TVMain/TvContent.visible
+	$TVMain/Light2D.enabled = !$TVMain/Light2D.enabled
+	
+	if $TVMain/TvContent.visible:
+		$TVMain/TvContent.play("lofi-channel")
+		Tween.interpolate_property($TVMain/Light2D, "texture_scale", 1, 2, 2, Tween.TRANS_SINE, Tween.EASE_IN)
+		Tween.start()
+	
+# ------- SIGNALS --------
 func _on_Tween_tween_completed(object, key):
 	if object is Light2D:
 		if tweenPlayback == 'straight':
@@ -87,10 +110,18 @@ func _on_HUD_dialogFinished(dialogId):
 		$HUD.showNotification("remote_minigame")
 		$TVMain/TVRemote.show()
 		mainDialogFinished = true
-	if dialogId == "enjoying_the_music":
+	elif dialogId == "enjoying_the_music":
 		$TVMain/TripTimer.start()
-	if dialogId == "something_weird":
-		global.go_to_scene("res://Scenes/TripScene.tscn");
+	elif dialogId == "something_weird":
+		global.go_to_scene("res://Scenes/TripScene.tscn")
+	elif dialogId == "return":
+		$TVMain/TVRemote.show()
+		global.wait(1.5)
+		canMoveRemote = true
+	elif dialogId == "music_playing":
+		Actions.setAction('doorknob_game_active', true)
+		yield(get_tree().create_timer(3.0), "timeout")
+		global.go_to_scene("res://Scenes/Basement.tscn")
 		
 		
 func _on_InfraredPoint_area_entered(_area):
@@ -110,8 +141,10 @@ func _on_HUD_notificationClosed():
 func _on_TripTimer_timeout():
 	Tween.interpolate_property(MusicController.audioPlayer, "pitch_scale", 1.0, 0.1, 5, Tween.TRANS_BOUNCE, Tween.EASE_IN_OUT)
 	Tween.start()
+	$TVMain/Background.material.shader = TripShader
 	$HUD.showDialog("tv", "something_weird");
 
 
 func _on_VisibilityNotifier2D_screen_exited():
-	$HUD.showDialog("tv", "enjoying_the_music")
+	if global.get_previous_scene() != 'tripscene':
+		$HUD.showDialog("tv", "enjoying_the_music")

@@ -13,3 +13,6 @@ func _ready():
 
 func getAction(actionId):
 	return actions[actionId]
+
+func setAction(actionId:String, value:bool):
+	actions[actionId] = value
