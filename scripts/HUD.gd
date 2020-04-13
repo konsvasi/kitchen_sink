@@ -21,6 +21,7 @@ func _unhandled_key_input(event):
 			if $Notification.visible:
 				emit_signal("notificationClosed")
 				$Notification.hide()
+				get_tree().paused = false
 			
 			if $Dialogbox.visible:
 				loadDialog()	
@@ -50,6 +51,7 @@ func disableMenu():
 func showNotification(notificationId):
 	$Notification.setText(notificationId)
 	$Notification.show()
+	get_tree().paused = true
 	
 func _on_InventoryMenu_hide():
 	$InventoryMenu.clearItems()

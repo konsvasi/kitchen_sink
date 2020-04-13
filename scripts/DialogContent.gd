@@ -34,9 +34,14 @@ var content = {
 		"elf_next": ['Don\'t ask questions, just let yourself go and everything will be fine.', 'Don\'t fight it.'],
 		"human": ['What is happening???!!!??', 'Will this end...?'],
 		"end": ['Better turn the TV off and go upstairs...']	
+	},
+	"door": {
+		"move": ['Aaaah the door knob is moving?', 'Am I imagining this?'],
+		"out": ['I\'m locked, I\'m never getting out of here!!!']
 	}
 }
 
 var notification_content = {
-	"remote_minigame": "Move the remote by pressing w,a,s.\n When the sensor changes color press x"
+	"remote_minigame": "Move the remote by pressing w,a,s.\n When the sensor changes color press x",
+	"doorknob_minigame": "Click on the door knob to open the door."
 }

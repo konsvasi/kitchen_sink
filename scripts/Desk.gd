@@ -66,7 +66,6 @@ func _on_Area2D_mouse_exited():
 	$YellowBorder.visible = false;
 
 func _on_Area2D_input_event(viewport, event, shape_idx):
-	print('event', event)
 	if (event is InputEventMouseButton):
 		positionToMove = event.get_global_position();
 		moveArm = true;
