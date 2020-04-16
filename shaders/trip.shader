@@ -17,9 +17,9 @@ void fragment()
 	st = st * 1.-1.;
 
   // Make the distance field
- //d = sin(length( abs(st)-.3 )) * TIME * 0.5;
+ d = sin(length( abs(st)-.3 )) * TIME * 0.5;
 //   d = sin(length( min(abs(st)-.3,0.) )) * TIME;
-  d = sin(length( max(abs(st)-.3,0.01) )) * TIME * 0.5;
+  //d = sin(length( max(abs(st)-.3,0.01) )) * TIME * 0.5;
 //  COLOR = texture(TEXTURE, vec2(fract(d*4.0), fract(d*5.0)));
   // Visualize the distance field
   COLOR = vec4(fract(d*1.0), fract(d*5.0), fract(d*2.5),0.3);

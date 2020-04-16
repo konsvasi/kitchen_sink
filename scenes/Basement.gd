@@ -11,7 +11,7 @@ func _ready():
 	# set action needed items
 	if PlayerVariables.usedKeyItems.has("special_mushrooms"):
 		$Couch.actionNeeded = false
-	
+	print('doorknob active?', Actions.getAction("doorknob_game_active"))
 	if Actions.getAction("doorknob_game_active"):
 		# Change to minigame scene
 		$DoorToHouse.nextScene = "res://scenes/TripScene.tscn"

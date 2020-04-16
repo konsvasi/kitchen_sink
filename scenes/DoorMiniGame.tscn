@@ -12,10 +12,10 @@ radius = 50.5657
 [sub_resource type="CircleShape2D" id=2]
 radius = 81.4714
 
-[sub_resource type="CircleShape2D" id=4]
+[sub_resource type="CircleShape2D" id=3]
 radius = 47.6818
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 637.29, 10 )
 
 [node name="DoorMiniGame" type="Node2D"]
@@ -50,7 +50,7 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Knob/Center"]
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="Top" type="StaticBody2D" parent="."]
 position = Vector2( 636.345, -7.3143 )
@@ -59,7 +59,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Top"]
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="Bottom" type="StaticBody2D" parent="."]
 position = Vector2( 641.871, 726.552 )
@@ -68,7 +68,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bottom"]
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="Left" type="StaticBody2D" parent="."]
 position = Vector2( -4.64526, 460.464 )
@@ -78,7 +78,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Left"]
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="Right" type="StaticBody2D" parent="."]
 position = Vector2( 1281.16, 410.52 )
@@ -88,7 +88,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Right"]
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="HUD" parent="." instance=ExtResource( 4 )]
 
