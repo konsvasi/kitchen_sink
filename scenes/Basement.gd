@@ -14,7 +14,7 @@ func _ready():
 	print('doorknob active?', Actions.getAction("doorknob_game_active"))
 	if Actions.getAction("doorknob_game_active"):
 		# Change to minigame scene
-		$DoorToHouse.nextScene = "res://scenes/TripScene.tscn"
+		$DoorToHouse.nextScene = "res://scenes/DoorMiniGame.tscn"
 
 func updateInteractPoints(itemId):
 	for point in interact_points:

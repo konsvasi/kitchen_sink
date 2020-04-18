@@ -61,10 +61,13 @@ func _unhandled_key_input(_event):
 				VELOCITY.x = 0
 				global.wait(1.0)
 				lowerRemoteControl = true
-				$HUD.showDialog("tv", "music_playing")
-		
-#		if !mainDialogFinished:
-#			$HUD/Dialogbox.loadDialog()
+				if !$HUD/Dialogbox.visible:
+					$HUD.showDialog("tv", "music_playing")
+#				else:
+#					$HUD/Dialogbox.loadDialog()
+#		else:
+#			if $HUD/Dialogbox.visible:
+#				$HUD/Dialogbox.loadDialog()
 
 # TV Remote move code
 func move(direction):

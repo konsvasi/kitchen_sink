@@ -4,7 +4,7 @@
 [ext_resource path="res://environment/knob.png" type="Texture" id=2]
 [ext_resource path="res://scripts/DoorMiniGame.gd" type="Script" id=3]
 [ext_resource path="res://scenes/HUD.tscn" type="PackedScene" id=4]
-[ext_resource path="res://audio/monster_snarls.ogg" type="AudioStream" id=5]
+[ext_resource path="res://audio/teleport.ogg" type="AudioStream" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 50.5657
@@ -20,6 +20,9 @@ extents = Vector2( 637.29, 10 )
 
 [node name="DoorMiniGame" type="Node2D"]
 script = ExtResource( 3 )
+__meta__ = {
+"_edit_horizontal_guides_": [ -45.8708 ]
+}
 
 [node name="Background" type="Sprite" parent="."]
 position = Vector2( 644.993, 360.475 )
@@ -93,12 +96,13 @@ shape = SubResource( 4 )
 [node name="HUD" parent="." instance=ExtResource( 4 )]
 
 [node name="SoundTimer" type="Timer" parent="."]
+one_shot = true
 
 [node name="DialogTimer" type="Timer" parent="."]
 wait_time = 15.0
 one_shot = true
 
-[node name="monsterSnarl" type="AudioStreamPlayer2D" parent="."]
+[node name="teleportSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
 [connection signal="input_event" from="Knob/Area2D" to="." method="_on_Area2D_input_event"]
 [connection signal="mouse_entered" from="Knob/Area2D" to="." method="_on_Area2D_mouse_entered"]
@@ -107,4 +111,4 @@ stream = ExtResource( 5 )
 [connection signal="dialogFinished" from="HUD" to="." method="_on_HUD_dialogFinished"]
 [connection signal="timeout" from="SoundTimer" to="." method="_on_SoundTimer_timeout"]
 [connection signal="timeout" from="DialogTimer" to="." method="_on_DialogTimer_timeout"]
-[connection signal="finished" from="monsterSnarl" to="." method="_on_monsterSnarl_finished"]
+[connection signal="finished" from="teleportSound" to="." method="_on_teleportSound_finished"]

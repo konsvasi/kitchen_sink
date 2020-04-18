@@ -59,18 +59,23 @@ func _on_Center_mouse_entered():
 
 
 func _on_HUD_dialogFinished(id):
-	if id == "move":
-		$DialogTimer.start()
+	match id:
+		"move":
+			$DialogTimer.start()
+		"out":
+			$SoundTimer.start()
+		"sound":
+			yield(get_tree().create_timer(1.0), "timeout")
+			global.go_to_sceneNew("Basement")
 
 
 func _on_DialogTimer_timeout():
 	$HUD.showDialog("door", "out")
-	$SoundTimer.start()
 
 
 func _on_SoundTimer_timeout():
-	$monsterSnarl.play()
+	$teleportSound.play()
 
-
-func _on_monsterSnarl_finished():
-	$monsterSnarl.stop()
+func _on_teleportSound_finished():
+	yield(get_tree().create_timer(1.0), "timeout")
+	$HUD.showDialog("door", "sound")

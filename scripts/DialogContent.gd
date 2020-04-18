@@ -37,7 +37,8 @@ var content = {
 	},
 	"door": {
 		"move": ['Aaaah the door knob is moving?', 'Am I imagining this?'],
-		"out": ['I\'m locked, I\'m never getting out of here!!!']
+		"out": ['I\'m locked, I\'m never getting out of here!!!'],
+		"sound": ['What was this sound?', ' It probably came from the TV']
 	}
 }
 

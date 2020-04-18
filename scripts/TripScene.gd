@@ -49,7 +49,10 @@ func _on_EyeTimer_timeout():
 	yield(get_tree().create_timer(2.0), "timeout")
 	$HUD.showDialog("trip", "end")
 	
-
+func _input(event):
+	if Input.is_action_just_pressed("ui_interact"):
+		$HUD.loadDialog()
+		
 func _on_HUD_dialogFinished(dialogId):
 	if dialogId == "main":
 		$Elf/ElfTween.interpolate_property($Elf, 'modulate', Color(1, 1, 1, 0), Color(1, 1, 1, 1), 3.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)

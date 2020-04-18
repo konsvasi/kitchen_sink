@@ -18,6 +18,12 @@ func go_to_scene(nextScene : String) -> void:
 	set_previous_scene(get_tree().get_current_scene().get_name())
 	call_deferred("_deferred_goto_scene", nextScene);
 
+func go_to_sceneNew(nextSceneName : String) -> void:
+	print("currentScene", get_tree().get_current_scene().get_name(), ' next scene', nextSceneName)
+	var formattedSceneName = "res://Scenes/" + nextSceneName + ".tscn"
+	set_previous_scene(get_tree().get_current_scene().get_name())
+	call_deferred("_deferred_goto_scene", formattedSceneName);
+
 func _deferred_goto_scene(path):
 	current_scene.free()
 	

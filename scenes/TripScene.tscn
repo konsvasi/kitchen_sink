@@ -8,11 +8,11 @@
 [ext_resource path="res://environment/elf.png" type="Texture" id=6]
 [ext_resource path="res://shaders/background.shader" type="Shader" id=7]
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 7 )
 
 [node name="TripScene" type="TextureRect"]
-material = SubResource( 2 )
+material = SubResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 3 )
