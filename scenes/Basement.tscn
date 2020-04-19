@@ -86,3 +86,6 @@ nextScene = "res://scenes/TV.tscn"
 position = Vector2( 10.253, 278.493 )
 transitionOnInteract = true
 nextScene = "res://scenes/House_inside.tscn"
+
+[node name="VillainStartPosition" type="Position2D" parent="."]
+position = Vector2( 272.9, 310.465 )

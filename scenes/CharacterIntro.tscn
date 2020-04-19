@@ -97,5 +97,8 @@ position = Vector2( 643.651, 483.893 )
 
 [node name="Alert" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
+
+[node name="PositionSlow" type="Position2D" parent="."]
+position = Vector2( 342.887, 472.752 )
 [connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]
 [connection signal="finished" from="Alert" to="." method="_on_Alert_finished"]

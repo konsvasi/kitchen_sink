@@ -1,8 +1,9 @@
 extends Node2D
 
-const SPEED = 10
+var speed = 10
 var velocity = Vector2()
 const FLOOR = Vector2(0, -1);
+var positionToGo
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -10,18 +11,22 @@ func _ready():
 	$Tween.start()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	velocity.x = ($Position.get_global_position().x - $Character.get_global_position().x) * SPEED
-	
+	if $Position.get_global_position().x - $Character.get_global_position().x > 0.01:
+		positionToGo = $Position.get_global_position().x
+#	else:
+#		print('slow')
+#		positionToGo = $PositionSlow.get_global_position().x
+#		speed = 1
+	velocity.x = (positionToGo - $Character.get_global_position().x) * speed
+		
 	velocity = $Character.move_and_slide(velocity, FLOOR)
 	
-
-
+	
 func _on_Tween_tween_completed(object, key):
-	print('play')
 	$Alert.play()
 
 
 func _on_Alert_finished():
 	$Alert.stop()
+	print('previous scene ', global.get_previous_scene(), ' add scene change')
