@@ -1,9 +1,8 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://environment/door_with_knob.png" type="Texture" id=1]
 [ext_resource path="res://environment/knob.png" type="Texture" id=2]
 [ext_resource path="res://scripts/DoorMiniGame.gd" type="Script" id=3]
-[ext_resource path="res://scenes/HUD.tscn" type="PackedScene" id=4]
 [ext_resource path="res://audio/teleport.ogg" type="AudioStream" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
@@ -93,13 +92,11 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Right"]
 shape = SubResource( 4 )
 
-[node name="HUD" parent="." instance=ExtResource( 4 )]
-
 [node name="SoundTimer" type="Timer" parent="."]
 one_shot = true
 
 [node name="DialogTimer" type="Timer" parent="."]
-wait_time = 15.0
+wait_time = 2.0
 one_shot = true
 
 [node name="teleportSound" type="AudioStreamPlayer" parent="."]
@@ -108,7 +105,6 @@ stream = ExtResource( 5 )
 [connection signal="mouse_entered" from="Knob/Area2D" to="." method="_on_Area2D_mouse_entered"]
 [connection signal="mouse_exited" from="Knob/Area2D" to="." method="_on_Area2D_mouse_exited"]
 [connection signal="mouse_entered" from="Knob/Center" to="." method="_on_Center_mouse_entered"]
-[connection signal="dialogFinished" from="HUD" to="." method="_on_HUD_dialogFinished"]
 [connection signal="timeout" from="SoundTimer" to="." method="_on_SoundTimer_timeout"]
 [connection signal="timeout" from="DialogTimer" to="." method="_on_DialogTimer_timeout"]
 [connection signal="finished" from="teleportSound" to="." method="_on_teleportSound_finished"]

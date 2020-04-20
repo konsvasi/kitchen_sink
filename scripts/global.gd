@@ -8,6 +8,7 @@ var PlayerNode = preload("res://scenes/Player.tscn").instance()
 var Player = preload("res://scripts/Player.gd").new()
 # Used to handle interaction when dialog is open
 var isDialogOpen = false
+var state = "default"
 
 func _ready():
 	var root = get_tree().get_root();
@@ -39,5 +40,12 @@ func set_previous_scene(sceneName : String) -> void:
 func get_previous_scene() -> String:
 	return previous_scene.to_lower()
 
+# Doesn't really work, remove calls to this
 func wait(timeToWait : float) -> void:
 	yield(get_tree().create_timer(timeToWait), "timeout")
+
+func setState(state : String) -> void:
+	self.state = state
+
+func getState() -> String:
+	return self.state

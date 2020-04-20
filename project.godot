@@ -27,6 +27,7 @@ ItemStore="*res://scripts/ItemStore.gd"
 KeySceneItems="*res://scripts/KeySceneItems.gd"
 Actions="*res://scripts/actions.gd"
 MusicController="*res://scenes/MusicController.tscn"
+HUD="*res://scenes/HUD.tscn"
 
 [display]
 

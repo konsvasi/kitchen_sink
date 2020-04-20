@@ -18,7 +18,8 @@ var content = {
 		"painting": ['What a nice painting', 'Took me three years to make...']
 	},
 	"basement": {
-		"special_mushrooms": ['I think I should eat the mushrooms before watching TV...']
+		"special_mushrooms": ['I think I should eat the mushrooms before watching TV...'],
+		"intro": ['Who are you?', 'How did you get in here?']
 	},
 	"tv": {
 		"main": ['Let\'s put some music videos...', 'wait first I have to turn on the TV...'],
