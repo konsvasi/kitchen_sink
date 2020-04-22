@@ -101,6 +101,7 @@ one_shot = true
 
 [node name="teleportSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
+volume_db = -4.0
 [connection signal="input_event" from="Knob/Area2D" to="." method="_on_Area2D_input_event"]
 [connection signal="mouse_entered" from="Knob/Area2D" to="." method="_on_Area2D_mouse_entered"]
 [connection signal="mouse_exited" from="Knob/Area2D" to="." method="_on_Area2D_mouse_exited"]
