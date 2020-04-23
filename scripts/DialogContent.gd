@@ -19,7 +19,8 @@ var content = {
 	},
 	"basement": {
 		"special_mushrooms": ['I think I should eat the mushrooms before watching TV...'],
-		"intro": ['Who are you?', 'How did you get in here?']
+		"intro": ['Who are you?', 'How did you get in here?'],
+		"name": ['Don\'t know me?', 'I\'m Zong, son of no one']
 	},
 	"tv": {
 		"main": ['Let\'s put some music videos...', 'wait first I have to turn on the TV...'],

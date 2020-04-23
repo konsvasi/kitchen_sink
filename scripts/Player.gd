@@ -20,7 +20,6 @@ func _physics_process(delta):
 	velocity.y += GRAVITY
 	if global.getState() == "default":
 		if Input.is_action_pressed("ui_right"):
-			print('getting input')
 			velocity.x = SPEED;
 			$AnimatedSprite.play("walk_right");
 		elif Input.is_action_pressed("ui_left"):
