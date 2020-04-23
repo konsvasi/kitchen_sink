@@ -8,19 +8,23 @@ var dialogId
 func _ready():
 	loadDialog()
 
-func setDialog(dialogArray):
+func setDialog(dialogArray, dialogId):
 	dialog = dialogArray
+	self.dialogId = dialogId
 	index = 0
+	print('dialog', dialog[0])
 	loadDialog()
 	
 func setId(id):
 	dialogId = id
 
 func loadDialog():
+	print('id: ', dialogId)
 	if index == dialog.size():
 		hide()
 		global.isDialogOpen = false
 		emit_signal("dialogFinished", dialogId)
+		index = -1
 
 	if index < dialog.size():
 		$RichTextLabel.bbcode_text = dialog[index]

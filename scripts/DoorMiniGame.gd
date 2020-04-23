@@ -10,8 +10,9 @@ var font
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	$HUD.disableMenu()
-	$HUD.showNotification("doorknob_minigame")
+	HUD.disableMenu()
+	HUD.showNotification("doorknob_minigame")
+	HUD.connect("dialogFinished", self, "_on_HUD_dialogFinished")
 	
 	font = DynamicFont.new()
 	font.font_data = load("res://fonts/Kenney High.ttf")
@@ -31,7 +32,7 @@ func _on_Area2D_mouse_entered():
 	direction = mousePosition.direction_to($Knob.position)
 	
 	if showDialog:
-		$HUD.showDialog("door", "move")
+		HUD.showDialog("door", "move")
 
 
 func _on_Area2D_mouse_exited():
@@ -70,7 +71,7 @@ func _on_HUD_dialogFinished(id):
 
 
 func _on_DialogTimer_timeout():
-	$HUD.showDialog("door", "out")
+	HUD.showDialog("door", "out")
 
 
 func _on_SoundTimer_timeout():
@@ -78,4 +79,4 @@ func _on_SoundTimer_timeout():
 
 func _on_teleportSound_finished():
 	yield(get_tree().create_timer(1.0), "timeout")
-	$HUD.showDialog("door", "sound")
+	HUD.showDialog("door", "sound")

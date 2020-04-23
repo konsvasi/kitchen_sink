@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scripts/House_inside.gd" type="Script" id=1]
 [ext_resource path="res://environment/house_iniside.png" type="Texture" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/Portal.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/Interactable_object.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/HUD.tscn" type="PackedScene" id=9]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -33,6 +32,7 @@ position = Vector2( 223.525, 233.996 )
 scale = Vector2( 1.59434, 0.875 )
 frames = SubResource( 1 )
 animation = "white_noise"
+frame = 2
 playing = true
 
 [node name="Player" parent="." instance=ExtResource( 6 )]
@@ -90,8 +90,6 @@ position = Vector2( 421.636, 241.542 )
 [node name="Interactable_object" parent="." instance=ExtResource( 8 )]
 position = Vector2( 530.794, 247.111 )
 dialogId = "painting"
-
-[node name="HUD" parent="." instance=ExtResource( 9 )]
 
 [node name="DoorToBasement" parent="." instance=ExtResource( 8 )]
 position = Vector2( 301.165, 245.107 )

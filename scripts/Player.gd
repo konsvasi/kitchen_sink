@@ -14,40 +14,44 @@ var isMenuOpen = false;
 
 func _ready():
 	velocity.y = GRAVITY
+	HUD.connect("dialogFinished", self, "_on_HUD_dialogFinished")
 	
 func _physics_process(delta):
 	velocity.y += GRAVITY
-	if Input.is_action_pressed("ui_right"):
-		velocity.x = SPEED;
-		$AnimatedSprite.play("walk_right");
-	elif Input.is_action_pressed("ui_left"):
-		velocity.x = -SPEED;
-		$AnimatedSprite.play("walk_left");
+	if global.getState() == "default":
+		if Input.is_action_pressed("ui_right"):
+			print('getting input')
+			velocity.x = SPEED;
+			$AnimatedSprite.play("walk_right");
+		elif Input.is_action_pressed("ui_left"):
+			velocity.x = -SPEED;
+			$AnimatedSprite.play("walk_left");
+		else:
+			velocity.x = 0;
+			$AnimatedSprite.play("idle");
+					
+		velocity = move_and_slide(velocity, FLOOR)
 	else:
-		velocity.x = 0;
-		$AnimatedSprite.play("idle");
-				
-	velocity = move_and_slide(velocity, FLOOR)
+		$AnimatedSprite.play("idle")
 	
 func _input(event):
-	if Input.is_action_pressed("ui_interact"):
+	if Input.is_action_just_pressed("ui_interact"):
 		print('items:', PlayerVariables.items)
-		if (activeArea is Area2D):
-			if (activeArea.type == "Interactable_Object"):
-				print(activeArea.actionNeeded, activeArea.name)
-				if activeArea.transitionOnInteract && !activeArea.actionNeeded:
-					global.go_to_scene(activeArea.nextScene)
-				elif activeArea.transitionOnInteract && activeArea.actionNeeded:
-						if !global.isDialogOpen:
-							get_parent().get_node("HUD").showDialog(get_parent().name.to_lower(), activeArea.actionId)
-						else:
-							get_parent().get_node("HUD").loadDialog()
-				# Open dialog		
-				elif activeArea.dialogId && !global.isDialogOpen:
-					get_parent().get_node("HUD").showDialog(get_parent().name.to_lower(), activeArea.dialogId)
-				else:
-					# Progress dialog
-					get_parent().get_node("HUD").loadDialog()
+		if global.getState() == "default":
+			if (activeArea is Area2D):
+				if (activeArea.type == "Interactable_Object"):
+					print(activeArea.actionNeeded, activeArea.name)
+					if activeArea.transitionOnInteract && !activeArea.actionNeeded:
+						global.go_to_scene(activeArea.nextScene)
+					elif activeArea.transitionOnInteract && activeArea.actionNeeded:
+						HUD.showDialog(get_parent().name.to_lower(), activeArea.actionId)
+						
+					# Open dialog		
+					elif activeArea.dialogId:
+						HUD.showDialog(get_parent().name.to_lower(), activeArea.dialogId)
+	#				else:
+	#					# Progress dialog
+	#					get_parent().get_node("HUD").loadDialog()
 			
 	if Input.is_action_pressed("ui_up"):		
 		if global.next_scene != "" && global.next_scene != null:
@@ -83,3 +87,7 @@ func _on_Area2D_area_exited(area):
 	global.next_scene = "";
 	
 	$ThoughtBubble.hide();
+
+
+func _on_HUD_dialogFinished(id):
+	global.setState("default")
