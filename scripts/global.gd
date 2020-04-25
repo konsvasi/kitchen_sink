@@ -9,6 +9,7 @@ var Player = preload("res://scripts/Player.gd").new()
 # Used to handle interaction when dialog is open
 var isDialogOpen = false
 var state = "default"
+var DEBUG = true
 
 func _ready():
 	var root = get_tree().get_root();
