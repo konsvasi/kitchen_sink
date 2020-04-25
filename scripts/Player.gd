@@ -84,16 +84,18 @@ func dialog_open(dialogContent):
 func _on_Area2D_area_entered(area):
 	# First check if Area2d is a Portal or an Interactable Object
 	activeArea = area;
-	if area.type == "Portal":
-		global.next_scene = area.get("nextScene");
-	elif area.type == "Interactable_Object":
-		if area.dialogId:
-			# set animation for dialog though bubble
-			$ThoughtBubble.animation = 'dialog_interaction'
-		else:
-			# set animation for normal interaction
-			$ThoughtBubble.animation = 'interaction'
-		$ThoughtBubble.show();
+	if area.name == "InteractPoint":
+		print('inside InteractPoint')
+#	if area.type == "Portal":
+#		global.next_scene = area.get("nextScene");
+#	elif area.type == "Interactable_Object":
+#		if area.dialogId:
+#			# set animation for dialog though bubble
+#			$ThoughtBubble.animation = 'dialog_interaction'
+#		else:
+#			# set animation for normal interaction
+#			$ThoughtBubble.animation = 'interaction'
+#		$ThoughtBubble.show();
 
 func _on_Area2D_area_exited(area):
 	activeArea = "";

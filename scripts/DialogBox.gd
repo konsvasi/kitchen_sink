@@ -6,7 +6,8 @@ var index = 0
 var dialogId
 
 func _ready():
-	loadDialog()
+	pass
+#	loadDialog()
 
 func setDialog(dialogArray, dialogId):
 	dialog = dialogArray
@@ -19,7 +20,7 @@ func setId(id):
 	dialogId = id
 
 func loadDialog():
-	print('id: ', dialogId)
+	print('idx: ', index, ' dialog.size: ', dialog.size())
 	if index == dialog.size():
 		hide()
 		global.isDialogOpen = false

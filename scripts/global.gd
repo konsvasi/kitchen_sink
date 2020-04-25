@@ -41,6 +41,9 @@ func set_previous_scene(sceneName : String) -> void:
 func get_previous_scene() -> String:
 	return previous_scene.to_lower()
 
+func get_current_scene_name() -> String:
+	return current_scene.name.to_lower()
+
 # Doesn't really work, remove calls to this
 func wait(timeToWait : float) -> void:
 	yield(get_tree().create_timer(timeToWait), "timeout")

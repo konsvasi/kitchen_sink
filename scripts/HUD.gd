@@ -10,42 +10,42 @@ var menuDisabled = false
 func _ready():
 	pass # Replace with function body.
 
-func _input(event):
-	if !$InventoryMenu.visible:
-		if event.is_action_pressed('ui_open_menu') && !menuDisabled:
-			$Menu.toggleMenu()
-		
-		if Input.is_action_just_pressed("ui_interact"):
-			# get selected element
-			# transition to element menu scene
-			if $Notification.visible:
-				emit_signal("notificationClosed")
-				$Notification.hide()
-				get_tree().paused = false
-			
-			print('idx', $Dialogbox.index)
-			if global.getState() == "dialog":
-				loadDialog()	
-				
-			if $Menu.visible:
-				if index == 0:
-					self.set_process_unhandled_key_input(false)
-					$InventoryMenu.updateItems()
-					
-		
-		if event.is_action_pressed('ui_down'):
-			index += 1
-			
-			if index == menuOptions.size():
-				index = 0
-			$Menu.selectOption(index)
-		
-		if event.is_action_pressed('ui_up'):
-			index = index - 1
-			
-			if index < 0:
-				index = menuOptions.size() - 1
-			$Menu.selectOption(index)	
+	
+#func _input(event):
+#	if !$InventoryMenu.visible:
+#		if event.is_action_pressed('ui_open_menu') && !menuDisabled:
+#			$Menu.toggleMenu()
+#
+#		if Input.is_action_just_pressed("ui_interact"):
+#			# get selected element
+#			# transition to element menu scene
+#			if $Notification.visible:
+#				emit_signal("notificationClosed")
+#				$Notification.hide()
+#				get_tree().paused = false
+#
+#			if global.getState() == "dialog":
+#				loadDialog()	
+#
+#			if $Menu.visible:
+#				if index == 0:
+#					self.set_process_unhandled_key_input(false)
+#					$InventoryMenu.updateItems()
+#
+#
+#		if event.is_action_pressed('ui_down'):
+#			index += 1
+#
+#			if index == menuOptions.size():
+#				index = 0
+#			$Menu.selectOption(index)
+#
+#		if event.is_action_pressed('ui_up'):
+#			index = index - 1
+#
+#			if index < 0:
+#				index = menuOptions.size() - 1
+#			$Menu.selectOption(index)	
 
 func disableMenu():
 	menuDisabled = true
@@ -70,6 +70,9 @@ func showDialog(currentScene, dialogId):
 func loadDialog():
 	$Dialogbox.loadDialog()
 
+func isDialogOpen():
+	return $Dialogbox.visible
+	
 func _on_Dialogbox_dialogFinished(finishedDialogId):
 	global.setState("default")
 	emit_signal("dialogFinished", finishedDialogId)

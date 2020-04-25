@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scripts/World.gd" type="Script" id=1]
 [ext_resource path="res://environment/house.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://environment/mountains.png" type="Texture" id=6]
 [ext_resource path="res://environment/city-bg-small.png" type="Texture" id=7]
 [ext_resource path="res://scenes/HUD.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/InteractPoint.tscn" type="PackedScene" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 747.979, 10 )
@@ -83,3 +84,7 @@ position = Vector2( 1389.43, -0.157928 )
 shape = SubResource( 2 )
 
 [node name="HUD" parent="." instance=ExtResource( 8 )]
+
+[node name="InteractPoint" parent="." instance=ExtResource( 9 )]
+position = Vector2( 469.378, 55.5927 )
+isDialogInteraction = true
