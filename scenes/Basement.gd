@@ -1,7 +1,7 @@
 extends Node2D
 
 var villainScene = preload("res://scenes/Villain.tscn")
-var interact_points = []
+onready var interact_points = get_tree().get_nodes_in_group('interact_point_action_needed')
 
 func _ready():
 	HUD.connect("dialogFinished", self, "_on_HUD_dialogFinished")
@@ -15,7 +15,7 @@ func _ready():
 			add_child(villain)
 			villain.get_node("KinematicBody2D/AnimationPlayer").play("float_idle")
 			$PrefightTrigger/CollisionShape2D.disabled = false
-	interact_points = get_tree().get_nodes_in_group('interact_point')
+
 	updateInteractPoints('special_mushrooms')
 	# set action needed items
 	if PlayerVariables.usedKeyItems.has("special_mushrooms"):
@@ -37,7 +37,6 @@ func _on_PrefightTrigger_body_exited(body):
 
 
 func _on_HUD_dialogFinished(id):
-	print("id", id)
 	match id:
 		"intro":
 			global.setState("default")

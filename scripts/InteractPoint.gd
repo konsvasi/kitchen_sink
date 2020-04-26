@@ -12,3 +12,4 @@ const type = 'interact_point'
 func _ready():
 	if actionId:
 		actionNeeded = true
+		add_to_group("interact_point_action_needed")
