@@ -89,5 +89,5 @@ func resetDialogPosition():
 	$BottomDialogContainer.add_child(dialogBox)
 	
 func _on_Dialogbox_dialogFinished(finishedDialogId):
-	global.setState("default")
+#	global.setState("default")
 	emit_signal("dialogFinished", finishedDialogId)

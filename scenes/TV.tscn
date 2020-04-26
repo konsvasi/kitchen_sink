@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://scenes/TV.gd" type="Script" id=1]
 [ext_resource path="res://environment/tv-background.png" type="Texture" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://utils/light.png" type="Texture" id=6]
 [ext_resource path="res://items/hot_sauce.png" type="Texture" id=7]
 [ext_resource path="res://utils/tv_remote.png" type="Texture" id=8]
-[ext_resource path="res://scenes/HUD.tscn" type="PackedScene" id=9]
 [ext_resource path="res://utils/infrared_active.png" type="Texture" id=11]
 [ext_resource path="res://utils/infrared.png" type="Texture" id=12]
 [ext_resource path="res://environment/table.png" type="Texture" id=14]
@@ -104,6 +103,7 @@ material = SubResource( 3 )
 position = Vector2( 642.937, 355.553 )
 scale = Vector2( 11.8421, 7.64045 )
 frames = SubResource( 4 )
+frame = 1
 playing = true
 
 [node name="Light2D" type="Light2D" parent="TVMain"]
@@ -178,12 +178,8 @@ shape = SubResource( 11 )
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="TVMain/TVRemote"]
 position = Vector2( 374.4, 433.371 )
 scale = Vector2( 5.25143, 11.6971 )
-
-[node name="HUD" parent="." instance=ExtResource( 9 )]
 [connection signal="area_entered" from="TVMain/InfraredPoint" to="." method="_on_InfraredPoint_area_entered"]
 [connection signal="area_exited" from="TVMain/InfraredPoint" to="." method="_on_InfraredPoint_area_exited"]
 [connection signal="tween_completed" from="TVMain/Tween" to="." method="_on_Tween_tween_completed"]
 [connection signal="timeout" from="TVMain/TripTimer" to="." method="_on_TripTimer_timeout"]
 [connection signal="screen_exited" from="TVMain/TVRemote/VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
-[connection signal="dialogFinished" from="HUD" to="." method="_on_HUD_dialogFinished"]
-[connection signal="notificationClosed" from="HUD" to="." method="_on_HUD_notificationClosed"]

@@ -7,7 +7,7 @@ func _ready():
 	HUD.connect("dialogFinished", self, "_on_HUD_dialogFinished")
 	match global.get_previous_scene():
 		"tv":
-			$Player.set_position($Couch.position)
+			$Player.set_position($couch_interact.position)
 			global.state = "default"
 		"doorminigame":
 			var villain = villainScene.instance()
@@ -17,13 +17,10 @@ func _ready():
 			$PrefightTrigger/CollisionShape2D.disabled = false
 
 	updateInteractPoints('special_mushrooms')
-	# set action needed items
-	if PlayerVariables.usedKeyItems.has("special_mushrooms"):
-		$Couch.actionNeeded = false
 	print('doorknob active?', Actions.getAction("doorknob_game_active"))
 	if Actions.getAction("doorknob_game_active"):
 		# Change to minigame scene
-		$DoorToHouse.nextScene = "res://scenes/DoorMiniGame.tscn"
+		$door_to_house_interact.transitionScene = "DoorMiniGame"
 
 func updateInteractPoints(itemId):
 	for point in interact_points:
