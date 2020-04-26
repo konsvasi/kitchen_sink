@@ -12,7 +12,6 @@ var quantity
 var description
 
 func _ready():
-	print(has_focus())
 	focus_mode = Control.FOCUS_ALL
 
 # Dictionary object with key for

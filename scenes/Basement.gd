@@ -4,11 +4,7 @@ var villainScene = preload("res://scenes/Villain.tscn")
 var interact_points = []
 
 func _ready():
-#	if global.get_previous_scene() == 'tv':
-#		$Player.set_position($Couch.position)
-	print(global.get_previous_scene())
 	HUD.connect("dialogFinished", self, "_on_HUD_dialogFinished")
-	global.previous_scene = "doorminigame"
 	match global.get_previous_scene():
 		"tv":
 			$Player.set_position($Couch.position)
@@ -20,7 +16,7 @@ func _ready():
 			villain.get_node("KinematicBody2D/AnimationPlayer").play("float_idle")
 			$PrefightTrigger/CollisionShape2D.disabled = false
 	interact_points = get_tree().get_nodes_in_group('interact_point')
-	updateInteractPoints('test_id')
+	updateInteractPoints('special_mushrooms')
 	# set action needed items
 	if PlayerVariables.usedKeyItems.has("special_mushrooms"):
 		$Couch.actionNeeded = false
@@ -31,7 +27,7 @@ func _ready():
 
 func updateInteractPoints(itemId):
 	for point in interact_points:
-		if itemId == point.actionId:
+		if itemId == point.actionId && PlayerVariables.hasUsed(itemId):
 			point.actionNeeded = false
 	
 

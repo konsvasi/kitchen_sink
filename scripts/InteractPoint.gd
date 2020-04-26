@@ -3,7 +3,12 @@ export (bool) var isDialogInteraction
 export (String) var dialogId
 export (bool) var isTransitionInteraction
 export (String) var transitionScene
+# Needed when Player needs to do something before 
+# being able to transition to next scene
+export (String) var actionId
+var actionNeeded
 const type = 'interact_point'
 
 func _ready():
-	pass # Replace with function body.
+	if actionId:
+		actionNeeded = true

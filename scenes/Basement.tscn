@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://environment/Basement.png" type="Texture" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/Interactable_object.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/InteractPoint.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/Basement.gd" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -25,24 +26,28 @@ position = Vector2( 10, 270 )
 collision_layer = 3
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+visible = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
 position = Vector2( 0.135254, 2.97549 )
 polygon = PoolVector2Array( 2.18174, 286.753, 17.7402, 286.753, 17.7402, 290.768, 26.7742, 290.768, 26.7742, 294.783, 35.9336, 294.658, 36.1846, 298.673, 21.2534, 298.422, 21.128, 294.658, 11.2157, 294.658, 11.3412, 290.392, 2.18174, 290.517 )
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
+visible = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D2"]
 position = Vector2( 33.5431, 16.0952 )
 polygon = PoolVector2Array( 2.18174, 286.753, 17.7402, 286.753, 17.7402, 290.768, 26.7742, 290.768, 26.5893, 294.86, 35.1103, 295.942, 36.1846, 298.673, 21.2534, 298.422, 21.128, 294.658, 11.2157, 294.658, 11.3412, 290.392, 2.18174, 290.517 )
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="."]
+visible = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D3"]
 position = Vector2( 66.6804, 28.6738 )
 polygon = PoolVector2Array( 2.24348, 287.692, 15.9042, 287.556, 17.7402, 290.768, 26.7742, 290.768, 26.7742, 294.783, 35.9336, 294.658, 36.1846, 298.673, 21.2534, 298.422, 21.128, 294.658, 11.2157, 294.658, 11.3412, 290.392, 2.18174, 290.517 )
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="."]
+visible = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D4"]
 polygon = PoolVector2Array( 103.008, 327.862, 113.152, 327.727, 113.152, 330.161, 103.143, 330.026 )
@@ -75,7 +80,7 @@ __meta__ = {
 shape = SubResource( 2 )
 
 [node name="Couch" parent="." instance=ExtResource( 3 )]
-position = Vector2( 194.623, 325.243 )
+position = Vector2( 231.284, 268.705 )
 areaName = "tv"
 transitionOnInteract = true
 actionNeeded = true
@@ -101,4 +106,10 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PrefightTrigger"]
 shape = SubResource( 3 )
 disabled = true
+
+[node name="couch_interact" parent="." instance=ExtResource( 4 )]
+position = Vector2( 197.265, 324.917 )
+isTransitionInteraction = true
+transitionScene = "TV"
+actionId = "special_mushrooms"
 [connection signal="body_exited" from="PrefightTrigger" to="." method="_on_PrefightTrigger_body_exited"]

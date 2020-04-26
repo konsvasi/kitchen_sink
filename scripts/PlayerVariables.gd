@@ -17,5 +17,4 @@ func setUsedKeyItem(itemId):
 	print('usedKeyItems', usedKeyItems)
 	
 func hasUsed(itemId):
-	# Get used key items
-	return true
+	return usedKeyItems.has(itemId)

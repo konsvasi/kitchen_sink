@@ -46,7 +46,14 @@ func _input(event):
 				if activeArea.isDialogInteraction:
 					HUD.showDialog(global.get_current_scene_name(), activeArea.dialogId)
 				elif activeArea.isTransitionInteraction:
-					global.go_to_sceneNew(activeArea.transitionScene)	
+					if !activeArea.actionId:
+						global.go_to_sceneNew(activeArea.transitionScene)
+					elif activeArea.actionId:
+						# check if action has been completed
+						if activeArea.actionNeeded:
+							HUD.showDialog(global.get_current_scene_name(), activeArea.actionId)
+						else:
+							print('transition to scene')
 	if states.in_dialog == state:
 		if Input.is_action_just_pressed("ui_interact"):
 			HUD.loadDialog()
