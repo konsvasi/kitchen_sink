@@ -41,11 +41,12 @@ func _input(event):
 	if states.idle == state:
 		if Input.is_action_just_pressed("ui_interact"):
 			var activeArea = parent.activeArea
-			print('actArea: ', activeArea.dialogId, ' scene ', global.get_current_scene_name())
+#			print('actArea: ', activeArea.dialogId, ' scene ', global.get_current_scene_name())
 			if activeArea && activeArea.type == "interact_point":
 				if activeArea.isDialogInteraction:
-					print('show dialog')
 					HUD.showDialog(global.get_current_scene_name(), activeArea.dialogId)
+				elif activeArea.isTransitionInteraction:
+					global.go_to_sceneNew(activeArea.transitionScene)	
 	if states.in_dialog == state:
 		if Input.is_action_just_pressed("ui_interact"):
 			HUD.loadDialog()

@@ -21,18 +21,40 @@ margin_bottom = 388.0
 [node name="InventoryMenu" parent="." instance=ExtResource( 3 )]
 visible = false
 
-[node name="Dialogbox" parent="." instance=ExtResource( 4 )]
-visible = false
-margin_left = -491.351
-margin_top = 563.098
-margin_right = 464.649
-margin_bottom = 714.098
-
 [node name="Notification" parent="." instance=ExtResource( 5 )]
 visible = false
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 6 )
+
+[node name="TopDialogContainer" type="Container" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -503.0
+margin_right = 508.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BottomDialogContainer" type="Container" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -489.0
+margin_top = -168.0
+margin_right = 464.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Dialogbox" parent="BottomDialogContainer" instance=ExtResource( 4 )]
+visible = false
+margin_left = -477.5
+margin_top = 8.0
+margin_right = 477.149
+margin_bottom = 163.0
 [connection signal="dialogFinished" from="." to="StateMachine" method="_on_HUD_dialogFinished"]
 [connection signal="hide" from="InventoryMenu" to="." method="_on_InventoryMenu_hide"]
-[connection signal="dialogFinished" from="Dialogbox" to="." method="_on_Dialogbox_dialogFinished"]
+[connection signal="dialogFinished" from="BottomDialogContainer/Dialogbox" to="." method="_on_Dialogbox_dialogFinished"]

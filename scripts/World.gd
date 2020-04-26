@@ -5,5 +5,5 @@ func _ready():
 	# Position player based on which scene the Player has come
 	if global.previous_scene != null:
 		if global.get_previous_scene() == "house_inside":
-			var houseInsidePortalPosition = get_node("Portal/CollisionShape2D").get_global_position()
+			var houseInsidePortalPosition = $HousePortal.get_global_position()
 			$Player.set_position(houseInsidePortalPosition)

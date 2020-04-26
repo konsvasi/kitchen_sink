@@ -6,6 +6,7 @@ var index = 0
 var menuOptions = ['Inventory', 'Options']
 var dialog = []
 var menuDisabled = false
+onready var dialogBox = $BottomDialogContainer/Dialogbox
 
 func _ready():
 	pass # Replace with function body.
@@ -59,19 +60,29 @@ func _on_InventoryMenu_hide():
 	$InventoryMenu.clearItems()
 	self.set_process_unhandled_key_input(true)
 
-func showDialog(currentScene, dialogId):
+func showDialog(currentScene, dialogId, position="down"):
+	if position == "up":
+		$BottomDialogContainer.remove_child(dialogBox)
+		$TopDialogContainer.add_child(dialogBox)
+		
+		
 	dialog = DialogContent.get_content(currentScene, dialogId)
-	$Dialogbox.setDialog(dialog, dialogId)
-	$Dialogbox.show()
+	dialogBox.setDialog(dialog, dialogId)
+	dialogBox.show()
 	global.isDialogOpen = true
 #	yield(get_tree().create_timer(0.1), "timeout")
 	global.setState("dialog")
 
 func loadDialog():
-	$Dialogbox.loadDialog()
+	dialogBox.loadDialog()
 
 func isDialogOpen():
-	return $Dialogbox.visible
+	return dialogBox.visible
+
+# Should be called when dialog was displayed in top position
+func resetDialogPosition():
+	$TopDialogContainer.remove_child(dialogBox)
+	$BottomDialogContainer.add_child(dialogBox)
 	
 func _on_Dialogbox_dialogFinished(finishedDialogId):
 	global.setState("default")
