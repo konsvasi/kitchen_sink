@@ -14,7 +14,7 @@ func _ready():
 	dialog.mouse_filter = Control.MOUSE_FILTER_PASS
 	if KeySceneItems.keySceneItems["desk"]["special_mushrooms"].taken:
 		$ShroomPack.queue_free()
-		dialog.setDialog(DialogContent.get_content("desk", "empty"))
+		HUD.showDialog("desk", "empty", "up")
 	else:
 		HUD.showDialog("desk", "main", "up")
 #		$Dialogbox.setDialog(DialogContent.get_content("desk", "main"))
@@ -43,7 +43,6 @@ func _input(event):
 		
 	
 func takeItemAndMove():
-	addItemToInventory("special_mushrooms");
 	velocity = (hidePosition - $KinematicBody2D.get_global_position()).normalized() * 200;
 	if (hidePosition - $KinematicBody2D.get_global_position()).length() > 5:
 		velocity = $KinematicBody2D.move_and_slide(velocity)
@@ -57,6 +56,7 @@ func addItemToInventory(itemId):
 	KeySceneItems.setTaken("desk", itemId)
 	
 func _on_ArmBackTimer_timeout():
+	addItemToInventory("special_mushrooms");
 	moveBack = true;
 
 func _on_Area2D_mouse_entered():

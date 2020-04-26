@@ -99,7 +99,6 @@ func _on_Area2D_area_exited(area):
 	activeArea = "";
 	activeOutArea = "";
 	global.next_scene = "";
-	
 	$ThoughtBubble.hide();
 
 

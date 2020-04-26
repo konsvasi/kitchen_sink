@@ -86,7 +86,6 @@ func getTransition(delta):
 func enterState(newState, oldState):
 	match newState:
 		states.idle:
-			print('you are in idle state')
 			parent.get_node("AnimatedSprite").play("idle")
 		states.in_dialog:
 			print('you are in dialog state')

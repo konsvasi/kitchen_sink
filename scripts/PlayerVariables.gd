@@ -11,6 +11,7 @@ func _ready():
 func setItem(itemId):
 #	print('item', ItemStore.getItem(itemId))
 	items[itemId] = ItemStore.getItem(itemId)
+	HUD.updateItems()
 
 func setUsedKeyItem(itemId):
 	usedKeyItems[itemId] = itemId

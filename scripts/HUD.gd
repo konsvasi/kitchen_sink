@@ -57,8 +57,9 @@ func showNotification(notificationId):
 	get_tree().paused = true
 	
 func _on_InventoryMenu_hide():
-	$InventoryMenu.clearItems()
-	self.set_process_unhandled_key_input(true)
+	pass
+#	$InventoryMenu.clearItems()
+#	self.set_process_unhandled_key_input(true)
 
 func showDialog(currentScene, dialogId, position="down"):
 	if position == "up":
@@ -79,6 +80,9 @@ func loadDialog():
 func isDialogOpen():
 	return dialogBox.visible
 
+func updateItems():
+	$InventoryMenu.updateItems()
+	
 # Should be called when dialog was displayed in top position
 func resetDialogPosition():
 	$TopDialogContainer.remove_child(dialogBox)

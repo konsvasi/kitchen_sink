@@ -65,6 +65,7 @@ margin_bottom = 175.084
 columns = 3
 
 [node name="ItemDescription" type="Label" parent="."]
+visible = false
 margin_left = 55.0
 margin_top = 535.0
 margin_right = 776.0
