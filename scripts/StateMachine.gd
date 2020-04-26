@@ -16,7 +16,9 @@ func _physics_process(delta):
 		
 		if transition != null:
 			setState(transition)
-
+	else:
+		print('false')
+		set_process(false)
 func stateLogic(delta):
 	pass
 

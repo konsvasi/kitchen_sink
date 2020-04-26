@@ -17,6 +17,8 @@ var isFromTripScene = false
 func _ready():
 	HUD.connect("dialogFinished", self, "_on_HUD_dialogFinished")
 	HUD.connect("notificationClosed", self, "_on_HUD_notificationClosed")
+	HUD.disableMenu()
+	
 	# debug purposes
 	if global.get_previous_scene() == 'tripscene':
 		isFromTripScene = true
@@ -34,7 +36,6 @@ func _ready():
 
 
 func _physics_process(_delta):
-	print('i am processing')
 	if canMoveRemote:
 		VELOCITY.y = randi() & GRAVITY
 		if Input.is_action_pressed("ui_right"):
