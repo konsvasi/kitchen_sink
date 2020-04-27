@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://utils/head.png" type="Texture" id=1]
 [ext_resource path="res://scripts/TripScene.gd" type="Script" id=2]
 [ext_resource path="res://environment/trippy_bg.png" type="Texture" id=3]
-[ext_resource path="res://scenes/HUD.tscn" type="PackedScene" id=4]
 [ext_resource path="res://environment/terry.png" type="Texture" id=5]
 [ext_resource path="res://environment/elf.png" type="Texture" id=6]
 [ext_resource path="res://shaders/background.shader" type="Shader" id=7]
@@ -53,8 +52,6 @@ one_shot = true
 
 [node name="EyeTween" type="Tween" parent="."]
 
-[node name="HUD" parent="." instance=ExtResource( 4 )]
-
 [node name="Terry" type="Sprite" parent="."]
 position = Vector2( 1036.31, 156.232 )
 scale = Vector2( 0.9, 0.9 )
@@ -69,6 +66,5 @@ texture = ExtResource( 6 )
 
 [node name="ElfTween" type="Tween" parent="Elf"]
 [connection signal="timeout" from="EyeTimer" to="." method="_on_EyeTimer_timeout"]
-[connection signal="dialogFinished" from="HUD" to="." method="_on_HUD_dialogFinished"]
 [connection signal="tween_completed" from="Terry/TerryTween" to="." method="_on_TerryTween_tween_completed"]
 [connection signal="tween_completed" from="Elf/ElfTween" to="." method="_on_ElfTween_tween_completed"]

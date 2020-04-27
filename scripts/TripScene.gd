@@ -12,10 +12,11 @@ func _ready():
 	$Elf.modulate.a = 0
 	$EyeLeft.modulate.a = 0
 	$EyeRight.modulate.a = 0
-	$HUD.disableMenu()
+	HUD.disableMenu()
+	HUD.connect("dialogFinished", self, "_on_HUD_dialogFinished")
 	MusicController.audioPlayer.pitch_scale = 0.7
 	yield(get_tree().create_timer(2.0), "timeout")
-	$HUD.showDialog("trip", "main")
+	HUD.showDialog("trip", "main")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -33,6 +34,11 @@ func _process(delta):
 		get_node("EyeLeft").set_modulate(new_color)
 		get_node("EyeRight").set_modulate(new_color)
 
+func _input(_event):
+	if Input.is_action_just_pressed("ui_interact"):
+		if HUD.isDialogOpen():
+			HUD.loadDialog()
+
 func stretchEyes():
 	$EyeTween.interpolate_property($EyeLeft, "rect_size", Vector2(64,35), Vector2(63, 280), 6, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$EyeTween.interpolate_property($EyeRight, "rect_size", Vector2(64,35), Vector2(63, 280), 6, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
@@ -47,7 +53,7 @@ func _on_EyeTimer_timeout():
 	colorEyes = true
 	stretchEyes()
 	yield(get_tree().create_timer(2.0), "timeout")
-	$HUD.showDialog("trip", "end")
+	HUD.showDialog("trip", "end")
 			
 func _on_HUD_dialogFinished(dialogId):
 	if dialogId == "main":
@@ -55,10 +61,10 @@ func _on_HUD_dialogFinished(dialogId):
 		$Elf/ElfTween.start()
 	
 	if dialogId == "elf":
-		$HUD.showDialog("trip", "human")
+		HUD.showDialog("trip", "human")
 	
 	if dialogId == "human":
-		$HUD.showDialog("trip", "elf_next")
+		HUD.showDialog("trip", "elf_next")
 	
 	if dialogId == "elf_next":
 		$Elf/ElfTween.interpolate_property($Elf, 'modulate', Color(1, 1, 1, 1), Color(1, 1, 1, 0), 3.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
@@ -81,11 +87,11 @@ func _on_HUD_dialogFinished(dialogId):
 
 func _on_TerryTween_tween_completed(object, key):
 	if firstTime:
-		$HUD.showDialog("trip", "take_it_easy")
+		HUD.showDialog("trip", "take_it_easy")
 		firstTime = false
 
 
 func _on_ElfTween_tween_completed(object, key):
 	if firstTimeElf:
-		$HUD.showDialog("trip", "elf")
+		HUD.showDialog("trip", "elf")
 		firstTimeElf = false

@@ -20,6 +20,9 @@ func _input(event):
 	if states.hud_inactive == state:
 		if Input.is_action_just_pressed("ui_open_menu") && !parent.menuDisabled:
 			menu.toggleMenu()
+#		elif Input.is_action_just_pressed("ui_interact"):
+#			if HUD.isDialogOpen():
+#				HUD.loadDialog()
 	elif states.hud_active == state:
 		if Input.is_action_just_pressed("ui_open_menu"):
 			menu.toggleMenu()
@@ -46,8 +49,6 @@ func _input(event):
 			parent.emit_signal("notificationClosed")
 			get_tree().paused = false
 			notification.hide()
-		else:
-			print('ELSE')
 			
 func getTransition(delta):
 	match state:

@@ -15,6 +15,9 @@ func _ready():
 			add_child(villain)
 			villain.get_node("KinematicBody2D/AnimationPlayer").play("float_idle")
 			$PrefightTrigger/CollisionShape2D.disabled = false
+		"characterintro":
+			$Player.position = global.playerPosition
+			# Add timer and dialog
 
 	updateInteractPoints('special_mushrooms')
 	print('doorknob active?', Actions.getAction("doorknob_game_active"))
@@ -42,5 +45,6 @@ func _on_HUD_dialogFinished(id):
 		"name":
 			print('finished with name dialog')
 			yield(get_tree().create_timer(1.0), "timeout")
+			global.save_player_position($Player.get_global_position())
 			global.go_to_scene("res://Scenes/CharacterIntro.tscn")
 #			global.go_to_sceneNew("CharacterIntro")

@@ -25,6 +25,8 @@ func _physics_process(delta):
 func _input(event):
 	if event is InputEventMouseMotion || event is InputEventMouseButton:
 		get_viewport().unhandled_input(event)
+	elif Input.is_action_just_pressed("ui_interact"):
+		HUD.loadDialog()
 
 func _on_Area2D_mouse_entered():
 	move = true
