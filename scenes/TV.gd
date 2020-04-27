@@ -28,8 +28,6 @@ func _ready():
 		# return dialog
 		HUD.showDialog("tv", "return")
 	else:	
-#		Tween.interpolate_property($TVMain/Light2D, "texture_scale", 1, 2, 2, Tween.TRANS_SINE, Tween.EASE_IN)
-#		Tween.start()
 		HUD.showDialog("tv", "main")
 	# Disable menu in scene
 	HUD.disableMenu()
@@ -74,9 +72,18 @@ func _physics_process(_delta):
 ##			if $HUD/Dialogbox.visible:
 ##				$HUD/Dialogbox.loadDialog()
 func _input(event):
-	if HUD.isDialogOpen():
-		if Input.is_action_just_pressed("ui_interact"):
-			HUD.loadDialog()
+	if Input.is_action_just_pressed("ui_interact"):
+		if hasSignal:
+			if !isFromTripScene:
+				MusicController.play("res://audio/cup_of_tea.ogg")
+				resetRemote()
+			else:
+				resetRemote()
+				HUD.showDialog("tv", "music_playing")
+		else:
+			if HUD.isDialogOpen():
+				HUD.loadDialog()
+
 
 # TV Remote move code
 func move(direction):
@@ -102,6 +109,13 @@ func toggleTV() -> void:
 		$TVMain/TvContent.play("lofi-channel")
 		Tween.interpolate_property($TVMain/Light2D, "texture_scale", 1, 2, 2, Tween.TRANS_SINE, Tween.EASE_IN)
 		Tween.start()
+
+func resetRemote() -> void:
+	toggleTV()
+	canMoveRemote = false
+	VELOCITY.x = 0
+	yield(get_tree().create_timer(1.0), "timeout")
+	lowerRemoteControl = true
 	
 # ------- SIGNALS --------
 func _on_Tween_tween_completed(object, key):
