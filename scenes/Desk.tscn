@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scripts/Desk.gd" type="Script" id=1]
 [ext_resource path="res://environment/desk.png" type="Texture" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://items/pack_of_mushrooms.png" type="Texture" id=4]
 [ext_resource path="res://utils/arm.png" type="Texture" id=6]
 [ext_resource path="res://scenes/GoBackButton.tscn" type="PackedScene" id=7]
-[ext_resource path="res://scenes/DialogBox.tscn" type="PackedScene" id=8]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -84,16 +83,9 @@ margin_top = 416.744
 margin_right = 902.234
 margin_bottom = 464.744
 nextScene = "res://scenes/House_inside.tscn"
-
-[node name="Dialogbox" parent="." instance=ExtResource( 8 )]
-margin_left = -195.123
-margin_top = -209.376
-margin_right = 847.877
-margin_bottom = 51.6236
 [connection signal="tree_exited" from="." to="." method="_on_Desk_tree_exited"]
 [connection signal="input_event" from="ShroomPack/Area2D" to="." method="_on_Area2D_input_event"]
 [connection signal="mouse_entered" from="ShroomPack/Area2D" to="." method="_on_Area2D_mouse_entered"]
 [connection signal="mouse_exited" from="ShroomPack/Area2D" to="." method="_on_Area2D_mouse_exited"]
 [connection signal="timeout" from="ArmBackTimer" to="." method="_on_ArmBackTimer_timeout"]
 [connection signal="pressed" from="GoBackButton" to="." method="_on_GoBackButton_pressed"]
-[connection signal="tree_entered" from="Dialogbox" to="." method="_on_Dialogbox_tree_entered"]

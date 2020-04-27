@@ -80,26 +80,25 @@ func get_node_from_current_scene(nodeName):
 
 func dialog_open(dialogContent):
 	print(dialogContent)
+
+func getStateMachine():
+	return $PlayerStateMachine
 	
 func _on_Area2D_area_entered(area):
 	# First check if Area2d is a Portal or an Interactable Object
 	activeArea = area;
-	if area.type == "Portal":
-		global.next_scene = area.get("nextScene");
-	elif area.type == "Interactable_Object":
-		if area.dialogId:
-			# set animation for dialog though bubble
+	if area.type == 'interact_point':
+		if area.isDialogInteraction:
 			$ThoughtBubble.animation = 'dialog_interaction'
-		else:
-			# set animation for normal interaction
+		elif area.isTransitionInteraction:
 			$ThoughtBubble.animation = 'interaction'
-		$ThoughtBubble.show();
+		
+		$ThoughtBubble.show()
 
 func _on_Area2D_area_exited(area):
 	activeArea = "";
 	activeOutArea = "";
 	global.next_scene = "";
-	
 	$ThoughtBubble.hide();
 
 

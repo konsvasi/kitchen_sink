@@ -29,4 +29,5 @@ func _on_Tween_tween_completed(object, key):
 
 func _on_Alert_finished():
 	$Alert.stop()
-	print('previous scene ', global.get_previous_scene(), ' add scene change')
+	yield(get_tree().create_timer(1.0), "timeout")
+	global.go_to_sceneNew("basement")

@@ -11,11 +11,11 @@ func _ready():
 func setItem(itemId):
 #	print('item', ItemStore.getItem(itemId))
 	items[itemId] = ItemStore.getItem(itemId)
+	HUD.updateItems()
 
 func setUsedKeyItem(itemId):
 	usedKeyItems[itemId] = itemId
 	print('usedKeyItems', usedKeyItems)
 	
 func hasUsed(itemId):
-	# Get used key items
-	return true
+	return usedKeyItems.has(itemId)

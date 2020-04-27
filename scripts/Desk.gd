@@ -6,17 +6,18 @@ var moveBack = false;
 var positionToMove;
 var velocity = Vector2();
 const hidePosition = Vector2(330, 1210);
-onready var dialog = $Dialogbox
+onready var dialog = HUD.dialogBox
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 #	MusicController.play("res://audio/adventure_begins.ogg", -17.0)
-	$Dialogbox.mouse_filter = Control.MOUSE_FILTER_PASS
+	dialog.mouse_filter = Control.MOUSE_FILTER_PASS
 	if KeySceneItems.keySceneItems["desk"]["special_mushrooms"].taken:
 		$ShroomPack.queue_free()
-		$Dialogbox.setDialog(DialogContent.get_content("desk", "empty"))
+		HUD.showDialog("desk", "empty", "up")
 	else:
-		$Dialogbox.setDialog(DialogContent.get_content("desk", "main"))
+		HUD.showDialog("desk", "main", "up")
+#		$Dialogbox.setDialog(DialogContent.get_content("desk", "main"))
 
 	
 func _process(delta):
@@ -38,11 +39,10 @@ func _input(event):
 	if event is InputEventMouseMotion || event is InputEventMouseButton:
 		get_viewport().unhandled_input(event)
 	if Input.is_action_just_pressed("ui_interact"):
-		$Dialogbox.loadDialog()
+		HUD.loadDialog()
 		
 	
 func takeItemAndMove():
-	addItemToInventory("special_mushrooms");
 	velocity = (hidePosition - $KinematicBody2D.get_global_position()).normalized() * 200;
 	if (hidePosition - $KinematicBody2D.get_global_position()).length() > 5:
 		velocity = $KinematicBody2D.move_and_slide(velocity)
@@ -56,13 +56,13 @@ func addItemToInventory(itemId):
 	KeySceneItems.setTaken("desk", itemId)
 	
 func _on_ArmBackTimer_timeout():
+	addItemToInventory("special_mushrooms");
 	moveBack = true;
 
 func _on_Area2D_mouse_entered():
 	$YellowBorder.visible = true;
 	
 func _on_Area2D_mouse_exited():
-	print('exited')
 	$YellowBorder.visible = false;
 
 func _on_Area2D_input_event(viewport, event, shape_idx):
@@ -76,8 +76,10 @@ func _on_GoBackButton_pressed():
 
 
 func _on_Dialogbox_tree_entered():
-	$Dialogbox.setDialog(DialogContent.get_content("desk", "main"))
+	HUD.showDialog("desk", "main", "upper")
+#	$Dialogbox.setDialog(DialogContent.get_content("desk", "main"))
 
 
 func _on_Desk_tree_exited():
+	HUD.resetDialogPosition()
 	MusicController.stop()

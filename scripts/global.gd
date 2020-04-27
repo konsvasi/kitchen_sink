@@ -6,6 +6,7 @@ var previous_scene = 'default'
 var next_scene = null;
 var PlayerNode = preload("res://scenes/Player.tscn").instance()
 var Player = preload("res://scripts/Player.gd").new()
+var playerPosition = Vector2(0, 0)
 # Used to handle interaction when dialog is open
 var isDialogOpen = false
 var state = "default"
@@ -26,6 +27,9 @@ func go_to_sceneNew(nextSceneName : String) -> void:
 	set_previous_scene(get_tree().get_current_scene().get_name())
 	call_deferred("_deferred_goto_scene", formattedSceneName);
 
+func save_player_position(position: Vector2) -> void:
+	playerPosition = position
+
 func _deferred_goto_scene(path):
 	current_scene.free()
 	
@@ -39,7 +43,11 @@ func set_previous_scene(sceneName : String) -> void:
 	previous_scene = sceneName.to_lower();
 	
 func get_previous_scene() -> String:
+	print('prevScene:', previous_scene.to_lower())
 	return previous_scene.to_lower()
+
+func get_current_scene_name() -> String:
+	return current_scene.name.to_lower()
 
 # Doesn't really work, remove calls to this
 func wait(timeToWait : float) -> void:

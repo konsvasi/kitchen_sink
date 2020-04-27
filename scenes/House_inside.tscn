@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scripts/House_inside.gd" type="Script" id=1]
 [ext_resource path="res://environment/house_iniside.png" type="Texture" id=2]
@@ -6,8 +6,7 @@
 [ext_resource path="res://utils/white_noise_2.png" type="Texture" id=4]
 [ext_resource path="res://utils/white_noise_3.png" type="Texture" id=5]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scenes/Portal.tscn" type="PackedScene" id=7]
-[ext_resource path="res://scenes/Interactable_object.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/InteractPoint.tscn" type="PackedScene" id=9]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -63,34 +62,30 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Portal" parent="." instance=ExtResource( 7 )]
-position = Vector2( 180, 250 )
-areaName = "Door_outside"
-nextScene = "res://scenes/World.tscn"
-outArea = "Door to house"
-pathToScene = "World"
-
-[node name="fridge_door" parent="." instance=ExtResource( 8 )]
-position = Vector2( 49.1099, 242.565 )
-areaName = "fridge_door"
-transitionOnInteract = true
-nextScene = "res://scenes/Fridge.tscn"
-
-[node name="mushroom_on_desk" parent="." instance=ExtResource( 8 )]
-visible = false
-position = Vector2( 425.007, 234.266 )
-areaName = "mushroom_on_desk"
-transitionOnInteract = true
-nextScene = "res://scenes/Desk.tscn"
-
 [node name="respawn_from_desk_point" type="Node2D" parent="."]
 position = Vector2( 421.636, 241.542 )
 
-[node name="Interactable_object" parent="." instance=ExtResource( 8 )]
-position = Vector2( 530.794, 247.111 )
+[node name="PaintingDialog" parent="." instance=ExtResource( 9 )]
+position = Vector2( 531.682, 245.391 )
+isDialogInteraction = true
 dialogId = "painting"
 
-[node name="DoorToBasement" parent="." instance=ExtResource( 8 )]
-position = Vector2( 301.165, 245.107 )
-transitionOnInteract = true
-nextScene = "res://scenes/Basement.tscn"
+[node name="fridge_door_interact" parent="." instance=ExtResource( 9 )]
+position = Vector2( 48.5874, 243.211 )
+isTransitionInteraction = true
+transitionScene = "Fridge"
+
+[node name="door_outside_interact" parent="." instance=ExtResource( 9 )]
+position = Vector2( 183.779, 245.169 )
+isTransitionInteraction = true
+transitionScene = "World"
+
+[node name="door_to_basement_interact" parent="." instance=ExtResource( 9 )]
+position = Vector2( 301.668, 244.059 )
+isTransitionInteraction = true
+transitionScene = "Basement"
+
+[node name="mushroom_interact" parent="." instance=ExtResource( 9 )]
+position = Vector2( 423.393, 240.738 )
+isTransitionInteraction = true
+transitionScene = "Desk"

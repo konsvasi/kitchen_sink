@@ -6,7 +6,8 @@ var index = 0
 var dialogId
 
 func _ready():
-	loadDialog()
+	pass
+#	loadDialog()
 
 func setDialog(dialogArray, dialogId):
 	dialog = dialogArray
@@ -19,14 +20,15 @@ func setId(id):
 	dialogId = id
 
 func loadDialog():
-	print('id: ', dialogId)
+	print('idx: ', index, ' dialog.size: ', dialog.size())
+	var emit = false
 	if index == dialog.size():
 		hide()
 		global.isDialogOpen = false
-		emit_signal("dialogFinished", dialogId)
-		index = -1
+		emit = true
+#		index = -1
 
-	if index < dialog.size():
+	elif index < dialog.size() && index >= 0:
 		$RichTextLabel.bbcode_text = dialog[index]
 		$Tween.interpolate_property($RichTextLabel,
 			'percent_visible',
@@ -37,3 +39,5 @@ func loadDialog():
 		$Tween.start()
 	
 	index += 1
+	if emit:
+		emit_signal("dialogFinished", dialogId)

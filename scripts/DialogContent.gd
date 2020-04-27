@@ -12,7 +12,7 @@ func get_notification_content(notificationId):
 var content = {
 	"desk": {
 		"main": ['Ooh the mushrooms that B. left for me...', 'Time to triiiiiiip!!!!!'],
-		"empty": ['Such an empty desk']
+		"empty": ['Such an empty desk', 'I should probably head downstairs']
 	},
 	"house_inside": {
 		"painting": ['What a nice painting', 'Took me three years to make...']

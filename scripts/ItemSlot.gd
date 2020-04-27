@@ -12,7 +12,6 @@ var quantity
 var description
 
 func _ready():
-	print(has_focus())
 	focus_mode = Control.FOCUS_ALL
 
 # Dictionary object with key for
@@ -40,9 +39,9 @@ func useItem ():
 		
 		if isKeyItem(itemId):
 			print('current_scene name', get_tree().get_current_scene().get_name(), ' current scene ', get_tree().get_current_scene())
+			PlayerVariables.setUsedKeyItem(itemId)
 			if ItemStore.getItem(itemId).interactScene == get_tree().get_current_scene().get_name().to_lower():
 					get_tree().get_current_scene().updateInteractPoints(itemId)
-			PlayerVariables.setUsedKeyItem(itemId)
 		
 		queue_free()		
 

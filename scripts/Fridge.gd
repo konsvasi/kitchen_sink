@@ -17,7 +17,6 @@ func _input(event):
 	get_viewport().unhandled_input(event)
 
 func _on_Area2D_area_entered(area):
-	print('Entered: ', area)
 	activeArea = area;
 
 func takeItemById(id):

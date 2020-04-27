@@ -2,7 +2,7 @@ extends Panel
 
 var ItemSlot = load("res://scenes/ItemSlot.tscn")
 
-var heldItems = {}
+var heldItems = PlayerVariables.items
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
@@ -13,6 +13,8 @@ func _process(delta):
 		$EmptyInventoryMessage.hide()
 
 func loadItemSlots():
+	clearItems()
+	print('heldItems:', heldItems)
 	for item in heldItems:
 		var itemSlotInstance = ItemSlot.instance()
 		itemSlotInstance.setItemSlot(heldItems[item])
@@ -22,25 +24,35 @@ func loadItemSlots():
 		if $ItemContainer.get_child_count() > 0:
 			$ItemContainer.get_child(0).grab_focus()
 		else:
-			$EmptyInventoryMessage.show()	
+			$EmptyInventoryMessage.show()
 			
-func _unhandled_key_input(event):
-	if self.visible:
-		if Input.is_action_just_pressed("ui_interact"):
-	#		if ($ItemContainer.get_child_count() - 1 == 0):
-	#			print('doing nothing')
-	#			pass
-			print('interact', get_focus_owner().id)
-			if get_focus_owner():
-				if get_focus_owner().id == "item_slot":
-					$UseItemAudio.play()
-					get_focus_owner().useItem()
-					
-				if get_focus_owner().id == "back_button":
-					print('hide')
-					self.hide()	
+#func _unhandled_key_input(event):
+#	if self.visible:
+#		if Input.is_action_just_pressed("ui_interact"):
+#	#		if ($ItemContainer.get_child_count() - 1 == 0):
+#	#			print('doing nothing')
+#	#			pass
+##			print('interact', get_focus_owner().id)
+#			if get_focus_owner():
+#				if get_focus_owner().id == "item_slot":
+#					$UseItemAudio.play()
+#					get_focus_owner().useItem()
+#
+#				if get_focus_owner().id == "back_button":
+#					print('hide')
+#					self.hide()	
 
+func handleInput():
+	if get_focus_owner():
+#		print('interact inventory', get_focus_owner().id)`
+		if get_focus_owner().id == "item_slot":
+			$UseItemAudio.play()
+			get_focus_owner().useItem()
+		elif get_focus_owner().id == "back_button":
+			self.hide()	
+			
 func on_update_description(value):
+	$ItemDescription.show()
 	$ItemDescription.text = value
 	
 func _on_BackButton_pressed():
@@ -52,13 +64,12 @@ func _on_ItemContainer_sort_children():
 		$ItemContainer.get_child(0).grab_focus()
 	else:
 		$EmptyInventoryMessage.show()
+		$ItemDescription.hide()
 		# give focus to back button
 		$BackButton.grab_focus()
 
 func updateItems():
-	heldItems = PlayerVariables.items
 	loadItemSlots()
-	self.show()
 
 func clearItems():
 	for child in $ItemContainer.get_children():
