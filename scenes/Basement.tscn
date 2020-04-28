@@ -103,4 +103,7 @@ actionId = "special_mushrooms"
 position = Vector2( 9.74354, 279.802 )
 isTransitionInteraction = true
 transitionScene = "House_inside"
+
+[node name="VillainFightPosition" type="Position2D" parent="."]
+position = Vector2( 585.013, 314.874 )
 [connection signal="body_exited" from="PrefightTrigger" to="." method="_on_PrefightTrigger_body_exited"]

@@ -10,14 +10,14 @@ func _ready():
 			$Player.set_position($couch_interact.position)
 			global.state = "default"
 		"doorminigame":
-			var villain = villainScene.instance()
-			villain.position = $VillainStartPosition.position
-			add_child(villain)
-			villain.get_node("KinematicBody2D/AnimationPlayer").play("float_idle")
+			positionVillain()
 			$PrefightTrigger/CollisionShape2D.disabled = false
 		"characterintro":
+			positionVillain()
 			$Player.position = global.playerPosition
 			# Add timer and dialog
+			yield(get_tree().create_timer(0.5), "timeout")
+			HUD.showDialog("basement", "sense")
 
 	updateInteractPoints('special_mushrooms')
 	print('doorknob active?', Actions.getAction("doorknob_game_active"))
@@ -36,6 +36,12 @@ func _on_PrefightTrigger_body_exited(body):
 	HUD.showDialog("basement", "intro")
 
 
+func positionVillain():
+	var villain = villainScene.instance()
+	villain.position = $VillainStartPosition.position
+	add_child(villain)
+	villain.get_node("KinematicBody2D/AnimationPlayer").play("float_idle")
+	
 func _on_HUD_dialogFinished(id):
 	match id:
 		"intro":
@@ -43,8 +49,23 @@ func _on_HUD_dialogFinished(id):
 			$PrefightTrigger.queue_free()
 			HUD.showDialog("basement", "name")
 		"name":
-			print('finished with name dialog')
 			yield(get_tree().create_timer(1.0), "timeout")
 			global.save_player_position($Player.get_global_position())
 			global.go_to_scene("res://Scenes/CharacterIntro.tscn")
-#			global.go_to_sceneNew("CharacterIntro")
+		"sense":
+			yield(get_tree().create_timer(0.3), "timeout")
+			HUD.showDialog("basement", "explanation")
+		"explanation":
+			yield(get_tree().create_timer(0.3), "timeout")
+			HUD.showDialog("basement", "lose")
+		"lose":
+			yield(get_tree().create_timer(0.3), "timeout")
+			HUD.showDialog("basement", "explanation_continued")
+		"explanation_continued":
+			yield(get_tree().create_timer(0.3), "timeout")
+			HUD.showDialog("basement", "fight_question")
+		"fight_question":
+			yield(get_tree().create_timer(0.3), "timeout")
+			HUD.showDialog("basement", "brain")
+		"brain":
+			print('move Zong to fight area')

@@ -20,7 +20,25 @@ var content = {
 	"basement": {
 		"special_mushrooms": ['I think I should eat the mushrooms before watching TV...'],
 		"intro": ['Who are you?', 'How did you get in here?'],
-		"name": ['Don\'t know me?', 'I\'m Zong, son of no one']
+		"name": ['Don\'t know me?', 'I\'m Zong, son of no one'],
+		"sense": ['This doesn\'t make any sense'],
+		"explanation": ['It will make sense in a bit, Momo...',
+			'you see, you didn\'t just consume some magic mushrooms.',
+			'What you had the fortune to eat where mushrooms of the purest form, sacred artifacts, the symbol of our civilization.',
+			'Tales tell that the mushroom chooses who will consume it and by the way it also says',
+			'that during your trip you\'ll have to fight me',
+			'Find a way to beat me and you\'ll be preciously awarded.'
+		],
+		"lose": ['And if I lose? What happens then?'],
+		"explanation_continued": ['If you lose, you\'ll be stuck in an eternal trip.'],
+		"fight_question": ['How should I fight you?',
+			'I don\'t have anything, you sure look more prepared than me.',
+			'This is unfair...'],
+		"brain": ['Nonsense, you\'ve been born with the strongest weapon to ever exist...',
+			'Your brain...',
+			'with it your options are limitless.',
+			'Now let us start!!!']
+		
 	},
 	"tv": {
 		"main": ['Let\'s put some music videos...', 'wait first I have to turn on the TV...'],

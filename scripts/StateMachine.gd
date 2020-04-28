@@ -8,7 +8,6 @@ var states = {}
 onready var parent = get_parent()
 
 func _physics_process(delta):
-	print('myState', state)
 	if state != null:
 		stateLogic(delta)
 		# Returns a new state if a transition occurs

@@ -52,7 +52,7 @@ __meta__ = {
 [node name="Dialogbox" parent="BottomDialogContainer" instance=ExtResource( 4 )]
 visible = false
 margin_left = -477.5
-margin_top = 8.0
+margin_top = -5.0
 margin_right = 477.149
 margin_bottom = 163.0
 [connection signal="dialogFinished" from="." to="StateMachine" method="_on_HUD_dialogFinished"]
