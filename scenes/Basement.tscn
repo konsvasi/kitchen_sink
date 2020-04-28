@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://environment/Basement.png" type="Texture" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
@@ -12,6 +12,11 @@ extents = Vector2( 421.333, 10 )
 extents = Vector2( 10, 170 )
 
 [sub_resource type="RectangleShape2D" id=3]
+
+[sub_resource type="Curve2D" id=4]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 4.79242, -8.86993, 0, 0, 0, 0, 17.7803, -21.3075, -15.9093, 11.5205, 15.9093, -11.5205, 46.948, -40.7893, -25.0546, 8.79507, 25.0546, -8.79507, 130.208, -75.8424, -30.5382, -1.88508, 30.5382, 1.88508, 186.76, -93.1851, 0, 0, 0, 0, 226.347, -79.6125, 0, 0, 0, 0, 268.949, -55.1065, 0, 0, 0, 0, 294.586, -27.9614, 20.2126, 20.2126, -20.2126, -20.2126, 308.159, -0.439331 )
+}
 
 [node name="Basement" type="Node2D"]
 script = ExtResource( 5 )
@@ -106,4 +111,12 @@ transitionScene = "House_inside"
 
 [node name="VillainFightPosition" type="Position2D" parent="."]
 position = Vector2( 585.013, 314.874 )
+
+[node name="VillainPath" type="Path2D" parent="."]
+position = Vector2( 269.421, 309.87 )
+curve = SubResource( 4 )
+
+[node name="PathToFollow" type="PathFollow2D" parent="VillainPath"]
+position = Vector2( 4.79242, -8.86993 )
+rotate = false
 [connection signal="body_exited" from="PrefightTrigger" to="." method="_on_PrefightTrigger_body_exited"]

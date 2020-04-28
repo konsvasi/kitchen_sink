@@ -1,6 +1,7 @@
 extends Node2D
 
 var villainScene = preload("res://scenes/Villain.tscn")
+var villain
 onready var interact_points = get_tree().get_nodes_in_group('interact_point_action_needed')
 
 func _ready():
@@ -37,9 +38,10 @@ func _on_PrefightTrigger_body_exited(body):
 
 
 func positionVillain():
-	var villain = villainScene.instance()
-	villain.position = $VillainStartPosition.position
-	add_child(villain)
+	villain = villainScene.instance()
+#	villain.position = $VillainStartPosition.position
+	$VillainPath/PathToFollow.add_child(villain)
+#	add_child(villain)
 	villain.get_node("KinematicBody2D/AnimationPlayer").play("float_idle")
 	
 func _on_HUD_dialogFinished(id):
@@ -68,4 +70,4 @@ func _on_HUD_dialogFinished(id):
 			yield(get_tree().create_timer(0.3), "timeout")
 			HUD.showDialog("basement", "brain")
 		"brain":
-			print('move Zong to fight area')
+			villain.moveOnPath($VillainPath/PathToFollow)
