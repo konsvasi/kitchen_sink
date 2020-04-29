@@ -80,3 +80,5 @@ func _on_WallTrigger_body_entered(body):
 			border.get_node("CollisionShape").set_deferred("disabled", false)
 		border.show()
 	$WallTrigger.queue_free()
+	yield(get_tree().create_timer(0.5), "timeout")
+	HUD.showDialog("basement", "begin")

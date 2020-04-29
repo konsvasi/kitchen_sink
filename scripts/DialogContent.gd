@@ -47,7 +47,8 @@ var content = {
 		"brain": ['Nonsense, you\'ve been born with the strongest weapon to ever exist...',
 			'Your brain...',
 			'with it your options are limitless.',
-			'Now let us start!!!']
+			'Now let us start!!!'],
+		"begin": ['So let the fight begin.']
 		
 	},
 	"tv": {
@@ -94,7 +95,8 @@ var dialog_names = {
 		"lose": names.you,
 		"explanation_continued": names.zong,
 		"fight_question": names.you,
-		"brain": names.zong
+		"brain": names.zong,
+		"begin": names.zong
 		
 	},
 	"tv": {
