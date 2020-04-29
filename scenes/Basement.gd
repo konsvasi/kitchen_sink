@@ -71,3 +71,12 @@ func _on_HUD_dialogFinished(id):
 			HUD.showDialog("basement", "brain")
 		"brain":
 			villain.moveOnPath($VillainPath/PathToFollow)
+
+
+func _on_WallTrigger_body_entered(body):
+	var borders = get_tree().get_nodes_in_group("borders")
+	for border in get_tree().get_nodes_in_group("borders"):
+		if border.get_node("CollisionShape"):
+			border.get_node("CollisionShape").set_deferred("disabled", false)
+		border.show()
+	$WallTrigger.queue_free()

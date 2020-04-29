@@ -86,12 +86,13 @@ func getStateMachine():
 	
 func _on_Area2D_area_entered(area):
 	# First check if Area2d is a Portal or an Interactable Object
-	activeArea = area;
-	if area.type == 'interact_point':
-		if area.isDialogInteraction:
-			$ThoughtBubble.animation = 'dialog_interaction'
-		elif area.isTransitionInteraction:
-			$ThoughtBubble.animation = 'interaction'
+	activeArea = area
+	if 'type' in area:
+		if area.type == 'interaction_point':
+			if area.isDialogInteraction:
+				$ThoughtBubble.animation = 'dialog_interaction'
+			elif area.isTransitionInteraction:
+				$ThoughtBubble.animation = 'interaction'
 		
 		$ThoughtBubble.show()
 

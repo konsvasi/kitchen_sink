@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://environment/Basement.png" type="Texture" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://shaders/trip.shader" type="Shader" id=3]
 [ext_resource path="res://scenes/InteractPoint.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/Basement.gd" type="Script" id=5]
+[ext_resource path="res://utils/wall.png" type="Texture" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 421.333, 10 )
@@ -18,11 +20,25 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 7.26428, -22.3114, -15.9093, 11.5205, 15.9093, -11.5205, 46.948, -40.7893, -25.0546, 8.79507, 25.0546, -8.79507, 130.208, -75.8424, -30.5382, -1.88508, 30.5382, 1.88508, 186.76, -93.1851, 0, 0, 0, 0, 226.347, -79.6125, 0, 0, 0, 0, 268.949, -55.1065, 0, 0, 0, 0, 294.586, -27.9614, 0, 0, 0, 0, 309.378, -21.8612 )
 }
 
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 6.98309, 9.18872 )
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = ExtResource( 3 )
+shader_param/color = null
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 16.7084, 77.0855 )
+
+[sub_resource type="ShaderMaterial" id=8]
+shader = ExtResource( 3 )
+shader_param/color = null
+
 [node name="Basement" type="Node2D"]
 script = ExtResource( 5 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 330, 170 )
+position = Vector2( 330, 169.775 )
 texture = ExtResource( 1 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
@@ -117,6 +133,45 @@ position = Vector2( 269.421, 309.87 )
 curve = SubResource( 4 )
 
 [node name="PathToFollow" type="PathFollow2D" parent="VillainPath"]
-position = Vector2( 4.79242, -8.86993 )
+position = Vector2( 7.26428, -22.3114 )
 rotate = false
+
+[node name="WallTrigger" type="Area2D" parent="."]
+position = Vector2( 426.426, 327.057 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallTrigger"]
+position = Vector2( 0, -4.05219 )
+shape = SubResource( 5 )
+
+[node name="BorderLeft" type="StaticBody2D" parent="." groups=[
+"borders",
+]]
+visible = false
+position = Vector2( 350.469, 311.028 )
+collision_layer = 2
+collision_mask = 3
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="BorderLeft"]
+material = SubResource( 6 )
+position = Vector2( -7.09134, -44.9118 )
+scale = Vector2( 1.44321, 2.87132 )
+texture = ExtResource( 6 )
+
+[node name="CollisionShape" type="CollisionShape2D" parent="BorderLeft"]
+position = Vector2( -0.900482, -53.3539 )
+shape = SubResource( 7 )
+disabled = true
+
+[node name="BorderRight" type="Sprite" parent="." groups=[
+"borders",
+]]
+visible = false
+material = SubResource( 8 )
+position = Vector2( 664.424, 266.116 )
+scale = Vector2( 1.54873, 2.87132 )
+texture = ExtResource( 6 )
 [connection signal="body_exited" from="PrefightTrigger" to="." method="_on_PrefightTrigger_body_exited"]
+[connection signal="body_entered" from="WallTrigger" to="." method="_on_WallTrigger_body_entered"]
