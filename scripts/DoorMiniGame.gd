@@ -82,3 +82,7 @@ func _on_SoundTimer_timeout():
 func _on_teleportSound_finished():
 	yield(get_tree().create_timer(1.0), "timeout")
 	HUD.showDialog("door", "sound")
+
+
+func _on_DoorMiniGame_tree_exited():
+	HUD.menuDisabled = false

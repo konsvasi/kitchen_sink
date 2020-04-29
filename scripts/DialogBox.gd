@@ -9,9 +9,10 @@ func _ready():
 	pass
 #	loadDialog()
 
-func setDialog(dialogArray, dialogId):
+func setDialog(dialogArray, dialogId, name):
 	dialog = dialogArray
 	self.dialogId = dialogId
+	$NameContainer/NameLabel.text = name
 	index = 0
 	print('dialog', dialog[0])
 	loadDialog()

@@ -68,7 +68,8 @@ func showDialog(currentScene, dialogId, position="down"):
 		
 		
 	dialog = DialogContent.get_content(currentScene, dialogId)
-	dialogBox.setDialog(dialog, dialogId)
+	var name = DialogContent.get_dialog_owner(currentScene, dialogId)
+	dialogBox.setDialog(dialog, dialogId, name)
 	dialogBox.show()
 	global.isDialogOpen = true
 #	yield(get_tree().create_timer(0.1), "timeout")

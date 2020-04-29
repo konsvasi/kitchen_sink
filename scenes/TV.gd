@@ -173,3 +173,7 @@ func _on_TripTimer_timeout():
 func _on_VisibilityNotifier2D_screen_exited():
 	if global.get_previous_scene() != 'tripscene':
 		HUD.showDialog("tv", "enjoying_the_music")
+
+
+func _on_TV_tree_exited():
+	HUD.menuDisabled = false

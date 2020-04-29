@@ -1,10 +1,20 @@
 extends Node
 
+var names = {
+	"you": "You",
+	"zong": "Zong",
+	"elf": "Elf",
+	"terry": "Terry"
+}
+
 func _ready():
 	pass
 
 func get_content(currentScene, dialogId):
 	return content[currentScene][dialogId]
+
+func get_dialog_owner(currentScene, dialogId):
+	return dialog_names[currentScene][dialogId]
 
 func get_notification_content(notificationId):
 	return notification_content[notificationId]
@@ -65,4 +75,46 @@ var content = {
 var notification_content = {
 	"remote_minigame": "Move the remote by pressing w,a,s.\n When the sensor changes color press x",
 	"doorknob_minigame": "Click on the door knob to open the door."
+}
+
+var dialog_names = {
+	"desk": {
+		"main": names.you,
+		"empty": names.you
+	},
+	"house_inside": {
+		"painting": names.you
+	},
+	"basement": {
+		"special_mushrooms": names.you,
+		"intro": names.you,
+		"name": names.zong,
+		"sense": names.you,
+		"explanation": names.zong,
+		"lose": names.you,
+		"explanation_continued": names.zong,
+		"fight_question": names.you,
+		"brain": names.zong
+		
+	},
+	"tv": {
+		"main": names.you,
+		"enjoying_the_music": names.you,
+		"something_weird": names.you,
+		"return": names.you,
+		"music_playing": names.you
+	},
+	"trip": {
+		"main": names.you,
+		"take_it_easy": names.terry,
+		"elf": names.elf,
+		"elf_next": names.elf,
+		"human": names.you,
+		"end": names.you
+	},
+	"door": {
+		"move": names.you,
+		"out": names.you,
+		"sound": names.you
+	}
 }
