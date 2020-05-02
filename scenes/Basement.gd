@@ -6,6 +6,9 @@ onready var interact_points = get_tree().get_nodes_in_group('interact_point_acti
 
 func _ready():
 	HUD.connect("dialogFinished", self, "_on_HUD_dialogFinished")
+	if global.DEBUG:
+		global.previous_scene = "characterintro"
+		
 	match global.get_previous_scene():
 		"tv":
 			$Player.set_position($couch_interact.position)
@@ -21,7 +24,7 @@ func _ready():
 			HUD.showDialog("basement", "sense")
 
 	updateInteractPoints('special_mushrooms')
-	print('doorknob active?', Actions.getAction("doorknob_game_active"))
+
 	if Actions.getAction("doorknob_game_active"):
 		# Change to minigame scene
 		$door_to_house_interact.transitionScene = "DoorMiniGame"
@@ -71,6 +74,9 @@ func _on_HUD_dialogFinished(id):
 			HUD.showDialog("basement", "brain")
 		"brain":
 			villain.moveOnPath($VillainPath/PathToFollow)
+		"begin":
+			# Would be nice to show some fight intro screen
+			villain.get_node("VillainStateMachine").setState(1)
 
 
 func _on_WallTrigger_body_entered(body):

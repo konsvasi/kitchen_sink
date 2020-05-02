@@ -65,8 +65,6 @@ func enterState(newState, oldState):
 	match newState:
 		states.idle:
 			parent.get_node("AnimatedSprite").play("idle")
-		states.in_dialog:
-			print('you are in dialog state')
 
 func exitState(oldState, newState):
 	pass

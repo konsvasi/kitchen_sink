@@ -14,14 +14,13 @@ func setDialog(dialogArray, dialogId, name):
 	self.dialogId = dialogId
 	$NameContainer/NameLabel.text = name
 	index = 0
-	print('dialog', dialog[0])
 	loadDialog()
 	
 func setId(id):
 	dialogId = id
 
 func loadDialog():
-	print('idx: ', index, ' dialog.size: ', dialog.size())
+#	print('idx: ', index, ' dialog.size: ', dialog.size())
 	var emit = false
 	if index == dialog.size():
 		hide()

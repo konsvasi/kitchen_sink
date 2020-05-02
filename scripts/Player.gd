@@ -68,3 +68,9 @@ func _on_Area2D_area_exited(area):
 
 func _on_HUD_dialogFinished(id):
 	global.setState("default")
+
+
+func _on_Area2D_body_entered(body):
+	if 'nodeType' in body:
+		if body.nodeType == "damageNode":
+			body.applyDamage()
