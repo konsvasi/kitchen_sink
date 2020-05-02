@@ -14,3 +14,7 @@ func applyDamage():
 	return damage
 
 
+func _on_Area2D_body_entered(body):
+	print('hit floor', body)
+	if body is StaticBody2D:
+		emit_signal("attackFinished", "trample")

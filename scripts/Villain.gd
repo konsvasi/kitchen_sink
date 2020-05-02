@@ -7,9 +7,13 @@ var attacks = ['trample', 'charge', 'laser']
 var playerPos
 var trampleAttackCount = 0
 var isReturning = false
+var canAttack = true
 onready var boot = get_tree().current_scene.get_node("Boot")
 onready var basement = get_tree().current_scene
 var startPosition = Vector2(450, 132)
+
+signal trampleFinished
+
 
 func _ready():
 	boot.connect("attackFinished", self, "_on_trample_attack_finished")
@@ -31,6 +35,7 @@ func trample():
 #	var boot = get_tree().current_scene.get_node("Boot")
 #	print('Boot', boot)
 	# Get player position
+	canAttack = false
 	if trampleAttackCount <= 2:
 		playerPos = get_tree().current_scene.get_node("Player").get_global_position()
 	#	print('playerPos', playerPos)
@@ -41,6 +46,9 @@ func trample():
 	else:
 		isReturning = true
 		bootVelocity = (startPosition - boot.get_global_position()).normalized() * 70
+		print('Can attack now')
+		canAttack = true
+		emit_signal("trampleFinished")
 
 # Function called in delta
 func applyAttack():
@@ -55,6 +63,11 @@ func applyAttack():
 		yield(get_tree().create_timer(0.5), "timeout")
 		trample()
 
+func resetAttack(attackName : String) -> void:
+	if attackName == "trample":
+		boot.position = startPosition.position
+		bootVelocity = Vector2(0,0)
+	
 func showAura():
 	$KinematicBody2D/Aura.show()
 
