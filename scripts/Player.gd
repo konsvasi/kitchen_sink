@@ -1,7 +1,8 @@
 extends KinematicBody2D
 
 const SPEED = 60;
-const GRAVITY = 5;
+const GRAVITY = 75;
+const JUMP_FORCE = 65
 const FLOOR = Vector2(0, -1);
 export var health = 50;
 var items = {};
@@ -16,23 +17,6 @@ func _ready():
 	velocity.y = GRAVITY
 	HUD.connect("dialogFinished", self, "_on_HUD_dialogFinished")
 	
-#func _physics_process(delta):
-#	velocity.y += GRAVITY
-#	if global.getState() == "default":
-#		if Input.is_action_pressed("ui_right"):
-#			velocity.x = SPEED;
-#			$AnimatedSprite.play("walk_right");
-#		elif Input.is_action_pressed("ui_left"):
-#			velocity.x = -SPEED;
-#			$AnimatedSprite.play("walk_left");
-#		else:
-#			velocity.x = 0;
-#			$AnimatedSprite.play("idle");
-#
-#		velocity = move_and_slide(velocity, FLOOR)
-#	else:
-#		$AnimatedSprite.play("idle")
-
 func handleMovement(delta):
 #	print('direction:', -int(Input.is_action_pressed("ui_left")) + int(Input.is_action_pressed("ui_right")))
 	if Input.is_action_pressed("ui_right"):
@@ -45,35 +29,14 @@ func handleMovement(delta):
 		velocity.x = 0;
 #		$AnimatedSprite.play("idle");
 	
+	velocity.y += GRAVITY * delta
 #	velocity = move_and_slide(velocity, Vector2(0, 0))
 	
 func applyMovement():
 	move_and_slide(velocity, Vector2(0, 0))
-#func _input(event):
-#	if Input.is_action_just_pressed("ui_interact"):
-#		print('items:', PlayerVariables.items)
-#		if global.getState() == "default":
-#			if (activeArea is Area2D):
-#				if (activeArea.type == "Interactable_Object"):
-#					print(activeArea.actionNeeded, activeArea.name)
-#					if activeArea.transitionOnInteract && !activeArea.actionNeeded:
-#						global.go_to_scene(activeArea.nextScene)
-#					elif activeArea.transitionOnInteract && activeArea.actionNeeded:
-#						HUD.showDialog(get_parent().name.to_lower(), activeArea.actionId)
-#
-#					# Open dialog		
-#					elif activeArea.dialogId:
-#						HUD.showDialog(get_parent().name.to_lower(), activeArea.dialogId)
-#	#				else:
-#	#					# Progress dialog
-#	#					get_parent().get_node("HUD").loadDialog()
-#
-#	if Input.is_action_pressed("ui_up"):		
-#		if global.next_scene != "" && global.next_scene != null:
-#			global.previous_scene = get_tree().get_current_scene().name;
-#			global.go_to_scene(global.next_scene);
-		
-		
+
+func jump():
+	velocity.y = -JUMP_FORCE
 
 func get_node_from_current_scene(nodeName):
 	return 	get_tree().get_current_scene().get_node(nodeName)

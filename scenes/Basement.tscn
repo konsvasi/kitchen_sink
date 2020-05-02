@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://environment/Basement.png" type="Texture" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
@@ -6,6 +6,9 @@
 [ext_resource path="res://scenes/InteractPoint.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/Basement.gd" type="Script" id=5]
 [ext_resource path="res://utils/wall.png" type="Texture" id=6]
+[ext_resource path="res://utils/boot.png" type="Texture" id=7]
+[ext_resource path="res://shaders/fog.shader" type="Shader" id=8]
+[ext_resource path="res://utils/white_noise_1.png" type="Texture" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 421.333, 10 )
@@ -33,6 +36,11 @@ extents = Vector2( 16.7084, 77.0855 )
 [sub_resource type="ShaderMaterial" id=8]
 shader = ExtResource( 3 )
 shader_param/color = null
+
+[sub_resource type="ShaderMaterial" id=9]
+shader = ExtResource( 8 )
+shader_param/color = Vector3( 0.35, 0.48, 0.95 )
+shader_param/OCTAVES = 4
 
 [node name="Basement" type="Node2D"]
 script = ExtResource( 5 )
@@ -140,7 +148,7 @@ rotate = false
 position = Vector2( 426.426, 327.057 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallTrigger"]
-position = Vector2( 0, -4.05219 )
+position = Vector2( 0.25708, -4.05219 )
 shape = SubResource( 5 )
 
 [node name="BorderLeft" type="StaticBody2D" parent="." groups=[
@@ -173,5 +181,23 @@ material = SubResource( 8 )
 position = Vector2( 664.424, 266.116 )
 scale = Vector2( 1.54873, 2.87132 )
 texture = ExtResource( 6 )
+
+[node name="Boot" type="KinematicBody2D" parent="."]
+position = Vector2( 491.302, 95.8341 )
+
+[node name="Sprite" type="Sprite" parent="Boot"]
+position = Vector2( -2.43286, 0.888306 )
+scale = Vector2( 1.21869, 1.2724 )
+texture = ExtResource( 7 )
+
+[node name="BootCollisionShape" type="CollisionPolygon2D" parent="Boot"]
+visible = false
+polygon = PoolVector2Array( -41.6783, 54.7836, -23.5732, 40.7465, -10.0516, 31.6366, -9.69653, -15.5513, 31.4525, -15.2419, 31.59, 30.2386, 31.8765, 35.3378, 32.7358, 36.0254, 32.6213, 53.3857, 30.6733, 56.0212, 11.3076, 56.4223, 7.18243, 55.5629, 3.34369, 55.5056, -1.18259, 57.5682, -41.4608, 57.912, -43.2369, 57.9693 )
+
+[node name="fog" type="Sprite" parent="."]
+material = SubResource( 9 )
+position = Vector2( 329.794, 243.7 )
+scale = Vector2( 41.0893, 11.4919 )
+texture = ExtResource( 9 )
 [connection signal="body_exited" from="PrefightTrigger" to="." method="_on_PrefightTrigger_body_exited"]
 [connection signal="body_entered" from="WallTrigger" to="." method="_on_WallTrigger_body_entered"]
