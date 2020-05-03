@@ -207,6 +207,10 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boot/Area2D"]
 shape = SubResource( 9 )
 
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="Boot"]
+position = Vector2( -6.45033, 56.1111 )
+scale = Vector2( 3.73966, 0.334158 )
+
 [node name="fog" type="Sprite" parent="."]
 material = SubResource( 10 )
 position = Vector2( 331.223, 244.062 )

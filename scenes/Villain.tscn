@@ -71,3 +71,8 @@ align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 5.0
+[connection signal="trampleFinished" from="." to="VillainStateMachine" method="_on_Villain_trampleFinished"]
+[connection signal="timeout" from="AttackTimer" to="VillainStateMachine" method="_on_AttackTimer_timeout"]
