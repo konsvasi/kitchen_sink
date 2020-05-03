@@ -38,10 +38,10 @@ extents = Vector2( 16.7084, 77.0855 )
 shader = ExtResource( 3 )
 shader_param/color = null
 
-[sub_resource type="RectangleShape2D" id=10]
+[sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 15.7687, 0.682129 )
 
-[sub_resource type="ShaderMaterial" id=9]
+[sub_resource type="ShaderMaterial" id=10]
 shader = ExtResource( 8 )
 shader_param/color = Vector3( 0.35, 0.48, 0.95 )
 shader_param/OCTAVES = 4
@@ -205,10 +205,10 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boot/Area2D"]
-shape = SubResource( 10 )
+shape = SubResource( 9 )
 
 [node name="fog" type="Sprite" parent="."]
-material = SubResource( 9 )
+material = SubResource( 10 )
 position = Vector2( 331.223, 244.062 )
 scale = Vector2( 41.0893, 11.4919 )
 texture = ExtResource( 9 )

@@ -76,4 +76,3 @@ func _on_trample_attack_finished(attack : String):
 	yield(get_tree().create_timer(0.3), "timeout")
 	isReturning = true
 	bootVelocity = (startPosition - boot.get_global_position()).normalized() * 70
-	
