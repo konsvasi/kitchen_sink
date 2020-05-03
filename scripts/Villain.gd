@@ -30,6 +30,10 @@ func attack():
 	print('attackToPerform:', attackToPerform)
 	if attackToPerform == 'trample':
 		trample()
+	elif attackToPerform == 'charge':
+		charge()
+	elif attackToPerform == 'laser':
+		laser()
 
 func trample():
 	print('count: ', trampleAttackCount)
@@ -47,6 +51,18 @@ func trample():
 		yield(get_tree().create_timer(0.1), "timeout")
 		emit_signal("trampleFinished", "trample")
 		trampleAttackCount = 0
+
+func charge():
+	# get player position
+	# charge towards him
+	# if hit knockback player
+	pass
+
+func laser():
+	# get player position
+	# shoot laser for 3 seconds
+	# continuous damage to player if hit
+	pass
 
 # Function called in delta
 func applyAttack():
