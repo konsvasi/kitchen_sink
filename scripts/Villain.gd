@@ -14,6 +14,7 @@ var attackToPerform
 onready var boot = get_tree().current_scene.get_node("Boot")
 onready var basement = get_tree().current_scene
 onready var villainBody = $KinematicBody2D
+var bulletScene = preload("res://scenes/Bullet.tscn")
 var startPosition = Vector2(450, 132)
 
 signal trampleFinished
@@ -30,7 +31,7 @@ func moveOnPath(pathToFollow : PathFollow2D) -> void:
 	tween.start()
 
 func attack():
-	attackToPerform = attacks[1]
+	attackToPerform = attacks[2]
 	print('attackToPerform:', attackToPerform)
 	if attackToPerform == 'trample':
 		trample()
@@ -73,10 +74,11 @@ func charge():
 	# if hit knockback player
 
 func laser():
+	var bullet = bulletScene.instance()
+	add_child(bullet)
 	# get player position
 	# shoot laser for 3 seconds
 	# continuous damage to player if hit
-	pass
 
 # Probably not needed anymore
 func resetAttack(attackName : String) -> void:
