@@ -58,6 +58,11 @@ ui_open_menu={
  ]
 }
 
+[layer_names]
+
+2d_render/layer_1="hero"
+2d_render/layer_3="projectile"
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"

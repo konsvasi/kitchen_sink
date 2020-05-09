@@ -74,11 +74,14 @@ func charge():
 	# if hit knockback player
 
 func laser():
-	var bullet = bulletScene.instance()
-	add_child(bullet)
+	prepareBullet()
 	# get player position
 	# shoot laser for 3 seconds
 	# continuous damage to player if hit
+	
+func shootBullets():
+	var bullet = bulletScene.instance()
+	add_child(bullet)
 
 # Probably not needed anymore
 func resetAttack(attackName : String) -> void:
@@ -92,6 +95,17 @@ func showAura():
 func guard():
 	print('guarding')
 
+func prepareBullet():
+	$KinematicBody2D/Sprite/SpriteTween.interpolate_property(
+		$KinematicBody2D/Sprite, 
+		"modulate", 
+		Color(1.0,1.0,1.0), 
+		Color(0, 1.3, 1.5),1.0,
+		Tween.TRANS_LINEAR,
+		Tween.EASE_IN_OUT
+	)
+	$KinematicBody2D/Sprite/SpriteTween.start()
+	
 func _on_trample_attack_finished(attack : String):
 	yield(get_tree().create_timer(0.3), "timeout")
 	bootVelocity = (startPosition - boot.get_global_position()).normalized() * 70
@@ -103,3 +117,9 @@ func _on_boot_out():
 	bootVelocity = Vector2(0,0)
 	yield(get_tree().create_timer(0.5), "timeout")
 	trample()
+
+
+func _on_SpriteTween_tween_completed(object, key):
+	shootBullets()
+	$KinematicBody2D/Sprite.modulate = Color(1.0, 1.0, 1.0)
+	

@@ -1,17 +1,17 @@
 extends KinematicBody2D
 
-const SPEED = 60;
-const GRAVITY = 75;
+const SPEED = 60
+const GRAVITY = 75
 const JUMP_FORCE = 65
-const FLOOR = Vector2(0, -1);
-export var health = 50;
-var items = {};
-
-var velocity = Vector2();
-var insideDoor = false;
-var activeArea;
-var activeOutArea = "";
-var isMenuOpen = false;
+const FLOOR = Vector2(0, -1)
+export var health = 50
+var items = {}
+var velocity = Vector2()
+var insideDoor = false
+var activeArea
+var activeOutArea = ""
+var isMenuOpen = false
+var projectileDirection
 
 func _ready():
 	velocity.y = GRAVITY
@@ -35,17 +35,26 @@ func handleMovement(delta):
 func applyMovement():
 	move_and_slide(velocity, Vector2(0, 0))
 
+func stagger(delta):
+	print('staggering, please move')
+	move_and_collide(Vector2(-1,0) * SPEED * delta)
+
 func jump():
 	velocity.y = -JUMP_FORCE
 
 func get_node_from_current_scene(nodeName):
-	return 	get_tree().get_current_scene().get_node(nodeName)
+	return get_tree().get_current_scene().get_node(nodeName)
 
 func dialog_open(dialogContent):
 	print(dialogContent)
 
 func getStateMachine():
 	return $PlayerStateMachine
+
+func staggerAnimation():
+	$PlayerTween.interpolate_property(self, 'rotation_degrees', 0.0, -90.0, 1.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$PlayerTween.start()
+	$AnimatedSprite.modulate = Color(0.8, 0.2, 0.2)
 	
 func _on_Area2D_area_entered(area):
 	# First check if Area2d is a Portal or an Interactable Object
@@ -74,3 +83,5 @@ func _on_Area2D_body_entered(body):
 	if 'nodeType' in body:
 		if body.nodeType == "damageNode":
 			body.applyDamage()
+			projectileDirection = body.movement
+			$PlayerStateMachine.stagger()

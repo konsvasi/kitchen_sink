@@ -5,6 +5,7 @@ func _ready():
 	addState("in_dialog")
 	addState("idle")
 	addState("jumping")
+	addState("stagger")
 	call_deferred("setState", states.idle)
 	
 	if global.DEBUG:
@@ -41,6 +42,8 @@ func stateLogic(delta):
 	if [states.idle, states.walking].has(state):
 		parent.handleMovement(delta)
 		parent.applyMovement()
+	elif [states.stagger].has(state):
+		parent.stagger(delta)
 	getTransition(delta)
 
 func getTransition(delta):
@@ -60,11 +63,18 @@ func getTransition(delta):
 			parent.get_node("StateDebugLabel").set_text(str(state))
 			if !HUD.isDialogOpen():
 				return states.idle
-				
+		states.stagger:
+			parent.get_node("StateDebugLabel").set_text(str(state))
+			
 func enterState(newState, oldState):
 	match newState:
 		states.idle:
 			parent.get_node("AnimatedSprite").play("idle")
+		states.stagger:
+			parent.staggerAnimation()
 
 func exitState(oldState, newState):
 	pass
+
+func stagger():
+	call_deferred("setState", states.stagger)
