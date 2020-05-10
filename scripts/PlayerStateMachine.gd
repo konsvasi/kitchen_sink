@@ -6,6 +6,7 @@ func _ready():
 	addState("idle")
 	addState("jumping")
 	addState("stagger")
+	addState("guard")
 	call_deferred("setState", states.idle)
 	
 	if global.DEBUG:
@@ -29,6 +30,8 @@ func _input(event):
 							HUD.showDialog(global.get_current_scene_name(), activeArea.actionId)
 						else:
 							global.go_to_sceneNew(activeArea.transitionScene)
+		if Input.is_action_pressed("guard"):
+			call_deferred("setState", states.guard)
 		if Input.is_action_just_pressed("ui_accept"):
 			parent.jump()
 	if states.in_dialog == state:
@@ -37,9 +40,15 @@ func _input(event):
 	if states.walking == state:
 		if Input.is_action_just_pressed("ui_accept"):
 			parent.jump()
+		elif Input.is_action_pressed("guard"):
+			print('guard')
+			call_deferred("setState", states.guard)
+	if states.guard == state:
+		if Input.is_action_just_released("guard"):
+			call_deferred("setState", states.idle)
 
 func stateLogic(delta):
-	if [states.idle, states.walking].has(state):
+	if [states.idle, states.walking, states.guard].has(state):
 		parent.handleMovement(delta)
 		parent.applyMovement()
 	elif [states.stagger].has(state):
@@ -50,13 +59,13 @@ func getTransition(delta):
 	match state:
 		states.idle:
 #			print('state:', state)
-			parent.get_node("StateDebugLabel").set_text(str(state))
+			parent.get_node("StateDebugLabel").set_text("idle")
 			if parent.velocity.x != 0:
 				return states.walking
 			elif HUD.isDialogOpen():
 				return states.in_dialog
 		states.walking:
-			parent.get_node("StateDebugLabel").set_text(str(state))
+			parent.get_node("StateDebugLabel").set_text("walking")
 			if parent.velocity.x == 0:
 				return states.idle
 		states.in_dialog:
@@ -64,17 +73,22 @@ func getTransition(delta):
 			if !HUD.isDialogOpen():
 				return states.idle
 		states.stagger:
-			parent.get_node("StateDebugLabel").set_text(str(state))
-			
+			parent.get_node("StateDebugLabel").set_text("stagger")
+		states.guard:
+			parent.get_node("StateDebugLabel").set_text("guard")
 func enterState(newState, oldState):
 	match newState:
 		states.idle:
 			parent.get_node("AnimatedSprite").play("idle")
 		states.stagger:
 			parent.staggerAnimation()
+		states.guard:
+			parent.guard()
 
 func exitState(oldState, newState):
-	pass
+	match oldState:
+		states.guard:
+			parent.resetGuard()
 
 func stagger():
 	call_deferred("setState", states.stagger)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://character_sprites/idle.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://character_sprites/walk_left_2.png" type="Texture" id=9]
 [ext_resource path="res://character_sprites/walk_left_3.png" type="Texture" id=10]
 [ext_resource path="res://character_sprites/walk_left_4.png" type="Texture" id=11]
+[ext_resource path="res://utils/shield.png" type="Texture" id=12]
 [ext_resource path="res://scenes/ThoughtBubble.tscn" type="PackedScene" id=17]
 
 [sub_resource type="SpriteFrames" id=1]
@@ -38,7 +39,23 @@ height = 3.13357
 height = 15.6038
 
 [sub_resource type="Animation" id=4]
-resource_name = "stagger"
+resource_name = "guard"
+loop = true
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("Shield/ShieldSprite:region_rect")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 0, 0, 48, 48 ), Rect2( 48, 0, 48, 48 ), Rect2( 96, 0, 48, 48 ), Rect2( 144, 0, 48, 48 ), Rect2( 0, 0, 48, 48 ) ]
+}
+
+[sub_resource type="Animation" id=5]
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:modulate")
 tracks/0/interp = 1
@@ -74,7 +91,6 @@ position = Vector2( 0, 4.69777 )
 shape = SubResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 3 )
@@ -98,7 +114,25 @@ __meta__ = {
 [node name="StaggerTimer" type="Timer" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/stagger = SubResource( 4 )
+anims/guard = SubResource( 4 )
+anims/stagger = SubResource( 5 )
+
+[node name="Shield" type="Area2D" parent="."]
+visible = false
+collision_layer = 8
+collision_mask = 9
+
+[node name="ShieldSprite" type="Sprite" parent="Shield"]
+position = Vector2( 0, -7.88064 )
+texture = ExtResource( 12 )
+region_enabled = true
+region_rect = Rect2( 144, 0, 48, 48 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Shield"]
+polygon = PoolVector2Array( 13.4655, 15.7848, 16.1219, 14.3681, 20.1065, 10.2064, 23.2057, 3.5654, 23.914, -5.2007, 22.4087, -9.09675, 19.6638, -13.6126, 14.9708, -18.3056, 10.8091, -20.6078, -10.0878, -21.4933, -13.0099, -19.5452, -17.6143, -15.6492, -20.2707, -11.9302, -21.9531, -9.53948, -22.8385, -6.44035, -23.9896, -0.242098, -23.724, 2.67994, -22.5729, 6.31034, -19.3852, 11.6231, -14.9579, 14.9879, -13.3641, 16.139 )
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_Area2D_area_exited"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

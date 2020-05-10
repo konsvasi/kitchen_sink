@@ -44,6 +44,18 @@ func stagger(delta):
 
 func jump():
 	velocity.y = -JUMP_FORCE
+	
+func guard():
+#	$CollisionShape2D.set_deferred("disabled", true)
+#	$Area2D/CollisionShape2D.set_deferred("disabled", true)
+	$AnimationPlayer.play("guard")
+	$Shield.show()
+
+func resetGuard():
+	$AnimationPlayer.stop()
+	$Shield.hide()
+#	$CollisionShape2D.set_deferred("disabled", false)
+#	$Area2D/CollisionShape2D.set_deferred("disabled", false)
 
 func get_node_from_current_scene(nodeName):
 	return get_tree().get_current_scene().get_node(nodeName)
