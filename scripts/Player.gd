@@ -55,9 +55,7 @@ func getStateMachine():
 
 func staggerAnimation():
 	canWalkAgain = false
-#	$PlayerTween.interpolate_property(self, 'rotation_degrees', 0.0, -90.0, 1.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-#	$PlayerTween.start()
-	$AnimatedSprite.modulate = Color(0.8, 0.2, 0.2)
+	$AnimationPlayer.play("stagger")
 	velocity.x = -2 # should be the opposite direction of projectile
 	$StaggerTimer.start()
 	
