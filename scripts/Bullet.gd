@@ -13,7 +13,6 @@ func _ready():
 
 func _physics_process(delta):
 	movement = move_and_collide(velocity * delta)
-	print('transform', self.get_transform())
 
 func applyDamage():
 	destroy()

@@ -12,6 +12,8 @@ var activeArea
 var activeOutArea = ""
 var isMenuOpen = false
 var projectileDirection
+var canWalkAgain = false
+var friction = 0.1
 
 func _ready():
 	velocity.y = GRAVITY
@@ -30,14 +32,14 @@ func handleMovement(delta):
 #		$AnimatedSprite.play("idle");
 	
 	velocity.y += GRAVITY * delta
-#	velocity = move_and_slide(velocity, Vector2(0, 0))
 	
 func applyMovement():
 	move_and_slide(velocity, Vector2(0, 0))
 
 func stagger(delta):
-	print('staggering, please move')
-	move_and_collide(Vector2(-1,0) * SPEED * delta)
+	velocity.x = lerp(velocity.x, 0, friction)
+	move_and_collide(Vector2(velocity.x, 0) * SPEED * delta)
+	print('velocity', velocity)
 
 func jump():
 	velocity.y = -JUMP_FORCE
@@ -52,9 +54,12 @@ func getStateMachine():
 	return $PlayerStateMachine
 
 func staggerAnimation():
-	$PlayerTween.interpolate_property(self, 'rotation_degrees', 0.0, -90.0, 1.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$PlayerTween.start()
+	canWalkAgain = false
+#	$PlayerTween.interpolate_property(self, 'rotation_degrees', 0.0, -90.0, 1.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+#	$PlayerTween.start()
 	$AnimatedSprite.modulate = Color(0.8, 0.2, 0.2)
+	velocity.x = -2 # should be the opposite direction of projectile
+	$StaggerTimer.start()
 	
 func _on_Area2D_area_entered(area):
 	# First check if Area2d is a Portal or an Interactable Object
@@ -85,3 +90,9 @@ func _on_Area2D_body_entered(body):
 			body.applyDamage()
 			projectileDirection = body.movement
 			$PlayerStateMachine.stagger()
+			
+
+
+func _on_StaggerTimer_timeout():
+	$AnimatedSprite.modulate = Color(1, 1, 1)
+	$PlayerStateMachine.setState(2)

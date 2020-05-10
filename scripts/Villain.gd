@@ -111,7 +111,6 @@ func _on_trample_attack_finished(attack : String):
 	bootVelocity = (startPosition - boot.get_global_position()).normalized() * 70
 
 func _on_boot_out():
-	print('outside screen')
 	outsideScreen = true
 	isInAttack = false
 	bootVelocity = Vector2(0,0)
