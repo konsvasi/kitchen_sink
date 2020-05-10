@@ -18,7 +18,7 @@ var bulletScene = preload("res://scenes/Bullet.tscn")
 var startPosition = Vector2(450, 132)
 
 signal trampleFinished
-
+signal attackFinished
 
 func _ready():
 	boot.connect("attackFinished", self, "_on_trample_attack_finished")
@@ -75,13 +75,18 @@ func charge():
 
 func laser():
 	prepareBullet()
-	# get player position
-	# shoot laser for 3 seconds
-	# continuous damage to player if hit
 	
 func shootBullets():
 	var bullet = bulletScene.instance()
+	var bullet2 = bulletScene.instance()
+	var bullet3 = bulletScene.instance()
 	add_child(bullet)
+	yield(get_tree().create_timer(1.0),"timeout")
+	add_child(bullet2)
+	yield(get_tree().create_timer(1.0),"timeout")
+	add_child(bullet3)
+	yield(get_tree().create_timer(0.5),"timeout")
+	emit_signal("attackFinished", 'laser')
 
 # Probably not needed anymore
 func resetAttack(attackName : String) -> void:

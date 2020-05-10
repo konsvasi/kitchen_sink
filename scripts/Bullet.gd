@@ -1,13 +1,16 @@
 extends KinematicBody2D
 
 var nodeType = "damageNode"
-var velocity = Vector2()
+var velocity = Vector2.ZERO
+var testvelocity = Vector2.ZERO
 var damage = 5
 var angle
 var movement
 
 func _ready():
-	velocity.x = -80
+#	velocity.x = -80
+	var target = get_tree().current_scene.get_node("Player").get_global_position()
+	velocity = (target - self.get_global_position()).normalized() * 80
 	$AnimationPlayer.play("move")
 
 

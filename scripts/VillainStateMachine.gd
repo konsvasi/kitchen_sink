@@ -4,6 +4,7 @@ var canAttack = false
 
 func _ready():
 	parent.connect("trampleFinished", self, "_on_attack_finished")
+	parent.connect("attackFinished", self, "_on_attack_finished")
 	addState("idle")
 	addState("fight")
 	addState("attack")
@@ -52,5 +53,10 @@ func _on_Villain_trampleFinished(attackName : String):
 	parent.get_node("AttackTimer").start()
 	
 
+func _on_attack_finished(attackName: String):
+	print('finished: ', attackName)
+	call_deferred("setState", states.idle)
+	parent.get_node("AttackTimer").start()
+	
 func _on_AttackTimer_timeout():
 	canAttack = true

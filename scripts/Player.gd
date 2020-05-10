@@ -20,6 +20,7 @@ func _ready():
 	HUD.connect("dialogFinished", self, "_on_HUD_dialogFinished")
 	
 func handleMovement(delta):
+	velocity.y += GRAVITY * delta
 #	print('direction:', -int(Input.is_action_pressed("ui_left")) + int(Input.is_action_pressed("ui_right")))
 	if Input.is_action_pressed("ui_right"):
 		velocity.x = SPEED;
@@ -38,8 +39,8 @@ func applyMovement():
 
 func stagger(delta):
 	velocity.x = lerp(velocity.x, 0, friction)
-	move_and_collide(Vector2(velocity.x, 0) * SPEED * delta)
-	print('velocity', velocity)
+	velocity.y = lerp(velocity.y, 0, friction)
+	move_and_collide(Vector2(velocity.x, velocity.y) * SPEED * delta)
 
 func jump():
 	velocity.y = -JUMP_FORCE
