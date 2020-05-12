@@ -107,3 +107,9 @@ func _on_Area2D_body_entered(body):
 func _on_StaggerTimer_timeout():
 	$AnimatedSprite.modulate = Color(1, 1, 1)
 	$PlayerStateMachine.setState(2)
+
+
+func _on_Shield_body_entered(body):
+	if 'nodeType' in body:
+		if body.nodeType == "damageNode":
+			body.queue_free()

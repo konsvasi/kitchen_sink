@@ -21,14 +21,14 @@ animations = [ {
 "name": "idle",
 "speed": 0.0
 }, {
-"frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ],
-"loop": true,
-"name": "walk_left",
-"speed": 10.0
-}, {
 "frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
 "loop": true,
 "name": "walk_right",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ],
+"loop": true,
+"name": "walk_left",
 "speed": 10.0
 } ]
 
@@ -137,3 +137,4 @@ polygon = PoolVector2Array( 13.4655, 15.7848, 16.1219, 14.3681, 20.1065, 10.2064
 [connection signal="area_exited" from="Area2D" to="." method="_on_Area2D_area_exited"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="timeout" from="StaggerTimer" to="." method="_on_StaggerTimer_timeout"]
+[connection signal="body_entered" from="Shield" to="." method="_on_Shield_body_entered"]
