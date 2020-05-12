@@ -51,6 +51,12 @@ func guard():
 	$AnimationPlayer.play("guard")
 	$Shield.show()
 
+func duck():
+	$AnimatedSprite.play("duck")
+
+func resetDuck():
+	$AnimatedSprite.play("duck_reverse")
+	
 func resetGuard():
 	$AnimationPlayer.stop()
 	$Shield.hide()

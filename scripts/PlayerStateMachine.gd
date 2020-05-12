@@ -7,6 +7,7 @@ func _ready():
 	addState("jumping")
 	addState("stagger")
 	addState("guard")
+	addState("duck")
 	call_deferred("setState", states.idle)
 	
 	if global.DEBUG:
@@ -30,10 +31,12 @@ func _input(event):
 							HUD.showDialog(global.get_current_scene_name(), activeArea.actionId)
 						else:
 							global.go_to_sceneNew(activeArea.transitionScene)
-		if Input.is_action_pressed("guard"):
+		elif Input.is_action_pressed("guard"):
 			call_deferred("setState", states.guard)
-		if Input.is_action_just_pressed("ui_accept"):
+		elif Input.is_action_just_pressed("ui_accept"):
 			parent.jump()
+		elif Input.is_action_just_pressed("ui_down"):
+			call_deferred("setState", states.duck)
 	if states.in_dialog == state:
 		if Input.is_action_just_pressed("ui_interact"):
 			HUD.loadDialog()
@@ -41,10 +44,14 @@ func _input(event):
 		if Input.is_action_just_pressed("ui_accept"):
 			parent.jump()
 		elif Input.is_action_pressed("guard"):
-			print('guard')
 			call_deferred("setState", states.guard)
+		elif Input.is_action_just_pressed("ui_down"):
+			call_deferred("setState", states.duck)
 	if states.guard == state:
 		if Input.is_action_just_released("guard"):
+			call_deferred("setState", states.idle)
+	if states.duck == state:
+		if Input.is_action_just_released("ui_down"):
 			call_deferred("setState", states.idle)
 
 func stateLogic(delta):
@@ -69,13 +76,16 @@ func getTransition(delta):
 			if parent.velocity.x == 0:
 				return states.idle
 		states.in_dialog:
-			parent.get_node("StateDebugLabel").set_text(str(state))
+			parent.get_node("StateDebugLabel").set_text("dialog")
 			if !HUD.isDialogOpen():
 				return states.idle
 		states.stagger:
 			parent.get_node("StateDebugLabel").set_text("stagger")
 		states.guard:
 			parent.get_node("StateDebugLabel").set_text("guard")
+		states.duck:
+			parent.get_node("StateDebugLabel").set_text("ducking")
+			
 func enterState(newState, oldState):
 	match newState:
 		states.idle:
@@ -84,11 +94,15 @@ func enterState(newState, oldState):
 			parent.staggerAnimation()
 		states.guard:
 			parent.guard()
+		states.duck:
+			parent.duck()
 
 func exitState(oldState, newState):
 	match oldState:
 		states.guard:
 			parent.resetGuard()
+		states.duck:
+			parent.resetDuck()
 
 func stagger():
 	call_deferred("setState", states.stagger)
