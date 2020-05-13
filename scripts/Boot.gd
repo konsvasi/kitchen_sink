@@ -18,3 +18,11 @@ func _on_Area2D_body_entered(body):
 	if body is StaticBody2D:
 		print('hit floor', body)
 		emit_signal("attackFinished", "trample")
+
+
+func _on_VisibilityNotifier2D_screen_exited():
+	hide()
+
+
+func _on_VisibilityNotifier2D_screen_entered():
+	show()

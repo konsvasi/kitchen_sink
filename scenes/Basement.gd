@@ -87,4 +87,7 @@ func _on_WallTrigger_body_entered(body):
 		border.show()
 	$WallTrigger.queue_free()
 	yield(get_tree().create_timer(0.5), "timeout")
+	
+	# test only
+	$Melv.moveTowardsPlayer()
 	HUD.showDialog("basement", "begin")
