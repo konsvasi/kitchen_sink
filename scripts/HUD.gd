@@ -55,6 +55,9 @@ func showNotification(notificationId):
 	$Notification.setText(notificationId)
 	$Notification.show()
 	get_tree().paused = true
+
+func updateHealth(amount):
+	$Healthbar.updateHealth(amount)
 	
 func _on_InventoryMenu_hide():
 	pass

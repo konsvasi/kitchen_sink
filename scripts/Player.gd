@@ -18,6 +18,7 @@ var friction = 0.1
 func _ready():
 	velocity.y = GRAVITY
 	HUD.connect("dialogFinished", self, "_on_HUD_dialogFinished")
+	$Shield/CollisionPolygon2D.set_deferred("disabled", true)
 	
 func handleMovement(delta):
 	velocity.y += GRAVITY * delta
@@ -48,6 +49,7 @@ func jump():
 func guard():
 #	$CollisionShape2D.set_deferred("disabled", true)
 #	$Area2D/CollisionShape2D.set_deferred("disabled", true)
+	$Shield/CollisionPolygon2D.set_deferred("disabled", false)
 	$AnimationPlayer.play("guard")
 	$Shield.show()
 
@@ -60,6 +62,7 @@ func resetDuck():
 func resetGuard():
 	$AnimationPlayer.stop()
 	$Shield.hide()
+	$Shield/CollisionPolygon2D.set_deferred("disabled", true)
 #	$CollisionShape2D.set_deferred("disabled", false)
 #	$Area2D/CollisionShape2D.set_deferred("disabled", false)
 
@@ -75,7 +78,7 @@ func getStateMachine():
 func staggerAnimation():
 	canWalkAgain = false
 	$AnimationPlayer.play("stagger")
-	velocity.x = -2 # should be the opposite direction of projectile
+	velocity.x = -5 # should be the opposite direction of projectile
 	$StaggerTimer.start()
 	
 func _on_Area2D_area_entered(area):
@@ -104,8 +107,13 @@ func _on_HUD_dialogFinished(id):
 func _on_Area2D_body_entered(body):
 	if 'nodeType' in body:
 		if body.nodeType == "damageNode":
-			body.applyDamage()
-			projectileDirection = body.movement
+			var damage = body.applyDamage()
+			PlayerVariables.health -= damage
+			HUD.updateHealth(damage)
+			emit_signal("updateHealth", damage)
+			if 'bodyName' in body:
+				if body.bodyName == "projectile":
+					projectileDirection = body.movement
 			$PlayerStateMachine.stagger()
 			
 

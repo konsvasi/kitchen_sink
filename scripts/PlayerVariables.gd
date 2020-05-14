@@ -1,6 +1,6 @@
 extends Node
 
-var health = 50
+var health = 150
 var items = {}
 var usedKeyItems = {}
 

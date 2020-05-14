@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+var bodyName = "projectile"
 var nodeType = "damageNode"
 var velocity = Vector2.ZERO
 var testvelocity = Vector2.ZERO

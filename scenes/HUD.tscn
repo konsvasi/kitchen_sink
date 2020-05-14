@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/HUD.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Menu.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://scenes/DialogBox.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/Notification.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scripts/HUDStateMachine.gd" type="Script" id=6]
+[ext_resource path="res://scenes/Healthbar.tscn" type="PackedScene" id=7]
 
 [node name="HUD" type="CanvasLayer"]
 pause_mode = 2
@@ -55,6 +56,10 @@ margin_left = -477.5
 margin_top = -5.0
 margin_right = 477.149
 margin_bottom = 163.0
+
+[node name="Healthbar" parent="." instance=ExtResource( 7 )]
+margin_right = 395.0
+margin_bottom = 86.0
 [connection signal="dialogFinished" from="." to="StateMachine" method="_on_HUD_dialogFinished"]
 [connection signal="hide" from="InventoryMenu" to="." method="_on_InventoryMenu_hide"]
 [connection signal="dialogFinished" from="BottomDialogContainer/Dialogbox" to="." method="_on_Dialogbox_dialogFinished"]

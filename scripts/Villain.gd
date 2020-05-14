@@ -3,7 +3,7 @@ extends Node2D
 var velocity
 var bootVelocity
 var tween
-var attacks = ['trample', 'charge', 'laser']
+var attacks = ['trample', 'laser']
 var playerPosition
 var chargePosition
 var villainVelocity
@@ -31,7 +31,7 @@ func moveOnPath(pathToFollow : PathFollow2D) -> void:
 	tween.start()
 
 func attack():
-	attackToPerform = attacks[2]
+	attackToPerform = chooseAttack()
 	print('attackToPerform:', attackToPerform)
 	if attackToPerform == 'trample':
 		trample()
@@ -39,6 +39,9 @@ func attack():
 		charge()
 	elif attackToPerform == 'laser':
 		laser()
+	
+func chooseAttack() -> String:
+	return attacks[randi() % attacks.size()]
 
 # Function called in delta
 func applyAttack():

@@ -23,25 +23,25 @@ animations = [ {
 "name": "idle",
 "speed": 0.0
 }, {
-"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
-"loop": true,
-"name": "walk_right",
-"speed": 10.0
+"frames": [ ExtResource( 14 ), ExtResource( 13 ), ExtResource( 2 ) ],
+"loop": false,
+"name": "duck_reverse",
+"speed": 5.01
 }, {
 "frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ],
 "loop": true,
 "name": "walk_left",
 "speed": 10.0
 }, {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "walk_right",
+"speed": 10.0
+}, {
 "frames": [ ExtResource( 2 ), ExtResource( 13 ), ExtResource( 14 ) ],
 "loop": false,
 "name": "duck",
 "speed": 60.0
-}, {
-"frames": [ ExtResource( 14 ), ExtResource( 13 ), ExtResource( 2 ) ],
-"loop": false,
-"name": "duck_reverse",
-"speed": 5.01
 } ]
 
 [sub_resource type="CapsuleShape2D" id=2]
