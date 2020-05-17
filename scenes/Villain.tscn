@@ -35,7 +35,9 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 1, -2 ), Vector2( 0, -4 ), Vector2( 0, 0 ) ]
 }
 
-[node name="Villain" type="Node2D"]
+[node name="Villain" type="Node2D" groups=[
+"villain",
+]]
 position = Vector2( 13.0779, 24.0568 )
 script = ExtResource( 2 )
 

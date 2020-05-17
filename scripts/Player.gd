@@ -4,6 +4,7 @@ const SPEED = 60
 const GRAVITY = 75
 const JUMP_FORCE = 65
 const FLOOR = Vector2(0, -1)
+const OrbEffectMaterial = preload('res://materials/Orbeffect.tres')
 export var health = 50
 var items = {}
 var velocity = Vector2()
@@ -14,6 +15,7 @@ var isMenuOpen = false
 var projectileDirection
 var canWalkAgain = false
 var friction = 0.1
+onready var effectTimer = $EffectTimer
 
 func _ready():
 	velocity.y = GRAVITY
@@ -127,3 +129,16 @@ func _on_Shield_body_entered(body):
 	if 'nodeType' in body:
 		if body.nodeType == "damageNode":
 			body.queue_free()
+
+
+func _on_Basement_givePowers():
+	HUD.get_node("Healthbar").heal(PlayerVariables.maxHealth)
+	$AnimatedSprite.material = OrbEffectMaterial
+	effectTimer.start()
+	HUD.showDialog("basement", "player_powers")
+
+
+func _on_EffectTimer_timeout():
+	$AnimatedSprite.material = null
+	print('player has powers and is healed, go to next dialog option')
+	HUD.showDialog("basement", "melv_explain_powers")

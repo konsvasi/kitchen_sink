@@ -1,7 +1,8 @@
 extends KinematicBody2D
 
 var nodeType = "damageNode"
-var damage = 20
+const DAMAGE = 90
+var isDemo = false
 signal attackFinished
 signal reachedStartPosition
 
@@ -11,17 +12,23 @@ func _ready():
 
 func applyDamage():
 	emit_signal("attackFinished", "trample")
-	return damage
+	return DAMAGE
 
 
 func _on_Area2D_body_entered(body):
 	if body is StaticBody2D:
-		print('hit floor', body)
 		emit_signal("attackFinished", "trample")
 
 
 func _on_VisibilityNotifier2D_screen_exited():
 	hide()
+	if isDemo:
+		var villain = get_tree().get_nodes_in_group('villain')[0]
+		villain.get_node('VillainStateMachine').canAttack = false
+		villain.setState(4)
+		# set state to something new like states.cutscene where villain is inactive
+		print('setState idle', get_tree().get_nodes_in_group('villain'), ' scene', get_tree().current_scene)
+		isDemo = false
 
 
 func _on_VisibilityNotifier2D_screen_entered():

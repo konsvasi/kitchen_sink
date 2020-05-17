@@ -1,5 +1,6 @@
 extends Node
 
+var maxHealth = 150
 var health = 150
 var items = {}
 var usedKeyItems = {}

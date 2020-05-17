@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://environment/subway.png" type="Texture" id=1]
 [ext_resource path="res://scripts/Subway.gd" type="Script" id=2]
 [ext_resource path="res://environment/sky_background-blue.png" type="Texture" id=3]
 [ext_resource path="res://environment/mountains.png" type="Texture" id=4]
 [ext_resource path="res://environment/skyline-front.png" type="Texture" id=5]
+[ext_resource path="res://ui/cutin.png" type="Texture" id=6]
 
 [sub_resource type="Animation" id=1]
 resource_name = "shake"
@@ -62,3 +63,10 @@ zoom = Vector2( 0.99, 0.98 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Camera"]
 anims/shake = SubResource( 1 )
+
+[node name="CutIn" type="Sprite" parent="."]
+position = Vector2( 791.99, 361.252 )
+scale = Vector2( 1.10997, 1.24249 )
+texture = ExtResource( 6 )
+
+[node name="CutInTween" type="Tween" parent="."]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://environment/Basement.png" type="Texture" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://utils/white_noise_1.png" type="Texture" id=9]
 [ext_resource path="res://scripts/Boot.gd" type="Script" id=10]
 [ext_resource path="res://scenes/Melv.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/Orb.tscn" type="PackedScene" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 421.333, 10 )
@@ -227,8 +228,15 @@ position = Vector2( 455.065, 134.659 )
 [node name="Melv" parent="." instance=ExtResource( 11 )]
 position = Vector2( 319.043, 124.668 )
 rotation = 0.436332
+
+[node name="Orb" parent="." instance=ExtResource( 12 )]
+position = Vector2( 350.492, 108.803 )
+
+[node name="OrbTween" type="Tween" parent="."]
+[connection signal="givePowers" from="." to="Player" method="_on_Basement_givePowers"]
 [connection signal="body_exited" from="PrefightTrigger" to="." method="_on_PrefightTrigger_body_exited"]
 [connection signal="body_entered" from="WallTrigger" to="." method="_on_WallTrigger_body_entered"]
 [connection signal="body_entered" from="Boot/Area2D" to="Boot" method="_on_Area2D_body_entered"]
 [connection signal="screen_entered" from="Boot/VisibilityNotifier2D" to="Boot" method="_on_VisibilityNotifier2D_screen_entered"]
 [connection signal="screen_exited" from="Boot/VisibilityNotifier2D" to="Boot" method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="rotationFinished" from="Melv" to="." method="_on_Melv_rotationFinished"]

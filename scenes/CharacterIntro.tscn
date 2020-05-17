@@ -23,7 +23,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = SubResource( 2 )
-shader_param/amount = 0.515
+shader_param/amount = 0.522
 
 [sub_resource type="DynamicFont" id=4]
 size = 48

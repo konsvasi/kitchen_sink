@@ -4,7 +4,8 @@ var names = {
 	"you": "You",
 	"zong": "Zong",
 	"elf": "Elf",
-	"terry": "Terry"
+	"terry": "Terry",
+	"melv": "Melv"
 }
 
 func _ready():
@@ -48,7 +49,20 @@ var content = {
 			'Your brain...',
 			'with it your options are limitless.',
 			'Now let us start!!!'],
-		"begin": ['So let the fight begin.']
+		"begin": ['So let the fight begin.'],
+		"melv": ['STOOOOOP', 
+			'What is this?', 
+			'According to Rule 4 of ethical fighting during a trip', 
+			'you should not fight while your opponents haven\'t obtained their powers.',
+			'Typical of you brother...'
+		],
+		"zong_reply": ['Oh, hi Melv...', 'Why do you have to ruin everything??'],
+		"melv_powers": ['Rules are rules!!', 'Here frightened one, I\'ll give you your powers', 'Maybe you\'ll have a better chance at this fight'],
+		"player_powers": ['That doesn\'t feel good, what are you doing to me?'],
+		"melv_explain_powers": ['Now you should be able to channel your powers and use them in the fight.', 
+			'I also healed you...',
+			'I\'m gonna sit here to the side to spectate the fight, see you later.'
+		]
 		
 	},
 	"tv": {
@@ -96,8 +110,12 @@ var dialog_names = {
 		"explanation_continued": names.zong,
 		"fight_question": names.you,
 		"brain": names.zong,
-		"begin": names.zong
-		
+		"begin": names.zong,
+		"melv": names.melv,
+		"zong_reply": names.zong,
+		"melv_powers": names.melv,
+		"player_powers": names.you,
+		"melv_explain_powers": names.melv
 	},
 	"tv": {
 		"main": names.you,

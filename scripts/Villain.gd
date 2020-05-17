@@ -16,6 +16,7 @@ onready var basement = get_tree().current_scene
 onready var villainBody = $KinematicBody2D
 var bulletScene = preload("res://scenes/Bullet.tscn")
 var startPosition = Vector2(450, 132)
+var isDemo = true
 
 signal trampleFinished
 signal attackFinished
@@ -41,6 +42,8 @@ func attack():
 		laser()
 	
 func chooseAttack() -> String:
+	if isDemo:
+		return "trample"
 	return attacks[randi() % attacks.size()]
 
 # Function called in delta
@@ -68,6 +71,12 @@ func trample():
 		emit_signal("trampleFinished", "trample")
 		trampleAttackCount = 0
 
+func moveBootToStart():
+	bootVelocity = (startPosition - boot.get_global_position()).normalized() * 70
+	trampleAttackCount = 0
+	isInAttack = false
+	boot.isDemo = true
+	
 func charge():
 	# get player position
 	chargePosition = get_tree().current_scene.get_node("Player").get_global_position()
@@ -96,6 +105,9 @@ func resetAttack(attackName : String) -> void:
 	if attackName == "trample":
 		boot.position = startPosition
 		bootVelocity = Vector2(0,0)
+
+func setState(index) -> void:
+	$VillainStateMachine.setState(index)
 	
 func showAura():
 	$KinematicBody2D/Aura.show()

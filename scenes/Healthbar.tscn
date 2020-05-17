@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://ui/healthbar_border.png" type="Texture" id=1]
-[ext_resource path="res://ui/healthbar_progress.png" type="Texture" id=2]
+[ext_resource path="res://audio/power_up.ogg" type="AudioStream" id=1]
+[ext_resource path="res://ui/progress.png" type="Texture" id=2]
 [ext_resource path="res://scripts/Healthbar.gd" type="Script" id=3]
+[ext_resource path="res://ui/border.png" type="Texture" id=4]
 
 [node name="Healthbar" type="Control"]
 margin_right = 246.0
@@ -12,17 +13,31 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Healthbar" type="TextureProgress" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 0.191833
-margin_bottom = 0.191833
+[node name="UpdateTween" type="Tween" parent="."]
+
+[node name="HealthbarUnder" type="TextureProgress" parent="."]
+margin_right = 170.0
+margin_bottom = 40.0
+max_value = 150.0
 value = 100.0
-texture_over = ExtResource( 1 )
+texture_progress = ExtResource( 2 )
+tint_progress = Color( 1, 0.156863, 0.156863, 1 )
+nine_patch_stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthbarOver" type="TextureProgress" parent="."]
+margin_right = 170.0
+margin_bottom = 40.0
+value = 45.0
+texture_over = ExtResource( 4 )
 texture_progress = ExtResource( 2 )
 nine_patch_stretch = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="UpdateTween" type="Tween" parent="."]
+[node name="SoundEffects" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+volume_db = -10.0

@@ -2,6 +2,8 @@ extends Node2D
 
 onready var camera = $Camera
 onready var tween = $Camera/CameraTween
+onready var cutinTween = $CutInTween
+onready var cutin = $CutIn
 var shakeAmount = 0.1
 var reverse = false
 var motion = 1
@@ -9,6 +11,8 @@ const SPEED = 50
 
 func _ready():
 	camera.get_node("AnimationPlayer").play("shake")
+	cutinTween.interpolate_property(cutin.get_material(), "shader_param/amount", 1.0, 0.0, 1.5,Tween.TRANS_LINEAR,Tween.EASE_IN_OUT)
+	cutinTween.start()
 	
 	
 func _process(delta):

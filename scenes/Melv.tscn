@@ -17,3 +17,11 @@ script = ExtResource( 2 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
 animation = "idle"
+
+[node name="MelvTween" type="Tween" parent="."]
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( -1.02324, 13.5253 )
+scale = Vector2( 0.678147, 0.257691 )
+[connection signal="tween_all_completed" from="MelvTween" to="." method="_on_MelvTween_tween_all_completed"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

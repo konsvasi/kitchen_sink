@@ -9,6 +9,7 @@ func _ready():
 	addState("fight")
 	addState("attack")
 	addState("guard")
+	addState("cutscene")
 	call_deferred("setState", states.idle)
 
 func stateLogic(delta):
@@ -29,6 +30,8 @@ func getTransition(delta):
 			parent.get_node('STATE_DEBUG').set_text(str(state))
 			if canAttack:
 				return states.fight
+		states.cutscene:
+			parent.get_node('STATE_DEBUG').set_text(str(state))
 			
 
 func enterState(newState, oldState):

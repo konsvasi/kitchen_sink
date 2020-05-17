@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/healthbar_progress.png-3aad030457be7925eab51649b2803c82.stex"
+path="res://.import/cutin.png-c120e8c80e0ba34fc0baa35fd4e89fc8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/healthbar_progress.png"
-dest_files=[ "res://.import/healthbar_progress.png-3aad030457be7925eab51649b2803c82.stex" ]
+source_file="res://ui/cutin.png"
+dest_files=[ "res://.import/cutin.png-c120e8c80e0ba34fc0baa35fd4e89fc8.stex" ]
 
 [params]
 
