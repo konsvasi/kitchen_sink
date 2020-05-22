@@ -65,6 +65,7 @@ zoom = Vector2( 0.99, 0.98 )
 anims/shake = SubResource( 1 )
 
 [node name="CutIn" type="Sprite" parent="."]
+visible = false
 position = Vector2( 791.99, 361.252 )
 scale = Vector2( 1.10997, 1.24249 )
 texture = ExtResource( 6 )

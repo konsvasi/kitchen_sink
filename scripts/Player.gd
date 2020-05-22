@@ -86,6 +86,7 @@ func staggerAnimation():
 func _on_Area2D_area_entered(area):
 	# First check if Area2d is a Portal or an Interactable Object
 	activeArea = area
+	print('area:', area.name)
 	if 'type' in area:
 		if area.type == 'interaction_point':
 			if area.isDialogInteraction:
@@ -94,6 +95,12 @@ func _on_Area2D_area_entered(area):
 				$ThoughtBubble.animation = 'interaction'
 		
 		$ThoughtBubble.show()
+	elif area.name == 'CageArea':
+		$PlayerStateMachine.stagger()
+		var damage = get_node_from_current_scene('Cage').applyDamage()
+		PlayerVariables.health -= damage
+		HUD.updateHealth(damage)
+		emit_signal("updateHealth", damage)
 
 func _on_Area2D_area_exited(area):
 	activeArea = "";

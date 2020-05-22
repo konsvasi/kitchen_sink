@@ -23,11 +23,6 @@ animations = [ {
 "name": "idle",
 "speed": 0.0
 }, {
-"frames": [ ExtResource( 2 ), ExtResource( 13 ), ExtResource( 14 ) ],
-"loop": false,
-"name": "duck",
-"speed": 60.0
-}, {
 "frames": [ ExtResource( 14 ), ExtResource( 13 ), ExtResource( 2 ) ],
 "loop": false,
 "name": "duck_reverse",
@@ -42,6 +37,11 @@ animations = [ {
 "loop": true,
 "name": "walk_right",
 "speed": 10.0
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 13 ), ExtResource( 14 ) ],
+"loop": false,
+"name": "duck",
+"speed": 60.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=2]

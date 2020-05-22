@@ -3,7 +3,7 @@ extends Node2D
 var velocity
 var bootVelocity
 var tween
-var attacks = ['trample', 'laser']
+var attacks = ['trample', 'laser', 'cage']
 var playerPosition
 var chargePosition
 var villainVelocity
@@ -13,6 +13,8 @@ var isInAttack = false
 var attackToPerform
 onready var boot = get_tree().current_scene.get_node("Boot")
 onready var basement = get_tree().current_scene
+onready var cage = get_tree().current_scene.get_node("Cage")
+onready var cageWarning = get_tree().current_scene.get_node("CageWarning")
 onready var villainBody = $KinematicBody2D
 var bulletScene = preload("res://scenes/Bullet.tscn")
 var startPosition = Vector2(450, 132)
@@ -20,6 +22,7 @@ var isDemo = true
 
 signal trampleFinished
 signal attackFinished
+signal castFinished
 
 func _ready():
 	boot.connect("attackFinished", self, "_on_trample_attack_finished")
@@ -36,14 +39,14 @@ func attack():
 	print('attackToPerform:', attackToPerform)
 	if attackToPerform == 'trample':
 		trample()
-	elif attackToPerform == 'charge':
-		charge()
 	elif attackToPerform == 'laser':
 		laser()
+	elif attackToPerform == 'cage':
+		cage()
 	
 func chooseAttack() -> String:
 	if isDemo:
-		return "trample"
+		return "cage"
 	return attacks[randi() % attacks.size()]
 
 # Function called in delta
@@ -51,9 +54,6 @@ func applyAttack():
 	match attackToPerform:
 		"trample":
 			boot.move_and_slide(bootVelocity)
-		"charge":
-			villainVelocity = villainBody.position.direction_to(chargePosition) * 50
-			villainVelocity = villainBody.move_and_slide(villainVelocity)
 				
 func trample():
 	print('count: ', trampleAttackCount)
@@ -77,18 +77,11 @@ func moveBootToStart():
 	isInAttack = false
 	boot.isDemo = true
 	
-func charge():
-	# get player position
-	chargePosition = get_tree().current_scene.get_node("Player").get_global_position()
-	print('playerPosition', playerPosition)
-	# charge towards him
-#	villainVelocity = (playerPosition - self.get_global_position()).normalized() * 80
-	# if hit knockback player
 
-func laser():
+func laser() -> void:
 	prepareBullet()
 	
-func shootBullets():
+func shootBullets() -> void:
 	var bullet = bulletScene.instance()
 	var bullet2 = bulletScene.instance()
 	var bullet3 = bulletScene.instance()
@@ -99,6 +92,22 @@ func shootBullets():
 	add_child(bullet3)
 	yield(get_tree().create_timer(0.5),"timeout")
 	emit_signal("attackFinished", 'laser')
+
+
+func cage() -> void:
+	playerPosition = get_tree().current_scene.get_node("Player").get_global_position()
+	cageWarning.position = playerPosition
+	cageWarning.position.y = playerPosition.y - 15
+	cageWarning.get_node("WarnPlayer").play("warn")
+	yield(get_tree().create_timer(0.4),"timeout")
+	cage.position = playerPosition
+	cage.position.y = playerPosition.y - 15
+	cage.get_node("AnimationPlayer").play("shock")
+	yield(get_tree().create_timer(0.9),"timeout")
+#	cageWarning.hide()
+#	cage.hide()
+#	cage.get_node("CageArea/CollisionShape2D").set_deferred("disabled", true)
+	emit_signal("attackFinished", 'cage')
 
 # Probably not needed anymore
 func resetAttack(attackName : String) -> void:
