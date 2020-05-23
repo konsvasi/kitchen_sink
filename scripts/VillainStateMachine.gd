@@ -5,6 +5,8 @@ var canAttack = false
 func _ready():
 	parent.connect("trampleFinished", self, "_on_attack_finished")
 	parent.connect("attackFinished", self, "_on_attack_finished")
+	parent.connect("cageFinished", self, "_on_attack_finished")
+	
 	addState("idle")
 	addState("fight")
 	addState("attack")
@@ -58,6 +60,8 @@ func _on_Villain_trampleFinished(attackName : String):
 
 func _on_attack_finished(attackName: String):
 	print('finished: ', attackName)
+	if attackName == 'cage':
+		parent.resetAttack('cage')
 	call_deferred("setState", states.idle)
 	parent.get_node("AttackTimer").start()
 	

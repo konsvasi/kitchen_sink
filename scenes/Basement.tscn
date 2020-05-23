@@ -67,14 +67,13 @@ tracks/0/keys = {
 "values": [ Rect2( 0, 0, 48, 64 ), Rect2( 48, 0, 48, 64 ), Rect2( 96, 0, 48, 64 ), Rect2( 143.924, 0, 48, 64 ), Rect2( 192, 0, 48, 64 ), Rect2( 288, 0, 48, 64 ), Rect2( 336, 0, 48, 64 ), Rect2( 432, 0, 48, 64 ), Rect2( 384, 0, 48, 64 ), Rect2( 432, 0, 48, 64 ), Rect2( 384, 0, 48, 64 ), Rect2( 432, 0, 48, 64 ), Rect2( 384, 0, 48, 64 ), Rect2( 432, 0, 48, 64 ), Rect2( 384, 0, 48, 64 ), Rect2( 432, 0, 48, 64 ), Rect2( 384, 0, 48, 64 ), Rect2( 432, 0, 48, 64 ), Rect2( 384, 0, 48, 64 ) ]
 }
 
-[sub_resource type="RectangleShape2D" id=13]
+[sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 14.1906, 18.5892 )
 
-[sub_resource type="RectangleShape2D" id=14]
+[sub_resource type="RectangleShape2D" id=13]
 extents = Vector2( 1.34457, 14.7772 )
 
-[sub_resource type="Animation" id=12]
-resource_name = "warn"
+[sub_resource type="Animation" id=14]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:region_rect")
 tracks/0/interp = 1
@@ -279,30 +278,32 @@ position = Vector2( 350.492, 108.803 )
 position = Vector2( 406.36, 80.6137 )
 texture = ExtResource( 13 )
 region_enabled = true
-region_rect = Rect2( 384, 0, 48, 64 )
+region_rect = Rect2( 143.924, 0, 48, 64 )
 script = ExtResource( 15 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Cage"]
 anims/shock = SubResource( 11 )
 
 [node name="CageArea" type="Area2D" parent="Cage"]
+collision_layer = 4
+collision_mask = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cage/CageArea"]
 visible = false
 position = Vector2( -0.175995, 9.94254 )
-shape = SubResource( 13 )
+shape = SubResource( 12 )
 
 [node name="StaticBodyLeft" type="StaticBody2D" parent="Cage"]
 
 [node name="cageLeft" type="CollisionShape2D" parent="Cage/StaticBodyLeft"]
 position = Vector2( -15.5283, 13.31 )
-shape = SubResource( 14 )
+shape = SubResource( 13 )
 
 [node name="StaticBodyRight" type="StaticBody2D" parent="Cage"]
 
 [node name="cageRight" type="CollisionShape2D" parent="Cage/StaticBodyRight"]
 position = Vector2( 15.2258, 13.6125 )
-shape = SubResource( 14 )
+shape = SubResource( 13 )
 
 [node name="CageWarning" type="Sprite" parent="."]
 position = Vector2( 360.976, 80.8074 )
@@ -314,7 +315,7 @@ __meta__ = {
 }
 
 [node name="WarnPlayer" type="AnimationPlayer" parent="CageWarning"]
-anims/warn = SubResource( 12 )
+anims/warn = SubResource( 14 )
 [connection signal="givePowers" from="." to="Player" method="_on_Basement_givePowers"]
 [connection signal="body_exited" from="PrefightTrigger" to="." method="_on_PrefightTrigger_body_exited"]
 [connection signal="body_entered" from="WallTrigger" to="." method="_on_WallTrigger_body_entered"]

@@ -19,7 +19,8 @@ func _input(event):
 		if Input.is_action_just_pressed("ui_interact"):
 			var activeArea = parent.activeArea
 #			print('actArea: ', activeArea.dialogId, ' scene ', global.get_current_scene_name())
-			if activeArea && activeArea.type == "interact_point":
+#			if activeArea && activeArea.type == "interact_point":
+			if "type" in activeArea:
 				if activeArea.isDialogInteraction:
 					HUD.showDialog(global.get_current_scene_name(), activeArea.dialogId)
 				elif activeArea.isTransitionInteraction:

@@ -16,6 +16,7 @@ var projectileDirection
 var canWalkAgain = false
 var friction = 0.1
 onready var effectTimer = $EffectTimer
+signal attack_blocked
 
 func _ready():
 	velocity.y = GRAVITY
@@ -49,8 +50,7 @@ func jump():
 	velocity.y = -JUMP_FORCE
 	
 func guard():
-#	$CollisionShape2D.set_deferred("disabled", true)
-#	$Area2D/CollisionShape2D.set_deferred("disabled", true)
+	$Area2D/CollisionShape2D.set_deferred("disabled", true)
 	$Shield/CollisionPolygon2D.set_deferred("disabled", false)
 	$AnimationPlayer.play("guard")
 	$Shield.show()
@@ -65,8 +65,7 @@ func resetGuard():
 	$AnimationPlayer.stop()
 	$Shield.hide()
 	$Shield/CollisionPolygon2D.set_deferred("disabled", true)
-#	$CollisionShape2D.set_deferred("disabled", false)
-#	$Area2D/CollisionShape2D.set_deferred("disabled", false)
+	$Area2D/CollisionShape2D.set_deferred("disabled", false)
 
 func get_node_from_current_scene(nodeName):
 	return get_tree().get_current_scene().get_node(nodeName)
@@ -96,11 +95,12 @@ func _on_Area2D_area_entered(area):
 		
 		$ThoughtBubble.show()
 	elif area.name == 'CageArea':
-		$PlayerStateMachine.stagger()
+		var cage = get_node_from_current_scene("Cage")
 		var damage = get_node_from_current_scene('Cage').applyDamage()
 		PlayerVariables.health -= damage
 		HUD.updateHealth(damage)
 		emit_signal("updateHealth", damage)
+		cage.finishAttack()
 
 func _on_Area2D_area_exited(area):
 	activeArea = "";
@@ -149,3 +149,8 @@ func _on_EffectTimer_timeout():
 	$AnimatedSprite.material = null
 	print('player has powers and is healed, go to next dialog option')
 	HUD.showDialog("basement", "melv_explain_powers")
+
+
+func _on_Shield_area_entered(area):
+	if area.name == "CageArea":
+		emit_signal("attack_blocked", "cage")

@@ -23,6 +23,11 @@ animations = [ {
 "name": "idle",
 "speed": 0.0
 }, {
+"frames": [ ExtResource( 2 ), ExtResource( 13 ), ExtResource( 14 ) ],
+"loop": false,
+"name": "duck",
+"speed": 60.0
+}, {
 "frames": [ ExtResource( 14 ), ExtResource( 13 ), ExtResource( 2 ) ],
 "loop": false,
 "name": "duck_reverse",
@@ -37,11 +42,6 @@ animations = [ {
 "loop": true,
 "name": "walk_right",
 "speed": 10.0
-}, {
-"frames": [ ExtResource( 2 ), ExtResource( 13 ), ExtResource( 14 ) ],
-"loop": false,
-"name": "duck",
-"speed": 60.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=2]
@@ -153,5 +153,6 @@ one_shot = true
 [connection signal="area_exited" from="Area2D" to="." method="_on_Area2D_area_exited"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="timeout" from="StaggerTimer" to="." method="_on_StaggerTimer_timeout"]
+[connection signal="area_entered" from="Shield" to="." method="_on_Shield_area_entered"]
 [connection signal="body_entered" from="Shield" to="." method="_on_Shield_body_entered"]
 [connection signal="timeout" from="EffectTimer" to="." method="_on_EffectTimer_timeout"]

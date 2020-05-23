@@ -19,12 +19,16 @@ onready var villainBody = $KinematicBody2D
 var bulletScene = preload("res://scenes/Bullet.tscn")
 var startPosition = Vector2(450, 132)
 var isDemo = true
+var cageCount = 0
+var checkOverlap = false
 
 signal trampleFinished
 signal attackFinished
 signal castFinished
+signal cageFinished
 
 func _ready():
+	cage.connect("attackFinished", self, "_on_cage_finished")
 	boot.connect("attackFinished", self, "_on_trample_attack_finished")
 	boot.get_node("VisibilityNotifier2D").connect("screen_exited", self, "_on_boot_out")
 	
@@ -54,9 +58,16 @@ func applyAttack():
 	match attackToPerform:
 		"trample":
 			boot.move_and_slide(bootVelocity)
+		"cage":
+			if checkOverlap:
+				if cage.checkOverlap():
+					get_tree().current_scene.get_node("Player/PlayerStateMachine").setState(4)
+#					PlayerVariables.health -= 0.1
+#					HUD.updateHealth(2)
+#					emit_signal("updateHealth", 2)
+					print('overlap:', cage.checkOverlap())
 				
 func trample():
-	print('count: ', trampleAttackCount)
 	if trampleAttackCount <= 2:
 		playerPosition = get_tree().current_scene.get_node("Player").get_global_position()
 		# Move it towards player
@@ -99,21 +110,30 @@ func cage() -> void:
 	cageWarning.position = playerPosition
 	cageWarning.position.y = playerPosition.y - 15
 	cageWarning.get_node("WarnPlayer").play("warn")
-	yield(get_tree().create_timer(0.4),"timeout")
+	yield(get_tree().create_timer(1),"timeout")
 	cage.position = playerPosition
 	cage.position.y = playerPosition.y - 15
 	cage.get_node("AnimationPlayer").play("shock")
-	yield(get_tree().create_timer(0.9),"timeout")
-#	cageWarning.hide()
-#	cage.hide()
-#	cage.get_node("CageArea/CollisionShape2D").set_deferred("disabled", true)
-	emit_signal("attackFinished", 'cage')
+	yield(get_tree().create_timer(2.0),"timeout")
+	
+	# Attack didn't hit player
+	# stop attack
+	if (!cage.checkOverlap()):
+		emit_signal("cageFinished", "cage")
 
-# Probably not needed anymore
+
 func resetAttack(attackName : String) -> void:
 	if attackName == "trample":
 		boot.position = startPosition
 		bootVelocity = Vector2(0,0)
+	elif attackName == "cage":
+#		cage.hide()
+#		cageWarning.hide()
+		cage.moveToStart()
+		cageWarning.position = Vector2.ZERO
+#		cage.get_node("CageArea/CollisionShape2D").call_deferred("disabled", true)
+#		cage.get_node("StaticBodyLeft/cageLeft").call_deferred("disabled", true)
+#		cage.get_node("StaticBodyRight/cageRight").call_deferred("disabled", true)
 
 func setState(index) -> void:
 	$VillainStateMachine.setState(index)
@@ -150,4 +170,6 @@ func _on_boot_out():
 func _on_SpriteTween_tween_completed(object, key):
 	shootBullets()
 	$KinematicBody2D/Sprite.modulate = Color(1.0, 1.0, 1.0)
-	
+
+func _on_cage_finished(attack : String):
+	emit_signal("cageFinished", "cage")
