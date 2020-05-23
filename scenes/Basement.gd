@@ -128,6 +128,7 @@ func _on_HUD_dialogFinished(id):
 		"melv_explain_powers":
 			melv.moveOut(melvStartPosition)
 			print("Show notification about powers and start fight after notification")
+			HUD.showNotification("powers_explanation")
 
 
 func _on_WallTrigger_body_entered(body):

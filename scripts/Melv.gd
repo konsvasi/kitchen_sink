@@ -32,7 +32,6 @@ func moveTowardsPlayer() -> void:
 	startMoving = true
 
 func moveOut(positionToMove : Vector2) -> void:
-	print('positionToMove:', positionToMove)
 	moveOutPosition = positionToMove
 	moveOut = true
 

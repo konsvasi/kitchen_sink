@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://environment/Basement.png" type="Texture" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
@@ -50,6 +50,9 @@ extents = Vector2( 15.7687, 0.682129 )
 shader = ExtResource( 8 )
 shader_param/color = Vector3( 0.35, 0.48, 0.95 )
 shader_param/OCTAVES = 4
+
+[sub_resource type="Animation" id=15]
+resource_name = "destroy"
 
 [sub_resource type="Animation" id=11]
 resource_name = "shock"
@@ -278,10 +281,11 @@ position = Vector2( 350.492, 108.803 )
 position = Vector2( 406.36, 80.6137 )
 texture = ExtResource( 13 )
 region_enabled = true
-region_rect = Rect2( 143.924, 0, 48, 64 )
+region_rect = Rect2( 0, 0, 48, 64 )
 script = ExtResource( 15 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Cage"]
+anims/destroy = SubResource( 15 )
 anims/shock = SubResource( 11 )
 
 [node name="CageArea" type="Area2D" parent="Cage"]

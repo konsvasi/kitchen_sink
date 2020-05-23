@@ -14,6 +14,7 @@ var activeOutArea = ""
 var isMenuOpen = false
 var projectileDirection
 var canWalkAgain = false
+var hasPowers = false
 var friction = 0.1
 onready var effectTimer = $EffectTimer
 signal attack_blocked
@@ -85,7 +86,6 @@ func staggerAnimation():
 func _on_Area2D_area_entered(area):
 	# First check if Area2d is a Portal or an Interactable Object
 	activeArea = area
-	print('area:', area.name)
 	if 'type' in area:
 		if area.type == 'interaction_point':
 			if area.isDialogInteraction:
@@ -126,7 +126,6 @@ func _on_Area2D_body_entered(body):
 			$PlayerStateMachine.stagger()
 			
 
-
 func _on_StaggerTimer_timeout():
 	$AnimatedSprite.modulate = Color(1, 1, 1)
 	$PlayerStateMachine.setState(2)
@@ -148,6 +147,7 @@ func _on_Basement_givePowers():
 func _on_EffectTimer_timeout():
 	$AnimatedSprite.material = null
 	print('player has powers and is healed, go to next dialog option')
+	hasPowers = true
 	HUD.showDialog("basement", "melv_explain_powers")
 
 

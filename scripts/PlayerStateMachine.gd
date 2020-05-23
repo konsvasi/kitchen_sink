@@ -32,7 +32,7 @@ func _input(event):
 							HUD.showDialog(global.get_current_scene_name(), activeArea.actionId)
 						else:
 							global.go_to_sceneNew(activeArea.transitionScene)
-		elif Input.is_action_pressed("guard"):
+		elif Input.is_action_pressed("guard") && parent.hasPowers:
 			call_deferred("setState", states.guard)
 		elif Input.is_action_just_pressed("ui_accept"):
 			parent.jump()
@@ -44,7 +44,7 @@ func _input(event):
 	if states.walking == state:
 		if Input.is_action_just_pressed("ui_accept"):
 			parent.jump()
-		elif Input.is_action_pressed("guard"):
+		elif Input.is_action_pressed("guard") && parent.hasPowers:
 			call_deferred("setState", states.guard)
 		elif Input.is_action_just_pressed("ui_down"):
 			call_deferred("setState", states.duck)

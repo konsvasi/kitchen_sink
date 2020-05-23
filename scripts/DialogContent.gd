@@ -89,7 +89,8 @@ var content = {
 
 var notification_content = {
 	"remote_minigame": "Move the remote by pressing w,a,s.\n When the sensor changes color press x",
-	"doorknob_minigame": "Click on the door knob to open the door."
+	"doorknob_minigame": "Click on the door knob to open the door.",
+	"powers_explanation": "Press K to protect yourself from most attacks.\n Press L to attack."
 }
 
 var dialog_names = {

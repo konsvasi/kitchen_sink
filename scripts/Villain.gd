@@ -49,8 +49,8 @@ func attack():
 		cage()
 	
 func chooseAttack() -> String:
-	if isDemo:
-		return "cage"
+#	if global.DEBUG:
+#		return "cage"
 	return attacks[randi() % attacks.size()]
 
 # Function called in delta
