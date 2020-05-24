@@ -45,8 +45,8 @@ func applyMovement():
 
 func attack() -> void:
 	var ball = ballScene.instance()
-	print('direction: ', velocity.x)
 	ball.direction = velocity.x
+	ball.setPosition(velocity.x)
 	add_child(ball)
 
 func stagger(delta):
