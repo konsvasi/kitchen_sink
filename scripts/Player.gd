@@ -5,6 +5,7 @@ const GRAVITY = 75
 const JUMP_FORCE = 65
 const FLOOR = Vector2(0, -1)
 const OrbEffectMaterial = preload('res://materials/Orbeffect.tres')
+const ballScene = preload('res://scenes/Ball.tscn')
 export var health = 50
 var items = {}
 var velocity = Vector2()
@@ -41,6 +42,12 @@ func handleMovement(delta):
 	
 func applyMovement():
 	move_and_slide(velocity, Vector2(0, 0))
+
+func attack() -> void:
+	var ball = ballScene.instance()
+	print('direction: ', velocity.x)
+	ball.direction = velocity.x
+	add_child(ball)
 
 func stagger(delta):
 	velocity.x = lerp(velocity.x, 0, friction)

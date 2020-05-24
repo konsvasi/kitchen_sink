@@ -8,6 +8,7 @@ func _ready():
 	addState("stagger")
 	addState("guard")
 	addState("duck")
+	addState("attack")
 	call_deferred("setState", states.idle)
 	
 	if global.DEBUG:
@@ -38,9 +39,14 @@ func _input(event):
 			parent.jump()
 		elif Input.is_action_just_pressed("ui_down"):
 			call_deferred("setState", states.duck)
+		elif Input.is_action_just_pressed("attack"):
+			call_deferred("setState", states.attack)
 	if states.in_dialog == state:
 		if Input.is_action_just_pressed("ui_interact"):
 			HUD.loadDialog()
+	if states.attack == state:
+		if Input.is_action_just_released("attack"):
+			call_deferred("setState", states.idle)
 	if states.walking == state:
 		if Input.is_action_just_pressed("ui_accept"):
 			parent.jump()
@@ -48,6 +54,8 @@ func _input(event):
 			call_deferred("setState", states.guard)
 		elif Input.is_action_just_pressed("ui_down"):
 			call_deferred("setState", states.duck)
+		elif Input.is_action_just_pressed("attack"):
+			call_deferred("setState", states.attack)
 	if states.guard == state:
 		if Input.is_action_just_released("guard"):
 			call_deferred("setState", states.idle)
@@ -56,7 +64,7 @@ func _input(event):
 			call_deferred("setState", states.idle)
 
 func stateLogic(delta):
-	if [states.idle, states.walking, states.guard].has(state):
+	if [states.idle, states.walking, states.guard, states.attack].has(state):
 		parent.handleMovement(delta)
 		parent.applyMovement()
 	elif [states.stagger].has(state):
@@ -86,6 +94,8 @@ func getTransition(delta):
 			parent.get_node("StateDebugLabel").set_text("guard")
 		states.duck:
 			parent.get_node("StateDebugLabel").set_text("ducking")
+		states.attack:
+			parent.get_node("StateDebugLabel").set_text("attack")
 			
 func enterState(newState, oldState):
 	match newState:
@@ -97,6 +107,8 @@ func enterState(newState, oldState):
 			parent.guard()
 		states.duck:
 			parent.duck()
+		states.attack:
+			parent.attack()
 
 func exitState(oldState, newState):
 	match oldState:
