@@ -7,6 +7,7 @@ var menuOptions = ['Inventory', 'Options']
 var dialog = []
 var menuDisabled = false
 onready var dialogBox = $BottomDialogContainer/Dialogbox
+onready var healthbar = $Healthbar
 
 func _ready():
 	pass # Replace with function body.
@@ -86,6 +87,9 @@ func isDialogOpen():
 
 func updateItems():
 	$InventoryMenu.updateItems()
+
+func showPlayerHealthbar() -> void:
+	healthbar.show()
 	
 # Should be called when dialog was displayed in top position
 func resetDialogPosition():
