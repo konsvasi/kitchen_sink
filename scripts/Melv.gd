@@ -7,7 +7,7 @@ var playerPosition = Vector2.ZERO
 var startMoving = false
 var moveOutPosition = Vector2.ZERO
 var moveOut = false
-onready var orb = $Orb
+onready var orb = $Orb   
 onready var melvTween = $MelvTween
 
 signal rotationFinished

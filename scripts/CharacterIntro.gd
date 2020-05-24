@@ -24,10 +24,11 @@ func _process(delta):
 	
 	
 func _on_Tween_tween_completed(object, key):
+	$Alert.volume_db = -100
 	$Alert.play()
 
 
 func _on_Alert_finished():
 	$Alert.stop()
 	yield(get_tree().create_timer(1.0), "timeout")
-	global.go_to_sceneNew("basement")
+	global.go_to_sceneNew("basement", "characterintro")

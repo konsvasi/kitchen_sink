@@ -21,10 +21,10 @@ func go_to_scene(nextScene : String) -> void:
 	set_previous_scene(get_tree().get_current_scene().get_name())
 	call_deferred("_deferred_goto_scene", nextScene);
 
-func go_to_sceneNew(nextSceneName : String) -> void:
-	print("currentScene", get_tree().get_current_scene().get_name(), ' next scene', nextSceneName)
+func go_to_sceneNew(nextSceneName : String, previousScene : String) -> void:
+	print("currentScene", previousScene, ' next scene', nextSceneName)
 	var formattedSceneName = "res://Scenes/" + nextSceneName + ".tscn"
-	set_previous_scene(get_tree().get_current_scene().get_name())
+	set_previous_scene(previousScene)
 	call_deferred("_deferred_goto_scene", formattedSceneName);
 
 func save_player_position(position: Vector2) -> void:
@@ -35,11 +35,12 @@ func _deferred_goto_scene(path):
 	
 	var s = ResourceLoader.load(path)
 	current_scene = s.instance()
-	
-	get_tree().get_root().add_child(current_scene)
+	print('current_scene: ', current_scene.name, ' path:', path)
 	get_tree().set_current_scene(current_scene)
+	get_tree().get_root().add_child(current_scene)
 
 func set_previous_scene(sceneName : String) -> void:
+	print('PREVIOUS_SCENE:', sceneName)
 	previous_scene = sceneName.to_lower();
 	
 func get_previous_scene() -> String:

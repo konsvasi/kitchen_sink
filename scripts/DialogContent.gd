@@ -30,6 +30,7 @@ var content = {
 	},
 	"basement": {
 		"special_mushrooms": ['I think I should eat the mushrooms before watching TV...'],
+		"aura": ['A fire in the basement?'],
 		"intro": ['Who are you?', 'How did you get in here?'],
 		"name": ['Don\'t know me?', 'I\'m Zong, son of no one'],
 		"sense": ['This doesn\'t make any sense'],
@@ -103,6 +104,7 @@ var dialog_names = {
 	},
 	"basement": {
 		"special_mushrooms": names.you,
+		"aura": names.you,
 		"intro": names.you,
 		"name": names.zong,
 		"sense": names.you,

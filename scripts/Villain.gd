@@ -11,10 +11,13 @@ var trampleAttackCount = 0
 var outsideScreen = false
 var isInAttack = false
 var attackToPerform
-onready var boot = get_tree().current_scene.get_node("Boot")
+#onready var boot = get_tree().current_scene.get_node("Boot")
+onready var boot = get_tree().get_root().get_node("Basement/Boot")
 onready var basement = get_tree().current_scene
-onready var cage = get_tree().current_scene.get_node("Cage")
-onready var cageWarning = get_tree().current_scene.get_node("CageWarning")
+onready var cage = get_tree().get_root().get_node("Basement/Cage")
+onready var cageWarning = get_tree().get_root().get_node("Basement/CageWarning")
+onready var spriteTween = $KinematicBody2D/Sprite/SpriteTween
+onready var sprite = $KinematicBody2D/Sprite
 onready var villainBody = $KinematicBody2D
 var bulletScene = preload("res://scenes/Bullet.tscn")
 var startPosition = Vector2(450, 132)
@@ -138,9 +141,19 @@ func resetAttack(attackName : String) -> void:
 func setState(index) -> void:
 	$VillainStateMachine.setState(index)
 	
-func showAura():
+func showAura() -> void:
 	$KinematicBody2D/Aura.show()
 
+func reveal() -> void:
+	spriteTween.interpolate_property(sprite, 
+		'modulate', 
+		Color(1,1,1,0), 
+		Color(1,1,1,1),
+		1.5,
+		Tween.TRANS_LINEAR,
+		Tween.EASE_OUT_IN)
+	spriteTween.start()
+	
 func guard():
 	print('guarding')
 
@@ -168,8 +181,10 @@ func _on_boot_out():
 
 
 func _on_SpriteTween_tween_completed(object, key):
-	shootBullets()
-	$KinematicBody2D/Sprite.modulate = Color(1.0, 1.0, 1.0)
+	if (key != ':modulate'):
+		print('key', key)
+		shootBullets()
+		$KinematicBody2D/Sprite.modulate = Color(1.0, 1.0, 1.0)
 
 func _on_cage_finished(attack : String):
 	emit_signal("cageFinished", "cage")

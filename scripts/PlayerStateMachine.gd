@@ -25,13 +25,13 @@ func _input(event):
 					HUD.showDialog(global.get_current_scene_name(), activeArea.dialogId)
 				elif activeArea.isTransitionInteraction:
 					if !activeArea.actionId:
-						global.go_to_sceneNew(activeArea.transitionScene)
+						global.go_to_sceneNew(activeArea.transitionScene, global.get_previous_scene())
 					elif activeArea.actionId:
 						# check if action has been completed
 						if activeArea.actionNeeded:
 							HUD.showDialog(global.get_current_scene_name(), activeArea.actionId)
 						else:
-							global.go_to_sceneNew(activeArea.transitionScene)
+							global.go_to_sceneNew(activeArea.transitionScene, global.get_previous_scene())
 		elif Input.is_action_pressed("guard") && parent.hasPowers:
 			call_deferred("setState", states.guard)
 		elif Input.is_action_just_pressed("ui_accept"):

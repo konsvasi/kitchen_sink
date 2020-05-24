@@ -119,7 +119,7 @@ func _on_Area2D_body_entered(body):
 			var damage = body.applyDamage()
 			PlayerVariables.health -= damage
 			HUD.updateHealth(damage)
-			emit_signal("updateHealth", damage)
+#			emit_signal("updateHealth", damage)
 			if 'bodyName' in body:
 				if body.bodyName == "projectile":
 					projectileDirection = body.movement

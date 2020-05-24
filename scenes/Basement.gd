@@ -5,6 +5,7 @@ var villain
 onready var melv = $Melv
 onready var orb = $Orb
 onready var orbTween = $OrbTween
+onready var cage = $Cage
 var orbVelocity = Vector2.ZERO
 var playerPosition = Vector2.ZERO
 var moveOrb = false
@@ -16,7 +17,7 @@ signal givePowers
 func _ready():
 	HUD.connect("dialogFinished", self, "_on_HUD_dialogFinished")
 	if global.DEBUG:
-		global.previous_scene = "characterintro"
+		global.previous_scene = "doorminigame"
 		
 	match global.get_previous_scene():
 		"tv":
@@ -25,12 +26,12 @@ func _ready():
 		"doorminigame":
 			positionVillain()
 			$PrefightTrigger/CollisionShape2D.disabled = false
-		"characterintro":
-			positionVillain()
-			$Player.position = global.playerPosition
-			# Add timer and dialog
-			yield(get_tree().create_timer(0.5), "timeout")
-			HUD.showDialog("basement", "sense")
+#		"characterintro":
+#			positionVillain()
+#			$Player.position = global.playerPosition
+#			# Add timer and dialog
+#			yield(get_tree().create_timer(0.5), "timeout")
+#			HUD.showDialog("basement", "sense")
 
 	updateInteractPoints('special_mushrooms')
 
@@ -64,8 +65,9 @@ func updateInteractPoints(itemId):
 	
 
 func _on_PrefightTrigger_body_exited(body):
+	yield(get_tree().create_timer(1.0), "timeout")
 	global.setState("dialog")
-	HUD.showDialog("basement", "intro")
+	HUD.showDialog("basement", "aura")
 
 func fadeOrb() -> void:
 	orbTween.interpolate_property(orb.get_node("OrbSprite"),
@@ -81,21 +83,25 @@ func fadeOrb() -> void:
 
 func positionVillain():
 	villain = villainScene.instance()
-#	villain.position = $VillainStartPosition.position
 	$VillainPath/PathToFollow.add_child(villain)
-#	add_child(villain)
+	villain.get_node("KinematicBody2D/Sprite").hide()
+	villain.showAura()
 	villain.get_node("KinematicBody2D/AnimationPlayer").play("float_idle")
 	
 func _on_HUD_dialogFinished(id):
 	match id:
+		"aura":
+			yield(get_tree().create_timer(1.0), "timeout")
+			$PrefightTrigger.queue_free()
+			villain.get_node("KinematicBody2D/Sprite").show()
+			villain.reveal()
+			HUD.showDialog("basement", "intro")
 		"intro":
 			global.setState("default")
-			$PrefightTrigger.queue_free()
 			HUD.showDialog("basement", "name")
 		"name":
 			yield(get_tree().create_timer(1.0), "timeout")
-			global.save_player_position($Player.get_global_position())
-			global.go_to_scene("res://Scenes/CharacterIntro.tscn")
+			HUD.showDialog("basement", "sense")
 		"sense":
 			yield(get_tree().create_timer(0.3), "timeout")
 			HUD.showDialog("basement", "explanation")
@@ -156,4 +162,3 @@ func _on_Melv_rotationFinished():
 		Tween.EASE_IN_OUT)
 	orbTween.start()
 	playerPosition = get_tree().current_scene.get_node("Player").get_global_position()
-	
