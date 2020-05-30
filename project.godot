@@ -21,18 +21,18 @@ _global_script_class_icons={
 [application]
 
 config/name="kitchen_sink"
-run/main_scene="res://scenes/Basement.tscn"
+run/main_scene="res://scenes/World.tscn"
 
 [autoload]
 
 global="*res://scripts/global.gd"
 PlayerVariables="*res://scripts/PlayerVariables.gd"
 DialogContent="*res://scripts/DialogContent.gd"
+HUD="*res://scenes/HUD.tscn"
 ItemStore="*res://scripts/ItemStore.gd"
 KeySceneItems="*res://scripts/KeySceneItems.gd"
 Actions="*res://scripts/actions.gd"
 MusicController="*res://scenes/MusicController.tscn"
-HUD="*res://scenes/HUD.tscn"
 
 [display]
 

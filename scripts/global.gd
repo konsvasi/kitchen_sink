@@ -10,15 +10,15 @@ var playerPosition = Vector2(0, 0)
 # Used to handle interaction when dialog is open
 var isDialogOpen = false
 var state = "default"
-var DEBUG = true
+var DEBUG = false
 
 func _ready():
 	var root = get_tree().get_root();
 	current_scene = root.get_child( root.get_child_count() -1 )
 
 func go_to_scene(nextScene : String) -> void:
-	print("currentScene", get_tree().get_current_scene().get_name(), ' next scene', nextScene)
-	set_previous_scene(get_tree().get_current_scene().get_name())
+#	print("currentScene", get_tree().get_current_scene().get_name(), ' next scene', nextScene)
+#	set_previous_scene(get_tree().get_current_scene().get_name())
 	call_deferred("_deferred_goto_scene", nextScene);
 
 func go_to_sceneNew(nextSceneName : String, previousScene : String) -> void:

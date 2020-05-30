@@ -26,12 +26,6 @@ func _ready():
 		"doorminigame":
 			positionVillain()
 			$PrefightTrigger/CollisionShape2D.disabled = false
-#		"characterintro":
-#			positionVillain()
-#			$Player.position = global.playerPosition
-#			# Add timer and dialog
-#			yield(get_tree().create_timer(0.5), "timeout")
-#			HUD.showDialog("basement", "sense")
 
 	updateInteractPoints('special_mushrooms')
 

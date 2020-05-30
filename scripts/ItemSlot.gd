@@ -38,10 +38,11 @@ func useItem ():
 		PlayerVariables.items.erase(itemId)
 		
 		if isKeyItem(itemId):
-			print('current_scene name', get_tree().get_current_scene().get_name(), ' current scene ', get_tree().get_current_scene())
+			print('tree:', get_tree())
+#			print('current_scene name', get_tree().current_scene.get_name(), ' current scene ', get_tree().get_current_scene())
 			PlayerVariables.setUsedKeyItem(itemId)
 			if ItemStore.getItem(itemId).interactScene == get_tree().get_current_scene().get_name().to_lower():
-					get_tree().get_current_scene().updateInteractPoints(itemId)
+				get_tree().get_current_scene().updateInteractPoints(itemId)
 		
 		queue_free()		
 
