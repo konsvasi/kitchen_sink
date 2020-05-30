@@ -26,7 +26,8 @@ func _input(event):
 					HUD.showDialog(global.get_current_scene_name(), activeArea.dialogId)
 				elif activeArea.isTransitionInteraction:
 					if !activeArea.actionId:
-						global.go_to_sceneNew(activeArea.transitionScene, global.get_previous_scene())
+						SceneChanger.change_scene(activeArea.transitionScene)
+#						global.go_to_sceneNew(activeArea.transitionScene, global.get_previous_scene())
 					elif activeArea.actionId:
 						# check if action has been completed
 						if activeArea.actionNeeded:

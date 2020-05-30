@@ -27,6 +27,7 @@ run/main_scene="res://scenes/World.tscn"
 
 global="*res://scripts/global.gd"
 PlayerVariables="*res://scripts/PlayerVariables.gd"
+SceneChanger="*res://scenes/SceneChanger.tscn"
 DialogContent="*res://scripts/DialogContent.gd"
 HUD="*res://scenes/HUD.tscn"
 ItemStore="*res://scripts/ItemStore.gd"
