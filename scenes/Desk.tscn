@@ -1,11 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scripts/Desk.gd" type="Script" id=1]
 [ext_resource path="res://environment/desk.png" type="Texture" id=2]
 [ext_resource path="res://ui/yellow-bg.png" type="Texture" id=3]
 [ext_resource path="res://items/pack_of_mushrooms.png" type="Texture" id=4]
+[ext_resource path="res://ui/back_button.png" type="Texture" id=5]
 [ext_resource path="res://utils/arm.png" type="Texture" id=6]
-[ext_resource path="res://scenes/GoBackButton.tscn" type="PackedScene" id=7]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -13,6 +13,9 @@
 extents = Vector2( 34.4614, 30.6383 )
 
 [sub_resource type="RectangleShape2D" id=3]
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 120.3, 23.9957 )
 
 [node name="Desk" type="Node2D"]
 position = Vector2( 325, 235 )
@@ -77,15 +80,19 @@ __meta__ = {
 [node name="ArmBackTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="GoBackButton" parent="." instance=ExtResource( 7 )]
-margin_left = 662.234
-margin_top = 416.744
-margin_right = 902.234
-margin_bottom = 464.744
-nextScene = "res://scenes/House_inside.tscn"
+[node name="GoBackButton" type="Sprite" parent="."]
+position = Vector2( 782.482, 437.91 )
+texture = ExtResource( 5 )
+
+[node name="ButtonArea" type="Area2D" parent="GoBackButton"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GoBackButton/ButtonArea"]
+shape = SubResource( 4 )
 [connection signal="tree_exited" from="." to="." method="_on_Desk_tree_exited"]
 [connection signal="input_event" from="ShroomPack/Area2D" to="." method="_on_Area2D_input_event"]
 [connection signal="mouse_entered" from="ShroomPack/Area2D" to="." method="_on_Area2D_mouse_entered"]
 [connection signal="mouse_exited" from="ShroomPack/Area2D" to="." method="_on_Area2D_mouse_exited"]
 [connection signal="timeout" from="ArmBackTimer" to="." method="_on_ArmBackTimer_timeout"]
-[connection signal="pressed" from="GoBackButton" to="." method="_on_GoBackButton_pressed"]
+[connection signal="input_event" from="GoBackButton/ButtonArea" to="." method="_on_ButtonArea_input_event"]
+[connection signal="mouse_entered" from="GoBackButton/ButtonArea" to="." method="_on_ButtonArea_mouse_entered"]
+[connection signal="mouse_exited" from="GoBackButton/ButtonArea" to="." method="_on_ButtonArea_mouse_exited"]

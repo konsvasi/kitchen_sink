@@ -17,6 +17,7 @@ func stateLogic(delta):
 	getTransition(delta)
 	
 func _input(event):
+	print("i am eating your input thanks", event)
 	if states.hud_inactive == state:
 		if Input.is_action_just_pressed("ui_open_menu") && !parent.menuDisabled:
 			menu.toggleMenu()

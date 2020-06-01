@@ -4,8 +4,8 @@
 [ext_resource path="res://ui/back_button_hover.png" type="Texture" id=2]
 [ext_resource path="res://scripts/GoBackButton.gd" type="Script" id=3]
 
-
 [node name="TextureButton" type="TextureButton"]
+pause_mode = 2
 margin_right = 40.0
 margin_bottom = 40.0
 texture_normal = ExtResource( 1 )

@@ -15,7 +15,8 @@ func _ready():
 		parent.get_node("StateDebugLabel").show()
 
 
-func _input(event):	
+func _input(event):
+	print("i am also eating your input")
 	if states.idle == state:
 		if Input.is_action_just_pressed("ui_interact"):
 			var activeArea = parent.activeArea

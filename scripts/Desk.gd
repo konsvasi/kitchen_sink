@@ -7,6 +7,9 @@ var positionToMove;
 var velocity = Vector2();
 const hidePosition = Vector2(330, 1210);
 onready var dialog = HUD.dialogBox
+onready var goBackButton = $GoBackButton
+const DEFAULT_TEXTURE = preload("res://ui/back_button.png")
+const HOVER_TEXTURE = preload("res://ui/back_button_hover.png")
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -70,10 +73,6 @@ func _on_Area2D_input_event(viewport, event, shape_idx):
 		positionToMove = event.get_global_position();
 		moveArm = true;
 
-func _on_GoBackButton_pressed():
-	global.previous_scene = "desk"
-	global.go_to_scene($GoBackButton.nextScene);
-
 
 func _on_Dialogbox_tree_entered():
 	HUD.showDialog("desk", "main", "upper")
@@ -83,3 +82,16 @@ func _on_Dialogbox_tree_entered():
 func _on_Desk_tree_exited():
 	HUD.resetDialogPosition()
 	MusicController.stop()
+
+
+func _on_ButtonArea_mouse_entered():
+	goBackButton.set_texture(HOVER_TEXTURE)
+
+
+func _on_ButtonArea_mouse_exited():
+	goBackButton.set_texture(DEFAULT_TEXTURE)
+
+
+func _on_ButtonArea_input_event(viewport, event, shape_idx):
+	if (event is InputEventMouseButton && event.pressed):
+		SceneChanger.change_scene("House_inside")

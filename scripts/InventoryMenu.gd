@@ -26,22 +26,6 @@ func loadItemSlots():
 		else:
 			$EmptyInventoryMessage.show()
 			
-#func _unhandled_key_input(event):
-#	if self.visible:
-#		if Input.is_action_just_pressed("ui_interact"):
-#	#		if ($ItemContainer.get_child_count() - 1 == 0):
-#	#			print('doing nothing')
-#	#			pass
-##			print('interact', get_focus_owner().id)
-#			if get_focus_owner():
-#				if get_focus_owner().id == "item_slot":
-#					$UseItemAudio.play()
-#					get_focus_owner().useItem()
-#
-#				if get_focus_owner().id == "back_button":
-#					print('hide')
-#					self.hide()	
-
 func handleInput():
 	if get_focus_owner():
 #		print('interact inventory', get_focus_owner().id)`
@@ -59,7 +43,6 @@ func _on_BackButton_pressed():
 	self.hide()
 
 func _on_ItemContainer_sort_children():
-#	print("SORTED", $ItemContainer.get_child_count())
 	if $ItemContainer.get_child_count() != 0:
 		$ItemContainer.get_child(0).grab_focus()
 	else:

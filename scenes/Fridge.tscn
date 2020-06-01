@@ -1,11 +1,14 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/Fridge.gd" type="Script" id=1]
 [ext_resource path="res://environment/fridge.png" type="Texture" id=2]
 [ext_resource path="res://items/hot_sauce.png" type="Texture" id=3]
-[ext_resource path="res://scenes/GoBackButton.tscn" type="PackedScene" id=4]
+[ext_resource path="res://ui/back_button.png" type="Texture" id=4]
 [ext_resource path="res://items/sandwich_v2.png" type="Texture" id=5]
 [ext_resource path="res://scenes/EnvironmentItem.tscn" type="PackedScene" id=7]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 120.115, 23.2237 )
 
 [node name="Fridge" type="Node2D"]
 script = ExtResource( 1 )
@@ -14,13 +17,6 @@ script = ExtResource( 1 )
 position = Vector2( 638.943, 360 )
 scale = Vector2( 2, 1.5 )
 texture = ExtResource( 2 )
-
-[node name="GoBackButton" parent="." instance=ExtResource( 4 )]
-margin_left = 942.212
-margin_top = 578.104
-margin_right = 1182.21
-margin_bottom = 626.104
-nextScene = "res://scenes/House_inside.tscn"
 
 [node name="Sandwich" parent="." instance=ExtResource( 7 )]
 position = Vector2( 821.337, 411.074 )
@@ -33,6 +29,20 @@ position = Vector2( 378.501, 334.926 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 3 )
 id = "hot_sauce"
-[connection signal="pressed" from="GoBackButton" to="." method="_on_GoBackButton_pressed"]
+
+[node name="GoBackButton" type="Sprite" parent="."]
+position = Vector2( 987.031, 633.448 )
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Area2D" type="Area2D" parent="GoBackButton"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GoBackButton/Area2D"]
+shape = SubResource( 1 )
 [connection signal="grabItemById" from="Sandwich" to="." method="_on_Sandwich_grabItemById"]
 [connection signal="grabItemById" from="HotSauce" to="." method="_on_HotSauce_grabItemById"]
+[connection signal="input_event" from="GoBackButton/Area2D" to="." method="_on_Area2D_input_event"]
+[connection signal="mouse_entered" from="GoBackButton/Area2D" to="." method="_on_Area2D_mouse_entered"]
+[connection signal="mouse_exited" from="GoBackButton/Area2D" to="." method="_on_Area2D_mouse_exited"]
