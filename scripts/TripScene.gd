@@ -6,8 +6,8 @@ var colorEyes = false
 var firstTime = true
 var firstTimeElf = true
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	$Terry.modulate.a = 0
 	$Elf.modulate.a = 0
 	$EyeLeft.modulate.a = 0

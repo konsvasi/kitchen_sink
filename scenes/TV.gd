@@ -15,6 +15,7 @@ var tripScene = preload("res://Scenes/TripScene.tscn")
 var isFromTripScene = false
 
 func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	HUD.connect("dialogFinished", self, "_on_HUD_dialogFinished")
 	HUD.connect("notificationClosed", self, "_on_HUD_notificationClosed")
 	HUD.disableMenu()

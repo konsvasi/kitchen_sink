@@ -10,6 +10,7 @@ var motion = 1
 const SPEED = 50
 
 func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	camera.get_node("AnimationPlayer").play("shake")
 	cutinTween.interpolate_property(cutin.get_material(), "shader_param/amount", 1.0, 0.0, 1.5,Tween.TRANS_LINEAR,Tween.EASE_IN_OUT)
 	cutinTween.start()

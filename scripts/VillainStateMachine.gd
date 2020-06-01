@@ -13,6 +13,7 @@ func _ready():
 	addState("guard")
 	addState("cutscene")
 	call_deferred("setState", states.idle)
+	
 
 func stateLogic(delta):
 	if [states.attack].has(state):

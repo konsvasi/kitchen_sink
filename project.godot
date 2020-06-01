@@ -21,12 +21,13 @@ _global_script_class_icons={
 [application]
 
 config/name="kitchen_sink"
-run/main_scene="res://scenes/World.tscn"
+run/main_scene="res://scenes/DoorMiniGame.tscn"
 
 [autoload]
 
 global="*res://scripts/global.gd"
 PlayerVariables="*res://scripts/PlayerVariables.gd"
+VillainVariables="*res://scripts/VillainVariables.gd"
 SceneChanger="*res://scenes/SceneChanger.tscn"
 DialogContent="*res://scripts/DialogContent.gd"
 HUD="*res://scenes/HUD.tscn"

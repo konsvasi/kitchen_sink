@@ -3,16 +3,24 @@ onready var healthbar = $HealthbarOver
 onready var healthbarUnder = $HealthbarUnder
 onready var updateTween = $UpdateTween
 onready var sound = $SoundEffects
+export (String) var target
+const targets = ["Player", "Villain"]
 
 var healthyColor = Color.green
 var cautionColor = Color.yellow
 var dangerColor = Color.red
 
 func _ready():
-	healthbar.max_value = PlayerVariables.maxHealth
-	healthbar.value = PlayerVariables.health
-	healthbarUnder.max_value = PlayerVariables.maxHealth
-	healthbarUnder.value = PlayerVariables.health
+	if target == "Player":
+		healthbar.max_value = PlayerVariables.maxHealth
+		healthbar.value = PlayerVariables.health
+		healthbarUnder.max_value = PlayerVariables.maxHealth
+		healthbarUnder.value = PlayerVariables.health
+	elif target == "Villain":
+		healthbar.max_value = VillainVariables.maxHealth
+		healthbar.value = VillainVariables.health
+		healthbarUnder.max_value = VillainVariables.maxHealth
+		healthbarUnder.value = VillainVariables.health
 	
 func updateHealth(amount) -> void:
 	healthbar.value -= amount

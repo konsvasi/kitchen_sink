@@ -15,6 +15,7 @@ onready var melvStartPosition = $Melv.global_position
 signal givePowers
 
 func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	HUD.connect("dialogFinished", self, "_on_HUD_dialogFinished")
 	if global.DEBUG:
 		global.previous_scene = "doorminigame"

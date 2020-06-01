@@ -188,3 +188,9 @@ func _on_SpriteTween_tween_completed(object, key):
 
 func _on_cage_finished(attack : String):
 	emit_signal("cageFinished", "cage")
+
+
+func _on_Area2D_body_entered(body):
+
+	if body.name == "Ball":
+		print('Damage villain')
