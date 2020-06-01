@@ -5,6 +5,7 @@ var direction
 var VELOCITY = 400
 var move = false
 var showDialog = true
+onready var dialogProgressTimer = $DialogProgressTimer
 var prompts = ["Shit", "Shiiiiiiit", "This can't be happening", "Aaaah", "WTF!!!!"]
 var font
 
@@ -26,8 +27,6 @@ func _physics_process(delta):
 func _input(event):
 	if event is InputEventMouseMotion || event is InputEventMouseButton:
 		get_viewport().unhandled_input(event)
-	elif Input.is_action_just_pressed("ui_interact"):
-		HUD.loadDialog()
 
 func _on_Area2D_mouse_entered():
 	move = true
@@ -36,6 +35,8 @@ func _on_Area2D_mouse_entered():
 	
 	if showDialog:
 		HUD.showDialog("door", "move")
+		dialogProgressTimer.start()
+		
 
 
 func _on_Area2D_mouse_exited():
@@ -70,7 +71,6 @@ func _on_HUD_dialogFinished(id):
 			$SoundTimer.start()
 		"sound":
 			yield(get_tree().create_timer(1.0), "timeout")
-#			global.go_to_sceneNew("Basement")
 			SceneChanger.change_scene("Basement")
 
 
@@ -88,3 +88,7 @@ func _on_teleportSound_finished():
 
 func _on_DoorMiniGame_tree_exited():
 	HUD.menuDisabled = false
+
+
+func _on_DialogProgressTimer_timeout():
+	HUD.loadDialog()
