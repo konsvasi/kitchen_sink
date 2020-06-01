@@ -118,6 +118,7 @@ func _on_HUD_dialogFinished(id):
 			# Would be nice to show some fight intro screen
 			villain.get_node("VillainStateMachine").setState(1)
 			fightMode = true
+			HUD.setHealthBar(VillainVariables.maxHealth, VillainVariables.health)
 			HUD.showPlayerHealthbar()
 		"melv":
 			yield(get_tree().create_timer(0.3), "timeout")

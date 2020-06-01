@@ -8,9 +8,10 @@ var dialog = []
 var menuDisabled = false
 onready var dialogBox = $BottomDialogContainer/Dialogbox
 onready var healthbar = $Healthbar
+onready var villainHealthBar = $VillainHealthBar
 
 func _ready():
-	pass # Replace with function body.
+	healthbar.setHealthBar(PlayerVariables.maxHealth, PlayerVariables.health)
 
 func disableMenu():
 	menuDisabled = true
@@ -20,8 +21,11 @@ func showNotification(notificationId):
 	$Notification.show()
 	get_tree().paused = true
 
-func updateHealth(amount):
-	$Healthbar.updateHealth(amount)
+func updateHealth(amount, target="player"):
+	if target == "villain":
+		villainHealthBar.updateHealth(amount)
+	else:
+		healthbar.updateHealth(amount)
 	
 func _on_InventoryMenu_hide():
 	pass
@@ -62,3 +66,8 @@ func resetDialogPosition():
 func _on_Dialogbox_dialogFinished(finishedDialogId):
 #	global.setState("default")
 	emit_signal("dialogFinished", finishedDialogId)
+
+func setHealthBar (maxHealth, currentHealth, target="villain") -> void:
+	print(maxHealth, currentHealth, target)
+	if target == "villain":
+		villainHealthBar.setHealthBar(maxHealth, currentHealth)

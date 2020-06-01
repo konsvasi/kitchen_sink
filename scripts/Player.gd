@@ -106,7 +106,7 @@ func _on_Area2D_area_entered(area):
 		var damage = get_node_from_current_scene('Cage').applyDamage()
 		PlayerVariables.health -= damage
 		HUD.updateHealth(damage)
-		emit_signal("updateHealth", damage)
+#		emit_signal("updateHealth", damage)
 		cage.finishAttack()
 
 func _on_Area2D_area_exited(area):

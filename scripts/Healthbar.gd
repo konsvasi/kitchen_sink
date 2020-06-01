@@ -11,16 +11,13 @@ var cautionColor = Color.yellow
 var dangerColor = Color.red
 
 func _ready():
-	if target == "Player":
-		healthbar.max_value = PlayerVariables.maxHealth
-		healthbar.value = PlayerVariables.health
-		healthbarUnder.max_value = PlayerVariables.maxHealth
-		healthbarUnder.value = PlayerVariables.health
-	elif target == "Villain":
-		healthbar.max_value = VillainVariables.maxHealth
-		healthbar.value = VillainVariables.health
-		healthbarUnder.max_value = VillainVariables.maxHealth
-		healthbarUnder.value = VillainVariables.health
+	pass
+
+func setHealthBar (maxHealth, currentHealth) -> void:
+	healthbar.max_value = maxHealth
+	healthbar.value = currentHealth
+	healthbarUnder.max_value = maxHealth
+	healthbarUnder.value = currentHealth
 	
 func updateHealth(amount) -> void:
 	healthbar.value -= amount

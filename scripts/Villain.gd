@@ -191,6 +191,8 @@ func _on_cage_finished(attack : String):
 
 
 func _on_Area2D_body_entered(body):
-
 	if body.name == "Ball":
-		print('Damage villain')
+		body.queue_free()
+		var damage = 9
+		VillainVariables.health -= damage
+		HUD.updateHealth(damage, "villain")
