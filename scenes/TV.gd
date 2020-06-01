@@ -48,29 +48,6 @@ func _physics_process(_delta):
 	
 	VELOCITY = $TVMain/TVRemote.move_and_slide(VELOCITY, FLOOR)
 	
-#func _unhandled_key_input(_event):
-#	if Input.is_action_just_pressed("ui_interact"):
-#		if hasSignal:
-#			if !isFromTripScene:
-#				MusicController.play("res://audio/cup_of_tea.ogg")
-#				toggleTV()
-#				canMoveRemote = false
-#				VELOCITY.x = 0
-#				global.wait(1.0)
-#				lowerRemoteControl = true
-#			else:
-#				toggleTV()
-#				canMoveRemote = false
-#				VELOCITY.x = 0
-#				global.wait(1.0)
-#				lowerRemoteControl = true
-#				if !HUD.isDialogOpen:
-#					HUD.showDialog("tv", "music_playing")
-##				else:
-##					$HUD/Dialogbox.loadDialog()
-##		else:
-##			if $HUD/Dialogbox.visible:
-##				$HUD/Dialogbox.loadDialog()
 func _input(event):
 	if Input.is_action_just_pressed("ui_interact"):
 		if hasSignal:
@@ -139,15 +116,17 @@ func _on_HUD_dialogFinished(dialogId):
 	elif dialogId == "enjoying_the_music":
 		$TVMain/TripTimer.start()
 	elif dialogId == "something_weird":
-		global.go_to_scene("res://Scenes/TripScene.tscn")
+#		global.go_to_scene("res://Scenes/TripScene.tscn")
+		SceneChanger.change_scene("TripScene")
 	elif dialogId == "return":
 		$TVMain/TVRemote.show()
-		global.wait(1.5)
+		yield(get_tree().create_timer(1.3), "timeout")
 		canMoveRemote = true
 	elif dialogId == "music_playing":
 		Actions.setAction('doorknob_game_active', true)
 		yield(get_tree().create_timer(3.0), "timeout")
-		global.go_to_scene("res://Scenes/Basement.tscn")
+#		global.go_to_scene("res://Scenes/Basement.tscn")
+		SceneChanger.change_scene("Basement")
 		
 		
 func _on_InfraredPoint_area_entered(_area):

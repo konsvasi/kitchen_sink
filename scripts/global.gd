@@ -1,5 +1,6 @@
 extends Node
 
+onready var root = get_tree().get_root()
 var prev_scene_position = Vector2();
 var current_scene = null;
 var previous_scene = 'default'
@@ -13,19 +14,19 @@ var state = "default"
 var DEBUG = false
 
 func _ready():
-	var root = get_tree().get_root();
+#	var root = get_tree().get_root();
 	current_scene = root.get_child( root.get_child_count() -1 )
 
-func go_to_scene(nextScene : String) -> void:
-#	print("currentScene", get_tree().get_current_scene().get_name(), ' next scene', nextScene)
-#	set_previous_scene(get_tree().get_current_scene().get_name())
-	call_deferred("_deferred_goto_scene", nextScene);
+#func go_to_scene(nextScene : String) -> void:
+##	print("currentScene", get_tree().get_current_scene().get_name(), ' next scene', nextScene)
+##	set_previous_scene(get_tree().get_current_scene().get_name())
+#	call_deferred("_deferred_goto_scene", nextScene);
 
-func go_to_sceneNew(nextSceneName : String, previousScene : String) -> void:
-	print("currentScene", previousScene, ' next scene', nextSceneName)
-	var formattedSceneName = "res://Scenes/" + nextSceneName + ".tscn"
-	set_previous_scene(previousScene)
-	call_deferred("_deferred_goto_scene", formattedSceneName);
+#func go_to_sceneNew(nextSceneName : String, previousScene : String) -> void:
+#	print("currentScene", previousScene, ' next scene', nextSceneName)
+#	var formattedSceneName = "res://Scenes/" + nextSceneName + ".tscn"
+#	set_previous_scene(previousScene)
+#	call_deferred("_deferred_goto_scene", formattedSceneName);
 
 func save_player_position(position: Vector2) -> void:
 	playerPosition = position
@@ -48,11 +49,12 @@ func get_previous_scene() -> String:
 	return previous_scene.to_lower()
 
 func get_current_scene_name() -> String:
+	var weak_ref = weakref(current_scene)
+	if (!weak_ref.get_ref()):
+		current_scene = root.get_child( root.get_child_count() -1 )
+	
 	return current_scene.name.to_lower()
 
-# Doesn't really work, remove calls to this
-func wait(timeToWait : float) -> void:
-	yield(get_tree().create_timer(timeToWait), "timeout")
 
 func setState(state : String) -> void:
 	self.state = state

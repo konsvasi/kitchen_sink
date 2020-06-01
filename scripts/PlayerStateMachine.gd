@@ -16,7 +16,6 @@ func _ready():
 
 
 func _input(event):
-	print("i am also eating your input")
 	if states.idle == state:
 		if Input.is_action_just_pressed("ui_interact"):
 			var activeArea = parent.activeArea
@@ -34,7 +33,8 @@ func _input(event):
 						if activeArea.actionNeeded:
 							HUD.showDialog(global.get_current_scene_name(), activeArea.actionId)
 						else:
-							global.go_to_sceneNew(activeArea.transitionScene, global.get_previous_scene())
+							SceneChanger.change_scene(activeArea.transitionScene)
+#							global.go_to_sceneNew(activeArea.transitionScene, global.get_previous_scene())
 		elif Input.is_action_pressed("guard") && parent.hasPowers:
 			call_deferred("setState", states.guard)
 		elif Input.is_action_just_pressed("ui_accept"):

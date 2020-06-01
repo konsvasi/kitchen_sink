@@ -11,8 +11,9 @@ var font
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	HUD.disableMenu()
-	HUD.showNotification("doorknob_minigame")
 	HUD.connect("dialogFinished", self, "_on_HUD_dialogFinished")
+	yield(get_tree().create_timer(0.3), "timeout")
+	HUD.showNotification("doorknob_minigame")
 	
 	font = DynamicFont.new()
 	font.font_data = load("res://fonts/Kenney High.ttf")
@@ -69,7 +70,8 @@ func _on_HUD_dialogFinished(id):
 			$SoundTimer.start()
 		"sound":
 			yield(get_tree().create_timer(1.0), "timeout")
-			global.go_to_sceneNew("Basement")
+#			global.go_to_sceneNew("Basement")
+			SceneChanger.change_scene("Basement")
 
 
 func _on_DialogTimer_timeout():

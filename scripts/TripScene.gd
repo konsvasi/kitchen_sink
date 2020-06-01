@@ -82,7 +82,8 @@ func _on_HUD_dialogFinished(dialogId):
 	
 	
 	if dialogId == "end":
-		global.go_to_scene("res://Scenes/Tv.tscn")
+#		global.go_to_scene("res://Scenes/Tv.tscn")
+		SceneChanger.change_scene("Tv")
 
 
 func _on_TerryTween_tween_completed(object, key):
