@@ -15,7 +15,3 @@ func change_scene(path, delay=0.3) -> void:
 	animationPlayer.play_backwards("fade")
 	yield(animationPlayer, "animation_finished")
 	emit_signal('scene_changed')
-	# what if the emit_signal has two arguments, next scene and previous scene
-	# so instead of using get_tree().get_current_scene.get_name()
-	# I'll just use the global that I've set from the signal
-	

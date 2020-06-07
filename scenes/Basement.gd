@@ -120,6 +120,7 @@ func _on_HUD_dialogFinished(id):
 			fightMode = true
 			HUD.setHealthBar(VillainVariables.maxHealth, VillainVariables.health)
 			HUD.showPlayerHealthbar()
+			HUD.showVillainHealthbar()
 		"melv":
 			yield(get_tree().create_timer(0.3), "timeout")
 			HUD.showDialog("basement", "zong_reply")
@@ -130,8 +131,8 @@ func _on_HUD_dialogFinished(id):
 			melv.givePowers()
 		"melv_explain_powers":
 			melv.moveOut(melvStartPosition)
-			print("Show notification about powers and start fight after notification")
 			HUD.showNotification("powers_explanation")
+			villain.get_node("VillainStateMachine").setState(1)
 
 
 func _on_WallTrigger_body_entered(body):

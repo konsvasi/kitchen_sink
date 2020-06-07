@@ -19,6 +19,7 @@ onready var cageWarning = get_tree().get_root().get_node("Basement/CageWarning")
 onready var spriteTween = $KinematicBody2D/Sprite/SpriteTween
 onready var sprite = $KinematicBody2D/Sprite
 onready var villainBody = $KinematicBody2D
+onready var stateMachine = $VillainStateMachine
 var bulletScene = preload("res://scenes/Bullet.tscn")
 var startPosition = Vector2(450, 132)
 var isDemo = true
@@ -52,8 +53,8 @@ func attack():
 		cage()
 	
 func chooseAttack() -> String:
-#	if global.DEBUG:
-#		return "cage"
+	if global.DEBUG:
+		return "laser"
 	return attacks[randi() % attacks.size()]
 
 # Function called in delta
@@ -139,7 +140,7 @@ func resetAttack(attackName : String) -> void:
 #		cage.get_node("StaticBodyRight/cageRight").call_deferred("disabled", true)
 
 func setState(index) -> void:
-	$VillainStateMachine.setState(index)
+	stateMachine.setState(index)
 	
 func showAura() -> void:
 	$KinematicBody2D/Aura.show()
@@ -158,7 +159,7 @@ func guard():
 	print('guarding')
 
 func prepareBullet():
-	$KinematicBody2D/Sprite/SpriteTween.interpolate_property(
+	spriteTween.interpolate_property(
 		$KinematicBody2D/Sprite, 
 		"modulate", 
 		Color(1.0,1.0,1.0), 
@@ -166,7 +167,7 @@ func prepareBullet():
 		Tween.TRANS_LINEAR,
 		Tween.EASE_IN_OUT
 	)
-	$KinematicBody2D/Sprite/SpriteTween.start()
+	spriteTween.start()
 	
 func _on_trample_attack_finished(attack : String):
 	yield(get_tree().create_timer(0.3), "timeout")
@@ -181,7 +182,8 @@ func _on_boot_out():
 
 
 func _on_SpriteTween_tween_completed(object, key):
-	if (key != ':modulate'):
+	print("get state: ", stateMachine.getState())
+	if (key == ':modulate' && stateMachine.getState() == 2):
 		print('key', key)
 		shootBullets()
 		$KinematicBody2D/Sprite.modulate = Color(1.0, 1.0, 1.0)

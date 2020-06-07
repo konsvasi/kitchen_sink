@@ -40,5 +40,8 @@ func setState(newState):
 	if state != null:
 		enterState(newState, previousState)
 
+func getState():
+	return state
+
 func addState(stateName):
 	states[stateName] = states.size()

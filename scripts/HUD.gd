@@ -12,6 +12,9 @@ onready var villainHealthBar = $VillainHealthBar
 
 func _ready():
 	healthbar.setHealthBar(PlayerVariables.maxHealth, PlayerVariables.health)
+	
+	# Healthbars other than the player's are hidden by default
+	villainHealthBar.hide()
 
 func disableMenu():
 	menuDisabled = true
@@ -57,6 +60,9 @@ func updateItems():
 
 func showPlayerHealthbar() -> void:
 	healthbar.show()
+
+func showVillainHealthbar() -> void:
+	villainHealthBar.show()
 	
 # Should be called when dialog was displayed in top position
 func resetDialogPosition():
