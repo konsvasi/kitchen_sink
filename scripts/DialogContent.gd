@@ -63,8 +63,8 @@ var content = {
 		"melv_explain_powers": ['Now you should be able to channel your powers and use them in the fight.', 
 			'I also healed you...',
 			'I\'m gonna sit here to the side to spectate the fight, see you later.'
-		]
-		
+		],
+		"villain_death": ['This shouldn\'t have happened. Is this a trap?']	
 	},
 	"tv": {
 		"main": ['Let\'s put some music videos...', 'wait first I have to turn on the TV...'],
@@ -118,7 +118,8 @@ var dialog_names = {
 		"zong_reply": names.zong,
 		"melv_powers": names.melv,
 		"player_powers": names.you,
-		"melv_explain_powers": names.melv
+		"melv_explain_powers": names.melv,
+		"villain_death": names.zong
 	},
 	"tv": {
 		"main": names.you,

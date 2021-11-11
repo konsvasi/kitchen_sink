@@ -26,6 +26,7 @@ func _ready():
 			global.state = "default"
 		"doorminigame":
 			positionVillain()
+			$couch_interact.queue_free()
 			$PrefightTrigger/CollisionShape2D.disabled = false
 
 	updateInteractPoints('special_mushrooms')
@@ -78,6 +79,7 @@ func fadeOrb() -> void:
 
 func positionVillain():
 	villain = villainScene.instance()
+	villain.connect("villainDied", self, "_on_villain_died")
 	$VillainPath/PathToFollow.add_child(villain)
 	villain.get_node("KinematicBody2D/Sprite").hide()
 	villain.showAura()
@@ -89,7 +91,7 @@ func _on_HUD_dialogFinished(id):
 			yield(get_tree().create_timer(1.0), "timeout")
 			$PrefightTrigger.queue_free()
 			villain.get_node("KinematicBody2D/Sprite").show()
-			villain.reveal()
+			villain.reveal(false)
 			HUD.showDialog("basement", "intro")
 		"intro":
 			global.setState("default")
@@ -133,6 +135,8 @@ func _on_HUD_dialogFinished(id):
 			melv.moveOut(melvStartPosition)
 			HUD.showNotification("powers_explanation")
 			villain.get_node("VillainStateMachine").setState(1)
+		"villain_death":
+			villain.get_node("VillainStateMachine").setState(5)
 
 
 func _on_WallTrigger_body_entered(body):
@@ -146,7 +150,7 @@ func _on_WallTrigger_body_entered(body):
 	HUD.showDialog("basement", "begin")
 
 
-func _on_Melv_rotationFinished():
+func _on_Melv_rotationFinished() -> void:
 	moveOrb = true
 	orb.position = melv.position
 	orb.get_node("Particles2D").emitting = true
@@ -160,3 +164,6 @@ func _on_Melv_rotationFinished():
 		Tween.EASE_IN_OUT)
 	orbTween.start()
 	playerPosition = get_tree().current_scene.get_node("Player").get_global_position()
+
+func _on_villain_died() -> void:
+	HUD.showDialog("basement", "villain_death")

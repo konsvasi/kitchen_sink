@@ -27,6 +27,9 @@ func destroy():
 	# maybe add some animation before freeing asset
 	queue_free()
 
+func explode() -> void:
+	add_child(explosion.instance())
+
 
 func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
@@ -40,4 +43,3 @@ func _on_Area2D_body_entered(body):
 		add_child(explosion.instance())
 		yield(get_tree().create_timer(1.2), "timeout")
 		queue_free()
-		print('play explosion queue_free both')

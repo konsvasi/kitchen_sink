@@ -7,11 +7,12 @@ func _ready():
 	parent.connect("attackFinished", self, "_on_attack_finished")
 	parent.connect("cageFinished", self, "_on_attack_finished")
 	
-	addState("idle")
-	addState("fight")
-	addState("attack")
-	addState("guard")
-	addState("cutscene")
+	addState("idle") # 0
+	addState("fight") # 1
+	addState("attack") # 2
+	addState("guard") # 3
+	addState("cutscene") # 4
+	addState("dead") # 5
 	call_deferred("setState", states.idle)
 	
 
@@ -35,7 +36,6 @@ func getTransition(delta):
 				return states.fight
 		states.cutscene:
 			parent.get_node('STATE_DEBUG').set_text(str(state))
-			
 
 func enterState(newState, oldState):
 	if newState == states.attack:
@@ -44,6 +44,8 @@ func enterState(newState, oldState):
 		parent.guard()
 	elif newState == states.fight:
 		parent.showAura()
+	elif newState == states.dead:
+		parent.dead()
 
 #func exitState(oldState, newState):
 #	print('exited ', oldState)

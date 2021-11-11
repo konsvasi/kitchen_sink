@@ -11,7 +11,7 @@ var playerPosition = Vector2(0, 0)
 # Used to handle interaction when dialog is open
 var isDialogOpen = false
 var state = "default"
-var DEBUG = true
+var DEBUG = false
 
 func _ready():
 #	var root = get_tree().get_root();

@@ -15,7 +15,7 @@ func _process(delta):
 func _on_DestroyTimer_timeout() -> void:
 	queue_free()
 
-func setPosition(direction) -> void:
-	if direction < 0:
+func setPosition(objDirection) -> void:
+	if objDirection < 0:
 		multiplier = -1
 	position.x = 20 * multiplier

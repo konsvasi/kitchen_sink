@@ -38,7 +38,6 @@ func _physics_process(_delta):
 	if canMoveRemote:
 		VELOCITY.y = randi() & GRAVITY
 		if Input.is_action_pressed("ui_right"):
-			print('moving remote')
 			VELOCITY.x = SPEED;
 		elif Input.is_action_pressed("ui_left"):
 			VELOCITY.x = -SPEED;

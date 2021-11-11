@@ -30,6 +30,7 @@ signal trampleFinished
 signal attackFinished
 signal castFinished
 signal cageFinished
+signal villainDied
 
 func _ready():
 	cage.connect("attackFinished", self, "_on_cage_finished")
@@ -145,11 +146,21 @@ func setState(index) -> void:
 func showAura() -> void:
 	$KinematicBody2D/Aura.show()
 
-func reveal() -> void:
+func dead() -> void:
+	print('death code here')
+	$KinematicBody2D/Aura.hide()
+	reveal(true)
+
+func reveal(hide : bool) -> void:
+	var start = 0
+	var end = 1
+	if hide:
+		start = 1
+		end = 0
 	spriteTween.interpolate_property(sprite, 
 		'modulate', 
-		Color(1,1,1,0), 
-		Color(1,1,1,1),
+		Color(1,1,1,start), 
+		Color(1,1,1,end),
 		1.5,
 		Tween.TRANS_LINEAR,
 		Tween.EASE_OUT_IN)
@@ -195,6 +206,9 @@ func _on_cage_finished(attack : String):
 func _on_Area2D_body_entered(body):
 	if body.name == "Ball":
 		body.queue_free()
-		var damage = 9
+		var damage = 29
 		VillainVariables.health -= damage
 		HUD.updateHealth(damage, "villain")
+		
+		if VillainVariables.health <= 0:
+			emit_signal("villainDied")

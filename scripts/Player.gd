@@ -6,6 +6,7 @@ const JUMP_FORCE = 65
 const FLOOR = Vector2(0, -1)
 const OrbEffectMaterial = preload('res://materials/Orbeffect.tres')
 const ballScene = preload('res://scenes/Ball.tscn')
+const explosionScene = preload('res://scenes/Explosion.tscn')
 export var health = 50
 var items = {}
 var velocity = Vector2()
